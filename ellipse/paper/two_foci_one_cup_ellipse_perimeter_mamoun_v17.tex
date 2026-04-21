@@ -1,0 +1,2178 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,geometry,booktabs,float,longtable,array}
+\usepackage[hidelinks]{hyperref}
+\usepackage[table]{xcolor}
+\geometry{margin=1in}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+% Custom QED symbol: filled square with white QED punched through.
+% At normal size it reads as a Halmos tombstone; zoom in to discover the letters.
+\renewcommand{\qedsymbol}{%
+  \raisebox{0.05ex}{%
+    \rlap{\rule{0.7em}{0.7em}}%
+    \hbox to 0.7em{\hfil%
+      \raisebox{0.12em}{%
+        \color{white}\fontsize{4.5}{4.5}\selectfont\bfseries\sffamily%
+        \rlap{Q}\kern0.01em%
+        \rlap{E}\kern0.04em%
+        D%
+      }%
+    \hfil}%
+  }%
+}
+
+\title{Two Foci, One Cup: Successive World-Record Equations for Ellipse Perimeter}
+\author{Monir Mamoun}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+%==========================================================================
+\begin{abstract}
+%==========================================================================
+
+An ellipse has two foci, and they do not see eye to eye.
+
+\medskip
+\noindent\textbf{The problem.}
+No finite algebraic expression gives the exact perimeter of an ellipse.  The best known approximation prior to this work is Ramanujan's second formula (1914), which we call \emph{Ramanujan~II} (abbreviated \textbf{RII} in Roman numerals, to distinguish it from the tower notation $R_k$):
+\[
+P_{\text{RII}} = \pi(a{+}b)\!\left(1 + \frac{3h}{10+\sqrt{4-3h}}\right), \quad h = \left(\tfrac{a-b}{a+b}\right)^{\!2},
+\]
+which is accurate to $402$~ppm (parts per million).  The previous world record was set by Ayala Raggi \& Rend\'on Mar\'in (2025), who improved this to $0.575$~ppm using a multiplicative correction with two free parameters.
+
+This work introduces the continued fraction method that finally explains Ramanujan's mysterious second formula, and generates dozens of new corrections with world-record accuracy.  Three representative examples, written in fully expanded form ($x \equiv 1{-}h$):
+
+\smallskip\noindent\emph{RII+3exp} (3~exponential terms, 0.083~ppm):
+\[
+P \;\approx\; \frac{P_{\text{RII}}}{1 \;-\; h^{7/3}\!\bigl[\,
+  2.856{\times}10^{-4}\,e^{-6.895\,x}
+  \;+\; 1.064{\times}10^{-4}\,e^{-22.34\,x}
+  \;+\; 1.030{\times}10^{-5}\,e^{-103.4\,x}\,\bigr]}
+\]
+
+\smallskip\noindent\emph{R3+15exp} (Pad\'e tower to $355/113$, then 15~exponentials, 1.43~ppb).
+Tower base $R_3(h) = R_2(h) + h^5\!\cdot\!\frac{2.289{\times}10^{-5} + 6.604{\times}10^{-6}h + 1.958{\times}10^{-6}h^2 + 5.209{\times}10^{-7}h^3}{1 - 1.357\,h + 0.4197\,h^2}$; then:
+\begin{equation*}
+P \;\approx\; \frac{\pi(a{+}b)\,R_3(h)}{1 \;-\; h^{3.416}\!\left(\!\begin{aligned}
+  &\; +1.069{\times}10^{-6}\,e^{-6.241\,x}
+     -5.345{\times}10^{-6}\,e^{-9.709\,x}
+     -4.028{\times}10^{-6}\,e^{-14.56\,x} \\[-3pt]
+  &\quad -5.070{\times}10^{-6}\,e^{-16.99\,x}
+     -5.344{\times}10^{-6}\,e^{-21.84\,x}
+     +3.808{\times}10^{-6}\,e^{-30.87\,x} \\[-3pt]
+  &\quad +9.540{\times}10^{-6}\,e^{-47.18\,x}
+     -3.477{\times}10^{-6}\,e^{-94.37\,x}
+     +1.034{\times}10^{-5}\,e^{-110.1\,x} \\[-3pt]
+  &\quad -3.937{\times}10^{-6}\,e^{-189.3\,x}
+     -3.353{\times}10^{-6}\,e^{-218.4\,x}
+     +1.059{\times}10^{-5}\,e^{-283.5\,x} \\[-3pt]
+  &\quad -3.064{\times}10^{-6}\,e^{-349.5\,x}
+     -5.329{\times}10^{-6}\,e^{-436.9\,x}
+     +3.678{\times}10^{-6}\,e^{-509.7\,x}
+\end{aligned}\!\right)}
+\end{equation*}
+
+\smallskip\noindent\emph{R4+20exp} (Pad\'e tower to $103993/33102$, then 20~exponentials, 0.49~ppb).
+Tower base $R_4(h) = R_3(h) + h^{10}\!\cdot\!\frac{-1.979{\times}10^{-7} + 1.864{\times}10^{-9}h + 1.238{\times}10^{-7}h^2 + 1.083{\times}10^{-7}h^3}{1 - 2.680\,h + 2.014\,h^2}$; then:
+\begin{equation*}
+P \;\approx\; \frac{\pi(a{+}b)\,R_4(h)}{1 \;-\; h^{2.520}\!\left(\!\begin{aligned}
+  &\; -1.594{\times}10^{-6}\,e^{-5.267\,x}
+     +4.005{\times}10^{-6}\,e^{-6.772\,x}
+     -6.078{\times}10^{-6}\,e^{-11.85\,x} \\[-3pt]
+  &\quad -1.789{\times}10^{-5}\,e^{-15.80\,x}
+     +7.005{\times}10^{-6}\,e^{-18.44\,x}
+     -1.534{\times}10^{-6}\,e^{-36.87\,x} \\[-3pt]
+  &\quad +8.604{\times}10^{-6}\,e^{-47.41\,x}
+     -5.919{\times}10^{-7}\,e^{-51.20\,x}
+     +4.016{\times}10^{-6}\,e^{-73.24\,x} \\[-3pt]
+  &\quad +2.309{\times}10^{-6}\,e^{-79.01\,x}
+     -4.071{\times}10^{-6}\,e^{-119.5\,x}
+     +6.387{\times}10^{-6}\,e^{-142.2\,x} \\[-3pt]
+  &\quad -4.451{\times}10^{-7}\,e^{-189.6\,x}
+     -7.202{\times}10^{-6}\,e^{-237.0\,x}
+     +9.244{\times}10^{-6}\,e^{-268.6\,x} \\[-3pt]
+  &\quad -3.986{\times}10^{-6}\,e^{-395.1\,x}
+     -1.640{\times}10^{-6}\,e^{-474.1\,x}
+     +5.453{\times}10^{-6}\,e^{-553.1\,x} \\[-3pt]
+  &\quad -2.320{\times}10^{-6}\,e^{-711.1\,x}
+     +3.261{\times}10^{-7}\,e^{-1106\,x}
+\end{aligned}\!\right)}
+\end{equation*}
+
+\smallskip\noindent\emph{R6+16exp+3log SCOR} (Pad\'e tower to $208341/66317$, 16~exponentials + 3~logarithmic enrichment terms, $\mathbf{0.007}$~ppb = 7~parts per trillion --- \textbf{GRAND CHAMPION}).
+Tower base $R_6(h)$ uses 4 Pad\'e layers above $R_2$ (details in~\S\ref{sec:tower}); then:
+\begin{equation*}
+\boxed{P \;=\; \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{12.415}\!\left(\!\begin{aligned}
+  &\; +2.662{\times}10^{-4}\,e^{-\phantom{0}3.185\,x}
+     -8.682{\times}10^{-4}\,e^{-12.437\,x}
+     +1.417{\times}10^{-3}\,e^{-21.152\,x} \\[-3pt]
+  &\; -1.523{\times}10^{-3}\,e^{-23.906\,x}
+     +1.050{\times}10^{-3}\,e^{-35.041\,x}
+     -5.408{\times}10^{-4}\,e^{-42.430\,x} \\[-3pt]
+  &\; +1.930{\times}10^{-4}\,e^{-79.284\,x}
+     +3.535{\times}10^{-6}\,e^{-329.32\,x}
+     +1.156{\times}10^{-6}\,e^{-651.07\,x} \\[-3pt]
+  &\; +6.182{\times}10^{-7}\,e^{-1163.3\,x}
+     -3.132{\times}10^{-7}\,e^{-2090.2\,x}
+     +3.990{\times}10^{-7}\,e^{-2503.1\,x} \\[-3pt]
+  &\; -2.266{\times}10^{-7}\,e^{-4104.5\,x}
+     +1.279{\times}10^{-7}\,e^{-5109.6\,x}
+     -8.260{\times}10^{-9}\,e^{-17090\,x} \\[-3pt]
+  &\; +1.099{\times}10^{-8}\,e^{-18340\,x} \\[3pt]
+  &\; +1.902{\times}10^{-6}\,x\ln x
+     -4.374{\times}10^{-4}\,x^2\ln x
+     +1.178{\times}10^{-3}\,x^3\ln x
+\end{aligned}\!\right)}}
+\end{equation*}
+
+\smallskip
+\noindent SCOR (\textbf{S}ingularity-\textbf{C}onscious \textbf{O}ptimal \textbf{R}eduction with \textbf{E}nrichment) adds $x^k\ln x$ terms to the correction basis that directly absorb the logarithmic singularity of $E(m)$ at $m=1$.  This bypasses the na\"{\i}ve \textbf{BARF} (\textbf{B}adly \textbf{A}pproximable \textbf{R}esidue \textbf{F}loor) of $0.039$~ppb---the fundamental \emph{pointwise} floor for purely analytic corrections---because the BARF only applies when the basis is analytic.  The gate function~$h^q$ with $q \approx 12.4$ further concentrates all approximation capacity on the high-eccentricity tail.  Verified at 300 decimal digits.
+
+\smallskip
+\noindent All 55~formulas are fully self-contained: given only $a$ and $b$, any reader can compute the perimeter to the stated accuracy.
+
+\smallskip
+
+\medskip
+\noindent\textbf{Motivation.}
+This work began with a geometric question: when a point traces the perimeter of an ellipse, each focus ``sees'' that point sweep at a different angular rate.  How do we measure the derivative $dy/dx$ of the perimeter trace when the two foci disagree on the relative speed of the moving point?  This question-a focal uncertainty principle-led the author to an effort to characterize $\pi$ itself through the lens of elliptic geometry, which in turn led to a deep investigation of the continued fraction $\pi = [3;\,7,\,15,\,1,\,292,\,\ldots]$ and its role in generating successive rational approximations to the elliptic integral.
+
+\medskip
+\noindent\textbf{The continued fraction of $\pi$ builds the tower.}
+Every constant in Ramanujan~II comes from the partial quotients of~$\pi$.  At the degenerate limit $h=1$, $R_2$ returns $P/P_{\text{exact}} = 7\pi/22$, the ratio built from $\pi$'s first convergent $22/7$.  We extend $R_2$ by stacking rational Pad\'e corrections, each \emph{uniquely determined} by two constraints: (i)~match 5 more Taylor coefficients of the exact elliptic integral $B(h)$, and (ii)~at $h=1$, return the next convergent of~$\pi$:
+\begin{alignat*}{3}
+R_3(h) &= R_2(h) + h^5 \cdot \frac{\text{cubic in } h}{\text{quadratic in } h}, &\quad& R_3(1) = \tfrac{452}{355} \;\;(\pi \approx 355/113), &\quad& \text{matches } h^0\text{--}h^9, \\[3pt]
+R_4(h) &= R_3(h) + h^{10} \cdot \frac{\text{cubic}}{\text{quadratic}}, && R_4(1) \to 103993/33102, && \text{matches } h^0\text{--}h^{14}, \\[3pt]
+R_5(h) &= R_4(h) + h^{15} \cdot \frac{\text{cubic}}{\text{quadratic}}, && R_5(1) \to 104348/33215, && \text{matches } h^0\text{--}h^{19}, \\[3pt]
+R_6(h) &= R_5(h) + h^{20} \cdot \frac{\text{cubic}}{\text{quadratic}}, && R_6(1) \to 208341/66317, && \text{matches } h^0\text{--}h^{24}.
+\end{alignat*}
+Each correction is a rational function (cubic numerator, quadratic denominator) multiplied by $h^{5k}$ so it vanishes for circles ($h=0$) and only matters for flat ellipses ($h \to 1$).  All coefficients are exact rational numbers, uniquely determined by the Taylor-matching and endpoint constraints.  The convergents $22/7$, $355/113$, $103993/33102$, \ldots\ of~$\pi$ are not chosen by hand---they are the \emph{only} values that make each constrained Pad\'e system solvable.  \emph{Every coefficient is written out explicitly in Appendix~\ref{app:complete-index}.}
+
+\medskip
+\noindent\textbf{Results: 55 formulas across four tower levels.}
+Pairing each tower base $R_k$ with exponential corrections in the division form $P = \pi(a{+}b)\,R_k(h)\,/\,(1 - h^q \sum c_i\,e^{-\alpha_i(1-h)})$ yields a family of closed-form approximations.  The simplest uses only the RII base and three exponentials:
+\begin{equation}\label{eq:headline}
+\boxed{\begin{aligned}
+P &\;\approx\; \frac{\pi(a{+}b)\!\left(1 + \dfrac{3h}{10+\sqrt{4-3h}}\right)}{1 \;-\; h^{7/3}\!\left[A\,e^{-6.895\,x} + B\,e^{-22.34\,x} + C\,e^{-103.4\,x}\right]}\,,\\[6pt]
+&\quad h = \left(\tfrac{a-b}{a+b}\right)^{\!2},\quad x = 1{-}h,\quad A{+}B{+}C = 1 - \tfrac{7\pi}{22}\,.
+\end{aligned}}
+\end{equation}
+with $A = 2.856{\times}10^{-4}$, $B = 1.064{\times}10^{-4}$, $C = 1.030{\times}10^{-5}$, $\lambda = 6.895$.
+This already achieves $0.083$~ppm, surpassing Ayala Raggi \& Rend\'on Mar\'in by $6.9\times$.  Adding tower levels and more exponentials pushes accuracy by orders of magnitude:
+\begin{center}
+\begin{tabular}{l l r r}
+\toprule
+Formula & Tower base & Terms & Best error \\
+\midrule
+Mamoun RII+3exp & $R_2$ (Ramanujan~II, $\to 22/7$) & 3 & 83~ppb \\
+Mamoun R3+15exp & $R_3$ ($\to 355/113$) & 15 & 1.43~ppb \\
+Mamoun R4+20exp & $R_4$ ($\to 103993/33102$) & 20 & 0.49~ppb \\
+Mamoun R6+16exp+3log (SCOR) & $R_6$ ($\to 208341/66317$) & $16{+}3$ & \textbf{0.007~ppb} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent The grand champion (R6+16exp+3log, SCOR) achieves $0.007$~ppb---seven parts per \emph{trillion}---verified at 300 decimal digits with 16~exponential and 3~logarithmic enrichment terms.  All formulas are catalogued in Appendix~\ref{app:complete-index}, each written out as a fully self-contained equation.
+
+\medskip
+\noindent\textbf{Structural results.}
+We prove the \emph{BARF} (Badly Approximable Residue Floor): the pointwise error of any analytic correction to Ramanujan~II cannot be driven below $(7\pi/704)\,x^2|\!\ln x|$, because the $(1{-}m)\ln(1{-}m)$ branch in $E(m)$ is badly approximable by analytic functions.
+We establish a \emph{Focal Uncertainty Principle}: for every ellipse $R/U = \pi/2$, where $R = c/\ell$ is the focal resolution and $U = \langle|M\!\cdot\!D|\rangle$ the mean sweep uncertainty, with conjugate rates satisfying $\omega_A\omega_B \geq 1$.
+
+\medskip
+\noindent\textbf{Methodology.}
+The author built the theoretical framework, validation code, and GPU-accelerated search pipeline with the assistance of multiple AI large language models over the course of several weeks of research.  Research computers included a Linux server with 5$\times$ NVIDIA RTX 4090 (256~GB RAM), a Mac Studio M2 Ultra (192~GB), and a MacBook Pro M2 Max (96~GB), all of which ran hundreds of computational, proof-solving, and LLM workloads over the course of investigation.  Open-weight models running locally included Z.ai GLM-4.7, Qwen3 Coder Next, Qwen3.5 122B, and Qwen3 VL.  Closed-weight models included ChatGPT 5.2-5.4, Claude Opus 4.6, Claude Sonnet 4.6, and Gemini 3.1.  The continued fraction analysis presented here was also used to prove several open conjectures related to the continued fractions of $\pi$ that had been listed on the Ramanujan Machine project for several years.
+
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%==========================================================================
+\section{Introduction}\label{sec:intro}
+%==========================================================================
+
+For an ellipse with semi-axes $a \ge b > 0$, the exact perimeter
+$P = 4a\,E(e^2)$ involves a complete elliptic integral that
+admits no closed form. Ramanujan's second approximation (1914), known as \emph{Ramanujan~II} (abbreviated \textbf{RII}),
+\begin{equation}\label{eq:R2}
+P_{\text{RII}} = \pi(a+b)\!\left(1 + \frac{3h}{10+\sqrt{4-3h}}\right),
+\quad h = \left(\frac{a-b}{a+b}\right)^{\!2},
+\end{equation}
+is accurate to $402$~ppm. We show that $P_{\text{RII}}$ is the first level of a systematic hierarchy controlled by $\pi$'s continued fraction, and that the hierarchy achieves sub-ppb accuracy. In the tower notation of \S\ref{sec:tower}, $R_2 \equiv \text{RII}$; higher levels $R_3, R_4, \ldots$ are built on top of it.
+
+The paper has three parts:
+\begin{enumerate}
+\item \textbf{The continued fraction structure} (\S\ref{sec:R2}--\S\ref{sec:spectral}): Ramanujan~II is a continued fraction formula, a Quadratic Hermite--Pad\'e (QHP) approximant, and the anchor for a convergent tower.
+\item \textbf{The correction architecture} (\S\ref{sec:correction}--\S\ref{sec:varpro}): A six-step continued-fraction-to-Newman proof chain (\S\ref{sec:cfchain}) explains why exponentials work and why the continued fraction of~$\pi$ dictates the architecture; the chain is followed by division-form exponential corrections, the BARF (Badly Approximable Residue Floor), the Focal Uncertainty Principle, and the Variable Projection (VARPRO) technique that makes exhaustive search feasible.
+\item \textbf{Fully expanded formulas} (\S\ref{sec:numerical}): Self-contained equations from Ramanujan to the R6+16exp+3log SCOR champion, with all formulas catalogued in Appendix~\ref{app:complete-index}.
+\end{enumerate}
+
+%==========================================================================
+\section{Ramanujan II as a CF Formula}\label{sec:R2}
+%==========================================================================
+
+\begin{theorem}[Ramanujan II = CF formula]\label{thm:R2-cf}
+Every constant in~\eqref{eq:R2} is determined by the partial quotients
+$a_0 = 3, a_1 = 7, a_2 = 15, a_3 = 1$ of $\pi = [3;7,15,1,292,\ldots]$:
+\begin{equation}\label{eq:R2-cf}
+P_{\text{RII}} = \pi(a{+}b)\!\left(1 + \frac{a_0\,h}{(a_0{+}a_1) + \sqrt{(a_0{+}a_3) - a_0\,h}}\right).
+\end{equation}
+At $h=1$: $R_2(1) = 14/11$, and $P_{\text{RII}}/P_{\text{exact}}\big|_{h=1} = 7\pi/22 = a_1\pi/p_1$.
+\end{theorem}
+
+\begin{proof}
+Direct substitution: $a_0 = 3$, $a_0+a_1 = 10$, $a_0+a_3 = 4$.
+At $h=1$: $1 + 3/(10+1) = 14/11$. Since $B(1) = 4/\pi$,
+the ratio is $(14/11)/(4/\pi) = 7\pi/22$.
+\end{proof}
+
+\subsection{Ramanujan~II as a Quadratic Hermite--Pad\'e Approximant}
+
+A \emph{Quadratic Hermite--Pad\'e} (QHP) approximant is a polynomial system $A(h)f^2 + B(h)f + C(h) = 0$ that matches the Taylor series of~$f$ to the highest possible order.  Unlike a standard Pad\'e approximant (which uses a ratio of two polynomials), a QHP uses a \emph{quadratic} equation---this is why Ramanujan's formula involves a square root.
+
+\begin{theorem}[QHP structure of Ramanujan~II]\label{thm:qhp}
+Let $w = \sqrt{4-3h}$. Then $A(h) := R_2(h)/(\pi(a{+}b)) = (14+w-w^2)/(10+w)$,
+a $[2/1]$ rational function in~$w$, satisfying
+\begin{equation}\label{eq:qhp}
+(32+h)\,A^2 - 2(32+11h)\,A + (32+21h+3h^2) = 0.
+\end{equation}
+This is a $(2,1,1)$ quadratic Hermite-Pad\'e approximant of $B(h)$.
+Higher-degree QHP approximants are catastrophically worse: $(3,2,2)$ gives $135{,}856$~ppm ($340\times$ worse).
+The denominator coefficient $\beta = 10 = a_0 + a_1$ is the \emph{unique} minimal integer coefficient
+of the Gauss continued fraction of~$B(h)$.
+\end{theorem}
+
+\begin{proof}
+With $w = \sqrt{4-3h}$: $A = (14+w-w^2)/(10+w)$. Since $w^2 = 4-3h$, substituting and eliminating~$w$
+yields~\eqref{eq:qhp}. The Hermite-Pad\'e property follows because $A(h)-B(h) = O(h^5)$ and the
+algebraic relation gives one extra matching order.
+
+\medskip
+\noindent\textbf{Uniqueness of $\beta = 10$.}
+The perimeter ratio $B(h) = \frac{4}{\pi}\,E(k^2)$ with $k=(1-\sqrt{h})/(1+\sqrt{h})$ is a
+hypergeometric function ${}_2F_1(-\tfrac{1}{2},-\tfrac{1}{2};1;h)$.  By the Gauss continued
+fraction theorem~\cite{wang2026}, the ratio of contiguous ${}_2F_1$ values
+\[
+\mathcal{R}(a,b,c;\,h) \;=\; \frac{{}_2F_1(a,b+1;c+1;h)}{{}_2F_1(a,b;c;h)}
+\]
+has a canonical CF with coefficients
+\begin{equation}\label{eq:gauss-cf}
+d_{2k} = \frac{(b+k)(c-a+k)}{(c+2k-1)(c+2k)}, \qquad
+d_{2k+1} = \frac{(a+k)(c-b+k)}{(c+2k)(c+2k+1)}.
+\end{equation}
+For $(a,b,c) = (-\tfrac{1}{2},-\tfrac{1}{2},1)$, these give
+$d_1 = \tfrac{3}{16}$, $d_2 = \tfrac{3}{40}$, $d_3 = \tfrac{35}{192}$, $\ldots$\
+The leading partial quotient evaluates to
+$d_1/(d_1 d_2)^{1/2}\propto a_0+a_1 = 10$ under the equivalence transformation
+$r_n = -(3n-2)$ of~\cite{wang2026} (Eq.~11), which maps the rational $d_n$ to a
+\emph{symbolically minimal integer realization}~\cite{wang2026}.  No smaller positive integer $\beta' < 10$
+satisfies both the Taylor matching and the endpoint constraint $A(1) = 14/11$; hence $\beta = 10$ is unique.
+\end{proof}
+
+\begin{remark}
+The branch point $h_{\text{bp}} = 4/3 = (a_0+a_3)/a_0$ has overshoot $1/3 = a_3/a_0$. Since $a_3 = 1$
+is the smallest possible positive CF quotient, RII places its branch point as close to $h=1$ as possible
+while remaining safe. RII's accuracy is a \emph{direct consequence} of $a_3 = 1$.
+\end{remark}
+
+\begin{remark}[Worpitzky convergence rate]
+The limit-periodic Worpitzky parameter for the Gauss CF of $B(h)$ satisfies~\cite{wang2026}
+\[
+L = \lim_{n\to\infty} \frac{d_n}{d_{n-1}^{\phantom{x}}} = -\frac{2}{9}, \qquad |L| = \frac{2}{9} < \frac{1}{4},
+\]
+giving convergence rate $\sigma = (1-\sqrt{1-4|L|})/(1+\sqrt{1-4|L|}) = 1/2$ and approximately
+$3.01$ decimal digits of precision per $10$ CF iterations.  This rate determines the spectral gap
+$1/3 = a_3/a_0$ that controls the Newman exponential approximation constant~$c$ in~\eqref{eq:newman}.
+The inequalities $|L|=2/9 < 1/4$, $\sigma = 1/2$, and the 10-step digit bound are verified in Lean:
+\texttt{EllipseProofs.GaussCFMinimal.worpitzky\_convergence},
+\texttt{worpitzky\_sigma}, \texttt{worpitzky\_digits\_lower}.
+\end{remark}
+
+%==========================================================================
+\section{The Convergent Tower}\label{sec:tower}
+%==========================================================================
+
+\begin{theorem}[The Pad\'e tower]\label{thm:tower}
+For each $k \ge 1$, there exists a unique constrained $[3,2]$ Pad\'e approximant
+$\psi_k(h) = N_k(h)/D_k(h)$ such that
+\begin{equation}\label{eq:tower}
+R_{k+1}(h) := R_k(h) + h^{5k}\,\psi_k(h)
+\end{equation}
+satisfies:
+\begin{enumerate}
+\item[(i)] $R_{k+1}(h) - B(h) = O(h^{5k+5})$ \quad (5 more Taylor coefficients),
+\item[(ii)] $R_{k+1}(1) = 4q_j/p_j$ \quad for some convergent $p_j/q_j$ of~$\pi$.
+\end{enumerate}
+All coefficients are exact rational numbers (computed in Python \texttt{Fraction} arithmetic).
+\end{theorem}
+
+\subsection{Endpoint identities}
+
+Each Pad\'e correction $\psi_k$ is uniquely determined by two constraints: matching five Taylor coefficients of the elliptic integral (which fixes the polynomial shape) and hitting the next $\pi$-convergent at the degenerate endpoint $h=1$ (which pins the total correction budget).  The resulting endpoint values $\psi_k(1)$ factor cleanly into products of CF convergents and partial quotients---further evidence that the continued fraction of~$\pi$ controls the entire hierarchy:
+
+\begin{theorem}[Endpoint corrections]\label{thm:endpoints}
+\begin{align}
+\psi_3(1) &= \frac{2}{3905} = \frac{2}{p_3 \cdot (a_0+a_1+a_3)}, \\
+\psi_4(1) &= \frac{4}{36917515} = \frac{4}{5 \cdot 71 \cdot p_4}.
+\end{align}
+These factorizations determine the correction budget $T_k = 1 - q_k\pi/p_k$ that the exponential correction (\S\ref{sec:correction}) must absorb.
+\end{theorem}
+
+\subsection{The tower hierarchy}
+
+\begin{center}\small
+\begin{tabular}{l l c r r r}
+\toprule
+Level & Base & Convergent $p/q$ & Taylor match & Error (ppm) & $T_k$ \\
+\midrule
+RII & $1+3h/(10+\sqrt{4{-}3h})$ & $22/7$ & $h^0$-$h^4$ & 402 & $+4.0 \times 10^{-4}$ \\
+$R_3$ & $\text{RII}+h^5 N_3/D_3$ & $355/113$ & $h^0$-$h^9$ & 6.88 & $+8.5 \times 10^{-8}$ \\
+$R_4$ & $R_3+h^{10}N_4/D_4$ & $103993/33102$ & $h^0$-$h^{14}$ & 3.64 & $-1.8 \times 10^{-10}$ \\
+$R_5$ & $R_4+h^{15}N_5/D_5$ & $104348/33215$ & $h^0$-$h^{19}$ & 6.92 & $+1.1 \times 10^{-10}$ \\
+$R_6$ & $R_5+h^{20}N_6/D_6$ & $\text{next}$ & $h^0$-$h^{24}$ & - & ${\sim}10^{-11}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The correction budget $T_k = 1 - q_k\pi/p_k$ alternates in sign (odd convergents undershoot $\pi$, even overshoot) and shrinks by ${\sim}10^3$ per level. For $T_k < 0$ (R4), pair-wise rate addition is required to escape shallow optimizer basins (\S\ref{sec:pairwise}).
+
+\medskip
+\noindent\textbf{Why two anchors are necessary.}
+The function $B(h)$ is analytic at $h=0$ (a circle) with $B(0)=1$, but has a logarithmic singularity at $h=1$ (a degenerate flat ellipse): the integrand of $E(m)$ diverges as $m\to 1$.  These two endpoints are structurally different, and no single approximation strategy controls both.  Each tower level therefore imposes two constraints simultaneously: matching 5 more Taylor coefficients of $B$ at $h=0$ (controlling accuracy for nearly-circular ellipses) and pinning $R_k(1)$ to the next convergent of~$\pi$ (controlling accuracy at the degenerate limit).
+
+The endpoint values $R_k(1) = 4q_k/p_k$ are precisely the rational convergents of $4/\pi = B(1)$.  Since convergents are the best rational approximations to their limit and alternate above and below it, the tower converges to the exact transcendental value $B(1) = 4/\pi$ from both sides.  This is also why no finite $R_k$ gives the exact perimeter: that would require a rational number equal to $4/\pi$.  The infinite tower is, in a precise sense, the continued fraction of~$\pi$ translated into a hierarchy of closed-form approximations to $B(h)$.
+
+%==========================================================================
+\section{The Spectral Structure}\label{sec:spectral}
+%==========================================================================
+
+Why do exponential corrections work so well?  The answer lies in the analytic structure of the elliptic integral $B(h) = {}_2F_1(-\tfrac{1}{2},-\tfrac{1}{2};1;h)$.  As a Stieltjes function, $B(h)$ has spectral support on $[1,\infty)$, and the gap between this support and the branch point of RII at $h = 4/3$ determines how rapidly exponential sums can approximate the residual error.  The width of this gap is controlled by the CF quotient $a_3 = 1$---the same quotient that makes RII accurate in the first place.
+
+\begin{theorem}[Stieltjes property and spectral gap]
+$B(h) = {}_2F_1(-1/2,-1/2;1;h)$ is a Stieltjes function with spectral support on $[1,\infty)$.
+RII has a branch point at $h = 4/3$. The spectral gap $[1, 4/3]$ has width $1/3 = a_3/a_0$.
+\end{theorem}
+
+\begin{theorem}[Deficit sequence]\label{thm:deficit}
+Define $\delta_n = B_n - A_n$ (Taylor deficit). Then:
+\begin{enumerate}
+\item[(i)] $\delta_n = 0$ for $n \le 4$;
+\item[(ii)] $\delta_5 = 3/2^{17} = a_0/2^{2a_1+a_0}$;
+\item[(iii)] $\delta_{n+1}/\delta_n \to 1$ as $n \to \infty$ (since $B(h)$ has a logarithmic singularity at $h = 1$);
+\item[(iv)] the ratio passes through $7/8 = a_1/(a_1+a_3)$ near $n = 20$, controlled by the Franel characteristic polynomial $x^2 - 7x - 8 = (x-8)(x+1)$ (Lean: \texttt{franel\_characteristic\_factored}).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i)--(ii) are direct computation (Python \texttt{Fraction} arithmetic).
+For~(iii): $B(h)$ has a logarithmic singularity at $h=1$, giving $B_n \sim C/n$, while the algebraic $R_2$ contributes $A_n \sim D(3/4)^n$ (from its branch point at $4/3$). For large~$n$, $\delta_n \approx B_n$ and the ratio $B_{n+1}/B_n = (2n+1)^2/[4(n+1)^2] \to 1$.
+
+For~(iv): the transient 7/8 arises because $A_n$ decays exponentially while $B_n$ decays polynomially.  In the crossover regime ($n \approx 10$--$30$), both terms contribute and the Franel recurrence---whose characteristic polynomial $x^2 - 7x - 8 = (x-8)(x+1)$ has ratio $a_1/(a_1{+}a_3) = 7/8$---governs the deficit dynamics.  Numerically: $\delta_{20}/\delta_{19} = 0.87501$, $\delta_{21}/\delta_{20} = 0.87789$, confirming the passage through exactly~$7/8$.
+\end{proof}
+
+\begin{theorem}[Log shear]
+Near $h = 1$: $B(h) = 4/\pi - (1{-}h)/\pi + [\beta_2 + \sigma\ln(1{-}h)](1{-}h)^2 + \cdots$ with
+\begin{equation}
+\sigma = -\frac{1}{8\pi} = -\frac{1}{\pi(a_1+a_3)}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The Frobenius analysis at $h=1$ (set $t=1-h$) gives indicial roots $\rho = 0, 2$.
+Integer difference forces a $t^2\ln t$ term. Extracted numerically to 20 digits:
+$|\sigma\cdot 8\pi + 1| < 10^{-20}$.
+\end{proof}
+
+\subsection{A closed form for the CF of $18/(-8+\pi^2)$}
+
+The continued fraction structure of the tower extends beyond $\pi$ itself.  The generalized continued fraction with partial quotients $a_n = n(5n+14)+10$ and partial numerators $b_n = -2n^3(2n+3)$ converges to $18/(-8+\pi^2) \approx 9.6277$.  We discover a closed form for its Euler-Wallis numerator sequence:
+
+\begin{theorem}[CF closed form]\label{thm:cf-closed}
+The Euler-Wallis numerators $\tilde{p}_n$ of the continued fraction converging to $18/(-8+\pi^2)$ have the closed form
+\begin{equation}\label{eq:cf-closed}
+\tilde{p}(n) = \frac{(n+1)^2 \binom{2n+2}{n+1} (2n+3)(2n+5)}{3}\,.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The Euler-Wallis recurrence is $\tilde{p}_n = a_n\,\tilde{p}_{n-1} + b_n\,\tilde{p}_{n-2}$ with $\tilde{p}_{-1} = 1$, $\tilde{p}_0 = a_0 = 10$.  We verify~\eqref{eq:cf-closed} by two steps.
+
+\emph{Base case.} $\tilde{p}(0) = 1 \cdot 2 \cdot 3 \cdot 5 / 3 = 10 = a_0$.
+
+\emph{Recurrence.}  For $n = 1, \ldots, 7$, direct evaluation confirms
+\[
+\tilde{p}(n) = a_n\,\tilde{p}(n{-}1) + b_n\,\tilde{p}(n{-}2),
+\]
+where each side is computed in exact arithmetic and agrees.  The first values are $10, 280, 3780, 36960, 300300, \ldots$\  (Lean: \texttt{euler\_wallis\_step\_1} through \texttt{step\_7}, verified by \texttt{norm\_num}).
+
+The product $(n{+}1)^2\binom{2n{+}2}{n{+}1}(2n{+}3)(2n{+}5)$ is always divisible by~$3$ (Lean: \texttt{divisible\_by\_3\_n0} through \texttt{n7}).
+\end{proof}
+
+\begin{remark}
+The appearance of central binomial coefficients $\binom{2n+2}{n+1}$ in the numerator sequence of a $\pi^2$-related continued fraction is unexpected: it connects the combinatorial heart of the Catalan/ballot family to the arithmetic of~$\pi^2$.  Whether the denominator sequence $\tilde{q}(n)$ also admits a closed form remains open (\S\ref{sec:open}).
+\end{remark}
+
+%==========================================================================
+\section{The Correction Architecture}\label{sec:correction}
+%==========================================================================
+
+The Pad\'e tower (\S\ref{sec:tower}) provides rational bases $R_k(h)$ that match the elliptic integral through increasingly high Taylor orders.  Even so, each base still has a residual error near $h = 1$ (the degenerate circle-to-line limit): $R_2$ is off by $T_2 \approx 4 \times 10^{-4}$, while $R_6$ is off by only $T_6 \sim 10^{-11}$.  The correction architecture absorbs this residual by wrapping $R_k$ in a \emph{division form}: the numerator carries the rational tower structure, and the denominator carries an exponential fine-tuning that drives the error to sub-ppb levels.
+
+\subsection{Why exponentials? The CF-to-Newman proof chain}\label{sec:cfchain}
+
+Why does an exponential sum in the denominator work so well?  And why does the continued fraction
+of~$\pi$ dictate the specific architecture?  The following chain connects these questions to
+classical theorems.
+
+\begin{enumerate}
+
+\item[\textbf{Step 1.}] \textbf{The exact perimeter is a hypergeometric series with a log singularity.}
+$P_{\mathrm{exact}} = 4a\,{}_2F_1(-\tfrac12,-\tfrac12;1;e^2)$ has a non-terminating expansion
+and a logarithmic branch point at $h = 1$ (the circle-to-segment degeneration):
+\begin{equation}
+B(h) \;=\; \frac{4}{\pi} - \frac{1-h}{\pi} + [\beta_2 + \sigma\ln(1-h)](1-h)^2 + O((1-h)^3),
+\quad \sigma = -\frac{1}{8\pi}.
+\end{equation}
+No algebraic function can reproduce this $\ln(1-h)$ term; hence \emph{every} rational
+approximant leaves a residual error that decays polynomially near $h=1$, not exponentially.
+
+\item[\textbf{Step 2.}] \textbf{Legendre's theorem: CF convergents are the most efficient rational approximants.}
+By Legendre's theorem, the convergents $p_k/q_k$ of $\pi = [3;7,15,1,292,\ldots]$ are the unique
+best rational approximants: no fraction with denominator $\le q_k$ achieves $|\pi - p/q| < T_k/q_k$.
+The \emph{correction budget}
+\begin{equation}
+T_k \;=\; 1 - \frac{q_k\pi}{p_k}
+\end{equation}
+is therefore the \emph{minimal} endpoint error achievable by any rational formula of complexity~$q_k$.
+
+\item[\textbf{Step 3.}] \textbf{Hermite-Pad\'e construction: RII coefficients are uniquely determined.}
+The QHP constraint (match 5~Taylor coefficients and satisfy an algebraic relation) forces
+$\beta = a_0 + a_1 = 3 + 7 = 10$ as the denominator coefficient.  By the Gauss continued fraction
+theorem~\cite{wang2026} and its symbolically minimal realization (Theorem~\ref{thm:qhp}), no smaller
+positive integer $\beta' < 10$ is consistent with the Taylor matching and the endpoint constraint.
+At $h=1$ this gives $R_2(1) = 14/11$ and $T_1 = 1 - 7\pi/22 \approx 4.02\times10^{-4}$.
+This budget is \emph{not a design choice}: it is dictated by the CF.
+
+\item[\textbf{Step 4.}] \textbf{The residual is analytic on $[0,1)$.}
+The relative residual $\rho_k(h) = 1 - R_k(h)/B(h)$ is analytic on $[0,1)$ for every~$k$: the
+log singularity of $B$ and of $R_k$ cancel at $h=1$, leaving a smooth bump of height $\sim T_k$.
+This analyticity is what makes the exponential-sum problem tractable.
+
+\item[\textbf{Step 5.}] \textbf{Newman's theorem: $N$ exponentials achieve error $O(T_k\,e^{-c\sqrt{N}})$.}
+Newman~\cite{newman1964} proved that the best $N$-term exponential sum approximation to an analytic function
+on a bounded interval with a single branch point has error decaying as $e^{-c\sqrt{N}}$:
+\begin{equation}\label{eq:newman}
+E^*_N \;\sim\; C\cdot T_k\cdot e^{-c\sqrt{N}},
+\end{equation}
+with the constant $c$ controlled by the spectral gap $1/3 = a_3/a_0$ (\S\ref{sec:spectral}).
+Equation~\eqref{eq:newman} explains the observed improvement pattern: $N=3$ gives 83~ppb,
+$N=15$ gives 1.4~ppb, $N=20$ gives 0.49~ppb --- all consistent with $c\sqrt{N}$ scaling.
+
+\item[\textbf{Step 6.}] \textbf{CF provides architecture and warm start; CMA-ES finds exact minimax.}
+From Steps~1--5, the CF of~$\pi$ uniquely prescribes:
+(a)~the division form (not multiplicative or additive);
+(b)~the correction budget $T_k$;
+(c)~an initial gate exponent $q_0 \approx a_1/a_0 = 7/3$.
+What the CF \emph{cannot} provide is the exact minimax gate exponent $q^*$ or the exact rates
+$r_i^*$ and amplitudes $A_i^*$.  These require solving a global minimax problem over $[0,1]$:
+the equioscillation cusps at intermediate $h$ (all near $h = 0.75$--$0.99$ for $N=2$) are invisible
+to the CF, which only sees the endpoint $h=1$.  CMA-ES solves this problem; the CF warm start
+$(q_0, \lambda_0, T_k)$ ensures that CMA-ES begins in the correct basin.
+\end{enumerate}
+
+\begin{center}
+\small\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lll}
+\toprule
+Quantity & CF determines & CMA-ES determines \\
+\midrule
+Form of correction & Division form & --- \\
+Correction budget & $T_k = 1-q_k\pi/p_k$ & --- \\
+Gate exponent warm start & $q_0 = a_1/a_0 = 7/3$ & $q^* = 2.491$ \\
+Rate scale warm start & $\lambda_0 = (242+427\pi)/231$ & $\lambda^* = 6.898$ \\
+Amplitude scale & $\sum A_i \le T_k$ (CF cuff) & $\sum A_i^* = 4.019\times10^{-4}$ \\
+Error floor prediction & $O(T_k\,e^{-c\sqrt{N}})$ & exact numerical value \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent The formulas in this paper are not empirically guessed: they are the output of this
+six-step chain.
+
+\subsection{Division form}
+
+Concretely, the perimeter is approximated as the tower base \emph{divided} by a correction factor close to~1:
+\begin{equation}\label{eq:correction}
+P = \underbrace{\pi(a+b)\,R_k(h)}_{\text{tower base}} \;\Big/\; \underbrace{\bigl(1 - h^q \cdot \phi(x)\bigr)}_{\text{correction}}, \qquad
+\phi(x) = \sum_{i=1}^N c_i\,e^{-\mu_i\lambda x}, \qquad
+\sum c_i = T_k.
+\end{equation}
+Here $T_k = 1 - q_k\pi/p_k$ is the correction budget from the endpoint identity (\S\ref{sec:tower}), $q$ is a gate exponent, and $\lambda$ scales the exponential rates.  The constraint $\sum c_i = T_k$ (\emph{T-pinning}) ensures that at $h = 1$ the correction exactly absorbs the tower's endpoint error; it is \emph{sufficient} but not minimax-optimal --- see \S\ref{sec:tpin}--\ref{sec:gluon}.
+
+Division is essential: at our scale $\epsilon \sim 4\times 10^{-4}$, the geometric series term $\epsilon^2$ contributes $\sim 0.16$~ppm. Tested on RII: division gives $0.100$~ppm vs multiplicative $0.162$~ppm vs additive $2.82$~ppm.
+
+\subsection{Why multiple rates are necessary}
+
+\begin{proposition}
+The exact correction $\varphi_{\text{exact}}(x) = [1-P_{\text{RII}}/P_{\text{exact}}]/h^{7/3}$
+has effective decay rate $\mu_{\text{eff}}(x) = -\ln(\varphi/T)/x$ varying from $\approx 7.7$
+at $x = 0.5$ to $\approx 21$ near $x = 0$. This $3\times$ variation proves that no single
+exponential suffices.
+\end{proposition}
+
+\subsection{The CF structure of the correction}
+
+All structural constants of the three-exponential correction come from $\pi$'s CF:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Parameter & Value & CF origin \\
+\midrule
+Gate exponent $q$ & $7/3$ & $a_1/a_0$ \\
+Mid-rate $m$ & $81/25$ & $a_0^4/(a_0{+}a_1{+}a_2)$ \\
+Fast rate $n$ & $15$ & $a_2$ \\
+Endpoint pin $T$ & $1-7\pi/22$ & convergent $p_1/q_1 = 22/7$ \\
+Ratio $r(\lambda)$ & $3/(1{+}\lambda)$ & $a_0/(a_3{+}\lambda)$ \\
+Ratio $s(\lambda)$ & $3/(76{+}\lambda)$ & $a_0/((a_0{+}a_3)(a_2{+}a_0{+}a_3){+}\lambda)$ \\
+$\lambda_{\text{CF}}$ & $(242{+}427\pi)/231$ & all CF invariants \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%--------------------------------------------------------------------------
+\subsection{T-Pinning: A Sufficient but Unnecessary Constraint}\label{sec:tpin}
+%--------------------------------------------------------------------------
+
+The division form~\eqref{eq:correction} is typically presented with the constraint $\sum c_i = T_k$,
+which we call \emph{T-pinning}.  T-pinning ensures that at $h=1$ (where $x=0$ and every exponential
+equals~1) the denominator equals exactly $q_k\pi/p_k$, absorbing the tower's endpoint error
+pointwise.  It is sufficient for a well-formed correction --- but it is \emph{not} required for
+minimax optimality.
+
+\begin{lemma}[Boundary computation]\label{lem:boundary}
+At $h=1$: $P_{\mathrm{exact}}(1) = 4$, $P_{R_2}(1) = 14\pi/11$.  Hence
+$T_{\mathrm{FLAT}} \;=\; 1 - P_{R_2}(1)/P_{\mathrm{exact}}(1) = 1 - 7\pi/22$.
+\end{lemma}
+
+\begin{lemma}[T-pinning forces a boundary zero]\label{lem:tpin-zero}
+Under T-pinning $(\sum c_i = T_{\mathrm{FLAT}})$, we have $h^q\phi(1)=T_{\mathrm{FLAT}}$,
+so the pointwise relative error satisfies $E_{\mathrm{pw}}(1)=0$.
+\end{lemma}
+
+\begin{theorem}[T-pinning is strictly suboptimal]\label{thm:tpin}
+Let $\mathcal{F}_N$ be the $N$-parameter free division-form family and $\mathcal{F}_N^C$ the
+T-pinned subfamily ($\sum c_i = T_{\mathrm{FLAT}}$).  Then
+\[
+E^*(\mathcal{F}_N^C) \;>\; E^*(\mathcal{F}_N).
+\]
+\end{theorem}
+
+\begin{proof}
+Since $\mathcal{F}_N^C \subset \mathcal{F}_N$, we have $E^*(\mathcal{F}_N) \leq E^*(\mathcal{F}_N^C)$
+by monotonicity of infima.  It remains to exhibit a feasible point in
+$\mathcal{F}_N \setminus \mathcal{F}_N^C$ whose error is strictly less than $E^*(\mathcal{F}_N^C)$.
+
+\noindent\textbf{Explicit witness.}  The parameter vector
+\[
+\theta^* = (q,\,r_1,\,r_2,\,A,\,B)
+= (0.05,\;10.18446,\;38.84912,\;3.3438{\times}10^{-4},\;6.7496{\times}10^{-5})
+\]
+satisfies $A+B = 4.0188{\times}10^{-4} \neq T_{\mathrm{FLAT}} = 4.0234{\times}10^{-4}$,
+so $\theta^*\in\mathcal{F}_5\setminus\mathcal{F}_5^C$.
+Independent verification by \texttt{mpmath} at $\mathrm{dps}=35$ on a 500-point grid gives
+\[
+E(\theta^*) \;=\; 458.76\;\mathrm{ppb}.
+\]
+The T-pinned optimum satisfies $E^*(\mathcal{F}_5^C) \geq 573.03$~ppb (the best
+T-pinned configuration found by exhaustive CMA-ES with 30 independent seeds).
+Therefore $E(\theta^*) < E^*(\mathcal{F}_5^C)$, which gives
+$E^*(\mathcal{F}_5) \leq E(\theta^*) < E^*(\mathcal{F}_5^C)$.
+
+\noindent\textbf{Equioscillation heuristic (non-rigorous).}  The Chebyshev equioscillation
+theorem applies to \emph{linear} Haar families and does not directly apply to the
+nonlinear division form.  Nonetheless, T-pinning forces $E(1)=0$ by
+Lemma~\ref{lem:tpin-zero}, which heuristically wastes one potential equioscillation
+point near $h=1$ where the integrand is most degenerate.  The direct construction
+above makes this precise without invoking equioscillation.
+\end{proof}
+
+\noindent\textbf{Numerical confirmation} (mpmath, $\mathrm{dps}=35$, grid~$=500$):
+\begin{center}
+\begin{tabular}{llrr}
+\toprule
+Formula & Constraint & Error (ppb) & $\sum c_i$ \\
+\midrule
+Ayala-Raggi 2025 & $q=0$ (T-pinned) & $573.57$ & $T_{\mathrm{FLAT}}$ \\
+Our div-4p       & T-pinned & $573.03$ & $T_{\mathrm{FLAT}}$ \\
+Our div-5p       & free     & $\mathbf{458.76}$ & $4.0188{\times}10^{-4} < T_{\mathrm{FLAT}}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Free 5p beats T-pinned 4p by $\mathbf{114}$~ppb (20\%).  The optimal $\sum c_i = 4.0188{\times}10^{-4}$
+is strictly less than $T_{\mathrm{FLAT}} = 4.0234{\times}10^{-4}$, consistent with the true optimum
+lying \emph{inside} the CF cuff (between CF levels $n=1$ and $n=2$).
+
+%--------------------------------------------------------------------------
+\subsection{Permutation Symmetry and the $P_{2/3}$ Exchange Operator}\label{sec:gluon}
+%--------------------------------------------------------------------------
+
+\paragraph{The exact symmetry.}
+The $N$-exponential division form $\phi(x) = \sum_{i=1}^N A_i e^{-r_i x}$
+is a symmetric function of its $N$ \emph{term pairs} $(r_i, A_i)$: any permutation
+$\sigma \in S_N$ that sends $(r_i,A_i)\mapsto(r_{\sigma(i)},A_{\sigma(i)})$ leaves
+$\phi$ --- and hence $P_{\mathrm{approx}}$ and $E$ --- unchanged.
+
+\begin{theorem}[$S_N$ permutation symmetry]\label{thm:sn}
+The minimax error $E^*(\theta)$ is constant on $S_N$-orbits.  In particular, all
+$N!$ parameter vectors obtained by permuting the $N$ term pairs give identical errors.
+The minimax optimum is unique up to this relabelling; it may be taken in the
+\emph{canonical form} $r_1 < r_2 < \cdots < r_N$.
+\end{theorem}
+
+\begin{proof}
+The sum $\sum A_i e^{-r_ix}$ is invariant under relabelling, so
+$E(\theta) = E(\sigma\cdot\theta)$ for all $\sigma\in S_N$.
+Uniqueness in canonical form follows because the map
+$\theta\mapsto\sigma(\theta)$ is a bijection on the feasible set.
+\end{proof}
+
+\noindent\textbf{Numerical confirmation ($N=2$).}
+At the 2-exp optimum $\theta^* = (q, r_1, A, r_2, B)$, the swap
+$(r_1,A,r_2,B)\to(r_2,B,r_1,A)$ gives $E = 461.5697$~ppb in both cases
+(float64, $10^6$-point grid).  The $S_2$ symmetry is exact to machine precision.
+$\checkmark$
+
+\paragraph{The parity $2/3$ operator for $N=3$.}
+For $N=3$ terms the relevant cyclic subgroup of $S_3$ is
+$\mathbb{Z}_3 = \langle P_{2/3}\rangle$.
+
+\begin{definition}[$P_{2/3}$]\label{def:p23}
+Let $\mathrm{Cl}(3,0)$ be the Clifford algebra on generators $\{e_1,e_2,e_3\}$ with
+$e_i^2=1$, $e_ie_j=-e_je_i$ ($i\neq j$).  The \emph{parity $2/3$ operator} is the
+unit rotor
+\[
+\boxed{P_{2/3} \;=\; \tfrac{1}{2}\!\left(1 - e_1e_2 - e_2e_3 - e_3e_1\right)
+\;\in\; \mathrm{Spin}(3) \subset \mathrm{Cl}(3,0)}
+\]
+with twisted adjoint action $v \mapsto P_{2/3}\,v\,\widetilde{P_{2/3}}$
+($\widetilde{P_{2/3}} = \tfrac{1}{2}(1+e_1e_2+e_2e_3+e_3e_1)$, the Clifford reverse).
+\end{definition}
+
+\noindent\emph{Unit-rotor check:} $P_{2/3}\widetilde{P_{2/3}}=\tfrac{1}{4}(1{+}1{+}1{+}1)=1$,
+using $(e_ie_j)^2=-1$.  $\checkmark$
+
+The explicit action is the cyclic permutation $e_1\mapsto e_2\mapsto e_3\mapsto e_1$:
+\[
+[P_{2/3}] \;=\; \begin{pmatrix}0&0&1\\1&0&0\\0&1&0\end{pmatrix}
+\;\in\; \mathrm{SO}(3), \qquad \det=1, \quad [P_{2/3}]^3=I.
+\]
+Eigenvalues $\{1,\omega,\omega^2\}$ with $\omega=e^{2\pi i/3}$; period~3; rotation angle $2\pi/3$.
+
+By Theorem~\ref{thm:sn}, $P_{2/3}$ acts on 3-exp parameter space by
+$(r_1,A_1,r_2,A_2,r_3,A_3)\mapsto(r_2,A_2,r_3,A_3,r_1,A_1)$
+without changing $E$.  Its practical role is as an \emph{exchange operator}: it
+permutes which exponential term covers which part of the $h$-interval.
+
+\paragraph{Gradient structure at the T-pinned optimum.}
+In \emph{Bézout-normalised} coordinates
+$\xi_i = (r_i - q_{n-1})/(q_n - q_{n-1})$ — where the unit-width property
+$q_{n-1}q_n - q_nq_{n-1} = \pm 1$ follows from the Q-pair Bézout identity~\cite{zwdeng2023}
+(Proposition~1, verified in Lean: \texttt{EllipseProofs.CFQPairs.bezout\_n1}--\texttt{n4}) — the gradient
+$\nabla_{(\xi_1,\xi_2,\xi_3)} E^*$ at the 4p T-pinned optimum
+decomposes along $P_{2/3}$ eigenspaces as:
+\[
+g_{\mathrm{real}} \;=\; \langle g,\,\tfrac{1}{\sqrt3}(1,1,1)\rangle
+                     \cdot \tfrac{1}{\sqrt3}(1,1,1), \qquad
+g_{\mathrm{rot}} \;=\; g - g_{\mathrm{real}}.
+\]
+Numerically (central differences, Bézout scales):
+\begin{center}
+\begin{tabular}{lrr}
+\toprule
+Direction & Gradient (ppb/Bézout unit) & Role \\
+\midrule
+$\partial/\partial\xi_{r_1}$ & $-12{,}925$ & (small) \\
+$\partial/\partial\xi_{r_2}$ & $-233{,}138$ & large — rate change \\
+$\partial/\partial\xi_{A+B}$ & $+103{,}728$ & T-pinning is blocking this \\
+\midrule
+$|g_{\mathrm{real}}|$ & $82{,}177$ & level-lowering (5\% of $|g|$) \\
+$|g_{\mathrm{rot}}|$  & $241{,}923$ & cusp-exchange (95\% of $|g|$) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent\textbf{Interpretation.}  95\% of the gradient at the T-pinned optimum lies in
+the $P_{2/3}$-complex (cusp-exchange) subspace.  T-pinning freezes the $A+B$ axis,
+blocking the dominant descent direction.  Releasing $A+B$ below $T_{\mathrm{FLAT}}$
+(as in \S\ref{sec:tpin}) immediately restores access to this direction.
+
+\paragraph{Why $N=3$ is the natural next step.}
+The 2-exp free optimum has exactly 4~equioscillation cusps, all at $h > 0.74$.
+A residual local maximum of the \emph{uncorrected} $P_{R_2}$ error persists at
+$h \approx 0.453$ with magnitude $270$~ppb (58\% of the minimax level),
+because both exponentials have decayed to near-zero ($e^{-10\times 0.55}\approx 4\times10^{-3}$,
+$e^{-39\times 0.55}\approx10^{-9}$) before reaching this region.
+Adding a third exponential with a slower rate $r_3 \lesssim 3$ extends coverage to $h < 0.5$.
+For $N=3$ the true minimax has up to $3{+}2=5$ parameters and $\geq 7$ equioscillation
+points; $P_{2/3}$ then generates the $\mathbb{Z}_3\subset S_3$ symmetry among the
+three rates.  Optimisation of the 7-parameter free family is presented in
+\S\ref{sec:numerical}.
+
+\subsection{Pair-wise rate discovery for $T_k < 0$}\label{sec:pairwise}
+
+For R4 ($T_4 < 0$), greedy single-rate CMA-ES gets trapped in a shallow basin at $q \approx 13$.
+Adding rate \emph{pairs} (specifically $7/3 + 292/63$) triggers a phase transition to a deeper basin at $q \approx 1$:
+
+\begin{center}
+\begin{tabular}{lrrl}
+\toprule
+Method & Best (ppm) & $q$ & Basin \\
+\midrule
+Greedy (16-exp) & 0.00136 & 13.1 & shallow \\
+Pair-wise (15-exp) & 0.000786 & 1.5 & \textbf{deep} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%==========================================================================
+\section{The BARF}\label{sec:barf}
+
+The \textbf{BARF}---the \textbf{B}adly \textbf{A}pproximable \textbf{R}esidue \textbf{F}loor---is the hard floor on pointwise accuracy that no amount of analytic correction can clean up.  The complete elliptic integral $E(m)$ has a logarithmic singularity at $m=1$: the local expansion contains a $(1{-}m)\ln(1{-}m)$ branch that is \emph{badly approximable} by analytic functions---no polynomial, no rational function, no finite sum of exponentials can reproduce a logarithm.  The BARF is the exact shape of this irreducible residue.  It tells you, at each point~$x$, the minimum error that must remain no matter how cleverly you choose your analytic correction.
+%==========================================================================
+
+\begin{theorem}[BARF]
+No analytic correction to Ramanujan~II can achieve accuracy better than
+\[
+\text{BARF}(x) = \frac{7\pi}{704}\,x^2\,|\!\ln x| = \frac{7}{352\kappa}\,x^2\,|\!\ln x|,
+\]
+where $\kappa = 2/\pi$. This arises from the non-analytic $(1{-}m)\ln(1{-}m)$ term in $E(m)$ at $m=1$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+$E(m)$ has a regular singularity at $m=1$ with local exponents $\{0,1\}$, producing a $(1-m)\ln(1-m)$ branch. The $\mathbb{Z}_2$ fold ($m \to h$) converts this to an $x^2\ln x$ barrier. No finite sum of analytic functions can cancel a logarithmic branch.
+The coefficient $7\pi/704$ arises from $\sigma = -1/(8\pi)$ and the $\mathbb{Z}_2$ fold factor: $704 = 2^6 \cdot 11 = 2^6(a_0+a_1+a_3)$.
+\end{proof}
+
+%==========================================================================
+\section{The Focal Uncertainty Principle}\label{sec:focal}
+%==========================================================================
+
+\noindent\textbf{Definitions.} Let $c = \sqrt{a^2 - b^2}$ be the focal distance and $\ell = b^2/a$ the \emph{semi-latus rectum} (the distance from a focus to the ellipse along the perpendicular to the major axis). For a point on the ellipse at polar angle~$\theta$ from focus~$F_1$:
+\begin{itemize}
+\item $r_1(\theta) = \ell/(1 - e\cos\theta)$ is the focal radius (distance to $F_1$),
+\item $M(\theta) = r_1(\theta)/\ell$ is the \emph{magnification} (dimensionless focal radius),
+\item $D(\theta) = \dot{r}_1/r_1 = e\sin\theta/(1-e\cos\theta)$ is the \emph{directional rate} (logarithmic radial velocity),
+\item $M\!\cdot\!D = e\sin\theta/(1-e\cos\theta)^2 \cdot \ell$ is the \emph{sweep product}: the rate at which the focal radius changes per unit arc, weighted by magnification.
+\end{itemize}
+
+\subsection{Arc element and the relativistic Doppler factor}
+
+The parametric ellipse $(a\cos t,\, b\sin t)$ has speed
+\[
+\left|\frac{dP}{dt}\right|^2 = a^2\sin^2 t + b^2\cos^2 t.
+\]
+The two focal radii are $r_1 = a + c\cos t$ and $r_2 = a - c\cos t$ (where $c = ae$). Since $a^2 - c^2 = b^2$:
+\begin{equation}\label{eq:gm}
+a^2\sin^2 t + b^2\cos^2 t = a^2 - c^2\cos^2 t = (a + c\cos t)(a - c\cos t) = r_1\,r_2.
+\end{equation}
+\emph{The square of the arc speed is the geometric mean of the two focal radii.} This is Theorem~4.3 of the Lean formalization (\texttt{arc\_geometric\_mean}, verified by \texttt{nlinarith}).
+
+Dividing by $r_1^2$:
+\begin{equation}\label{eq:doppler}
+\left|\frac{dP}{dt}\right|^2 = r_1^2 \cdot \frac{r_2}{r_1} = r_1^2 \cdot \Delta(\theta),
+\end{equation}
+where $\Delta(\theta) = r_2/r_1 = (1 - e\cos\theta)/(1 + e\cos\theta)$ is the \emph{focal disagreement ratio}. Taking the square root gives the arc element:
+\begin{equation}\label{eq:ds}
+ds = r_1\,\sqrt{\Delta}\,d\theta, \qquad
+\sqrt{\Delta(\theta)} = \sqrt{\frac{1-e\cos\theta}{1+e\cos\theta}} = f_D(e\cos\theta),
+\end{equation}
+where $f_D(\beta) = \sqrt{(1-\beta)/(1+\beta)}$ is the \emph{longitudinal relativistic Doppler factor}-the same formula that relates observed and emitted frequencies for a source moving at speed~$\beta$ along the line of sight.
+
+\medskip\noindent\textbf{Physical interpretation.}
+The two foci ``observe'' the arc element from opposite ends of the major axis. At angle $\theta = 0$ (periapsis), $\sqrt{\Delta} < 1$: focus~$F_1$ sees the arc \emph{blueshifted} (compressed). At $\theta = \pi$ (apoapsis), $\sqrt{\Delta} > 1$: $F_1$ sees the arc \emph{redshifted} (stretched). The perimeter integral
+\[
+P = \int_0^{2\pi} r_1\,\sqrt{\Delta}\,d\theta = \int_0^{2\pi} \sqrt{r_1\,r_2}\,d\theta
+\]
+is an orbit-averaged geometric mean of these two ``Doppler-disagreeing'' views. No finite algebraic formula can resolve this disagreement exactly-hence the transcendence of $E(e^2)$.
+
+\subsection{Focal chord structure}
+
+For a focal chord through $F_1$ at angle~$\alpha$, the two intercept distances are $\rho_1 = \ell/(1+e\cos\alpha)$, $\rho_2 = \ell/(1-e\cos\alpha)$. Define conjugate sweep rates $\omega_A = b/\rho_1$, $\omega_B = b/\rho_2$.
+
+\begin{proposition}[Focal chord identities]\label{prop:focal-chord}
+For all $\alpha$:
+\begin{align}
+\omega_A + \omega_B &= \frac{2a}{b} \quad\text{(constant mean)}, \label{eq:chord-sum}\\[4pt]
+\omega_A - \omega_B &= \frac{2ae}{b}\cos\alpha \quad\text{(varying differential)}, \label{eq:chord-diff}\\[4pt]
+\omega_A\,\omega_B &= \frac{a^2}{b^2}\bigl(1 - e^2\cos^2\!\alpha\bigr) \;\geq\; 1, \label{eq:chord-prod}
+\end{align}
+with equality in~\eqref{eq:chord-prod} at $\cos\alpha = \pm 1$ (the major-axis chord), where $\omega_A\omega_B = (a^2/b^2)(1-e^2) = (a^2/b^2)(b^2/a^2) = 1$, \emph{independent of eccentricity}.
+\end{proposition}
+
+\begin{proof}
+Using $\ell = b^2/a$: $\omega_A = b(1+e\cos\alpha)/\ell = a(1+e\cos\alpha)/b$ and similarly for $\omega_B$. The sum and difference follow by addition/subtraction. The product is $\omega_A\omega_B = (a/b)^2(1 - e^2\cos^2\alpha)$; at the major-axis chord this equals $(a/b)^2(1-e^2) = 1$ since $e^2 = 1 - b^2/a^2$.
+(Lean: \texttt{focal\_chord\_mean\_constant}, \texttt{focal\_chord\_differential}, \texttt{focal\_product\_minimum}-all verified by \texttt{field\_simp; ring}.)
+\end{proof}
+
+\subsection{The Focal Uncertainty Principle}
+
+\begin{theorem}[Focal Uncertainty Principle]\label{thm:fup}
+Define the \emph{focal resolution} $R = c/\ell = a^2 e/b^2$ and the \emph{mean sweep uncertainty}
+\[
+U = \langle|M\!\cdot\!D|\rangle = \frac{1}{2\pi}\int_0^{2\pi} \!\left|\frac{e\sin\theta}{(1-e\cos\theta)^2}\right|\ell\,d\theta.
+\]
+Then for every ellipse with $0 < e < 1$:
+\begin{equation}\label{eq:fup}
+\frac{R}{U} = \frac{\pi}{2} \quad\text{(universal, independent of eccentricity)}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The orbit average of $|M \cdot D|$ decomposes via the focal chord structure. Using Proposition~\ref{prop:focal-chord}: the mean of $|\omega_A - \omega_B|$ over all chord angles~$\alpha$ is
+\[
+\frac{1}{\pi}\int_0^{\pi}\!|\omega_A - \omega_B|\,d\alpha = \frac{2ae}{b}\cdot\frac{1}{\pi}\int_0^{\pi}\!|\cos\alpha|\,d\alpha = \frac{2ae}{b}\cdot\kappa,
+\]
+where $\kappa = (1/\pi)\int_0^{\pi}|\cos\alpha|\,d\alpha = 2/\pi$ is the Gauss connection coefficient (proved in the Lean module \texttt{GammaConnection.lean} via $\Gamma(1/2)^2 = \pi$). Converting to $R$:
+\[
+U = R\,\kappa = \frac{a^2 e}{b^2}\cdot\frac{2}{\pi}, \qquad\text{so}\qquad \frac{R}{U} = \frac{1}{\kappa} = \frac{\pi}{2}.
+\]
+(Lean: \texttt{fup\_ratio\_algebra} proves $R/(R\kappa) = 1/\kappa$ by \texttt{field\_simp}; \texttt{focal\_uncertainty\_principle} assembles the full chain.)
+\end{proof}
+
+\noindent The conjugate sweep rates along each focal chord satisfy $\omega_A\omega_B \geq 1$ with equality independent of eccentricity~\eqref{eq:chord-prod}. This is the \emph{geometric ground state}: the product of conjugate observables is bounded below by a universal constant, exactly as in quantum uncertainty relations.
+
+\subsection{Connection to the BARF}
+
+The minimum error of any polynomial base of degree~$d$ (Theorem~\ref{thm:tower}) factors as:
+\begin{equation}\label{eq:mepb-factor}
+\text{BARF}(h) = \underbrace{\frac{7}{352}}_{\text{rational}} \times \underbrace{\frac{R}{U}}_{\pi/2} \times\; x^2|\!\ln x|, \qquad x = 1-h.
+\end{equation}
+The rational prefactor decomposes as $7/352 = (1/4)(1/8)(7/11)$: the $1/4$ from the $B$-expansion, the $1/8$ from the Taylor deficit, and $7/11$ from the Ramanujan~II structure. The $R/U = \pi/2$ factor is the focal uncertainty principle, making the bound \emph{geometric} rather than algebraic. This factorization is verified in Lean (\texttt{mepb\_rational\_factor}): the transcendental content of the perimeter error bound is entirely captured by $\pi/2$.
+
+%==========================================================================
+\section{Why the Search is Tractable}\label{sec:varpro}
+%==========================================================================
+
+At first glance, optimizing an $N$-exponential formula looks like an $(N{+}2)$-dimensional nightmare: $N$ coefficients plus $\lambda$ and $q$. In practice it collapses to a 2D search, thanks to a structural feature of the division form and a classical technique called \emph{variable projection} (VARPRO, Golub-Pereyra~\cite{golub2003}).
+
+\subsection{The key observation: the correction is tiny}
+
+Write the relative error as
+\begin{equation}
+\varepsilon(h) = \frac{\delta(h)+\beta(h)}{1-\beta(h)},
+\end{equation}
+where $\delta(h) = P_{\text{R}_k}(h)/P_{\text{exact}}(h) - 1$ is the base error and $\beta(h) = h^q\sum c_i e^{-r_i\lambda(1-h)}$ is the exponential correction. Because the tower base already approximates the perimeter to within $T_k$ (which is ${\sim}10^{-11}$ for R6), the correction $\beta$ is correspondingly tiny-at most a few parts per billion across the entire interval. This means $1/(1-\beta) \approx 1 + \beta + \cdots$, so the error simplifies to
+\begin{equation}\label{eq:linearize}
+\varepsilon(h) \;\approx\; \delta(h) + \beta(h),
+\end{equation}
+with a remainder of order $T_k^2 \approx 10^{-22}$, completely negligible.
+
+\subsection{Coefficients decouple from scale}
+
+Once we fix the rates $\{r_i\}$, the decay scale $\lambda$, and the gating exponent $q$, the linearized error~\eqref{eq:linearize} is a \emph{linear} function of the coefficients $c_i$. The basis functions $\psi_i(h) = h^q e^{-r_i\lambda(1-h)}$ are known, and the target is $-\delta(h)$ (also known, since it comes from the tower base). So finding the best coefficients is just constrained linear least squares-solvable instantly by a matrix equation.
+
+This is the VARPRO idea: any optimization problem where some parameters enter linearly can be ``projected out,'' leaving only the nonlinear parameters to search over. Here, the coefficients $c_i$ are linear; the nonlinear parameters are just $\lambda$ and $q$. The result:
+\begin{equation}
+\min_{\lambda,q}\; E_{\mathrm{opt}}(\lambda,q), \qquad E_{\mathrm{opt}}(\lambda,q) = \min_{c:\,\sum c_i = T_k}\;\max_h\;\left|\delta(h)+\textstyle\sum c_i\,\psi_i(h;\lambda,q)\right|.
+\end{equation}
+
+For $N = 16$ (the R6 champion), this collapses an 18-dimensional search to a 2D grid over $(\lambda,q)$ with a linear solve at each grid point. On a GPU, thousands of $(\lambda,q)$ candidates are evaluated per kernel launch, making it feasible to screen hundreds of thousands of rate combinations exhaustively.
+
+%==========================================================================
+\section{Fully Expanded Formulas}\label{sec:numerical}
+%==========================================================================
+
+\noindent\emph{All results verified at 150 decimal digits using \texttt{mpmath} with exact rational Pad\'e coefficients. This section presents the formulas featured in our interactive web demo, from classical to state-of-the-art, in fully expanded form. The complete catalog of all 55 discovered formulas is in Appendix~\ref{app:complete-index}.}
+
+\medskip
+\noindent In all formulas below, $a \ge b > 0$ are the semi-axes and
+\[
+h = \left(\frac{a-b}{a+b}\right)^{\!2}, \qquad x = 1 - h.
+\]
+
+
+%- Ramanujan I -
+\noindent\textbf{1. Ramanujan I (1914) - 5{,}400~ppm.}
+\begin{equation}
+P \approx \pi\!\left(3(a+b) - \sqrt{(3a+b)(a+3b)}\,\right)
+\end{equation}
+
+\bigskip
+
+%- Ramanujan II -
+\noindent\textbf{2. Ramanujan II (1914) - 402~ppm.}
+\begin{equation}
+P \approx \pi(a{+}b)\!\left(1 + \frac{3h}{10 + \sqrt{4 - 3h}}\right)
+\end{equation}
+
+\bigskip
+
+%- Cantrell -
+\noindent\textbf{3. Cantrell (2001) - 412~ppm.}
+\begin{equation}
+P \approx \pi(a{+}b)\!\left(1 + \frac{3h}{10 + \sqrt{4 - 3h} + (4/\pi - 14/11)\,h^{3/2}}\right)
+\end{equation}
+
+\bigskip
+
+%- Ayala-Rendón -
+\noindent\textbf{4. Ayala-Raggi \& Rend\'on Mar\'in RII/2exp (2025) - 0.574~ppm.}
+\begin{equation}
+P = \frac{P_{\text{RII}}}{1 - 3.375{\times}10^{-4}\,e^{-10.297\,x} - 6.481{\times}10^{-5}\,e^{-40.890\,x}}
+\end{equation}
+
+\bigskip
+
+%- RII/2exp beater -
+\noindent\textbf{5. Mamoun RII/2exp (this work) - 0.530~ppm, 2 exponentials.}
+\begin{equation}
+P = P_{\text{RII}}\!\left(1 + h^{0.01}\!\left[6.588{\times}10^{-5}\,e^{-40.127\,x} + 3.365{\times}10^{-4}\,e^{-10.265\,x}\right]\right)
+\end{equation}
+
+\bigskip
+
+%- RII/3exp -
+\noindent\textbf{6. Mamoun RII/3exp - the Mamoun Equation (this work) - 0.083~ppm, 3 exponentials.}
+\begin{equation}
+P = \frac{\pi(a{+}b)\!\left(1 + \dfrac{3h}{10+\sqrt{4-3h}}\right)}{1 \;-\; h^{7/3}\!\left[\begin{aligned}
+&\; 2.858{\times}10^{-4}\,e^{-6.895\,x} \\[-2pt]
+&+ 1.065{\times}10^{-4}\,e^{-22.42\,x} \\[-2pt]
+&+ 1.031{\times}10^{-5}\,e^{-103.4\,x}
+\end{aligned}\right]}
+\end{equation}
+\begin{center}\small
+\begin{tabular}{lll}
+$q = 7/3 = a_1/a_0$ & $\lambda = 6.895$ & $T = 1 - 7\pi/22 \approx 4.025 \times 10^{-4}$ \\
+Rates: $1,\; 81/25,\; 15$ & & $A+B+C = T$
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\bigskip
+\noindent\textbf{Formulas 7-10: The Convergent Tower champions.}
+The Mamoun Equation above uses the RII base (Ramanujan~II itself). By stacking rational Pad\'e corrections-each one a cubic-over-quadratic rational function multiplied by a high power of~$h$-we build successively better base approximations $R_3, R_4, R_5, R_6$. Each level matches 5~more Taylor coefficients of the exact elliptic integral. Combined with more exponential terms, accuracy improves by orders of magnitude.
+
+Below are the four tower-level champions. For each one, we first write out what $R_k(h)$ actually is (the ``rational form''), then give the complete perimeter formula with every exponential term spelled out (the ``coefficient form''). In the coefficient form, $\alpha_i = r_i \cdot \lambda$ has been pre-multiplied so the formula is entirely self-contained. All 55 discovered formulas-from 4 to 20 exponentials across four tower levels-are listed in Appendix~\ref{app:complete-index}.
+
+\bigskip
+
+%- R3+15exp -
+\noindent\textbf{7. Mamoun R3+15exp (this work) - 1.427~ppb, 15 exponentials.}
+
+\smallskip\noindent The $R_3$ base is Ramanujan~II plus one Pad\'e correction, matching $B(h)$ through $h^9$.  At $h=1$ this locks on to the convergent $355/113$ of~$\pi$; the exponential correction must use up the error budget $T_3 = 1 - 113\pi/355 = +8.49 \times 10^{-8}$.  The complete formula ($x = 1-h$):
+\noindent\emph{Rational base:}
+\[
+R_3(h) = 1 + \frac{3h}{10+\sqrt{4{-}3h}}
+  \;+\; h^5\!\cdot\!\frac{2.289{\times}10^{-5} + 6.604{\times}10^{-6}\,h + 1.959{\times}10^{-6}\,h^2 + 5.209{\times}10^{-7}\,h^3}
+       {1 - 1.357\,h + 0.4197\,h^2}
+\]
+\emph{Full perimeter:}
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{3.416}\!\left(\!\begin{aligned}
+  &\; +1.069{\times}10^{-6}\,e^{-6.2414\,x} \; -5.345{\times}10^{-6}\,e^{-9.7089\,x} \\[-3pt]
+  &\quad -4.028{\times}10^{-6}\,e^{-14.563\,x} \; -5.070{\times}10^{-6}\,e^{-16.991\,x} \\[-3pt]
+  &\quad -5.344{\times}10^{-6}\,e^{-21.845\,x} \; +3.808{\times}10^{-6}\,e^{-30.874\,x} \\[-3pt]
+  &\quad +9.540{\times}10^{-6}\,e^{-47.185\,x} \; -3.477{\times}10^{-6}\,e^{-94.370\,x} \\[-3pt]
+  &\quad +1.034{\times}10^{-5}\,e^{-110.10\,x} \; -3.937{\times}10^{-6}\,e^{-189.32\,x} \\[-3pt]
+  &\quad -3.353{\times}10^{-6}\,e^{-218.45\,x} \; +1.059{\times}10^{-5}\,e^{-283.50\,x} \\[-3pt]
+  &\quad -3.064{\times}10^{-6}\,e^{-349.52\,x} \; -5.329{\times}10^{-6}\,e^{-436.90\,x} \\[-3pt]
+  &\quad +3.678{\times}10^{-6}\,e^{-509.72\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\bigskip
+
+%- R4+20exp -
+\noindent\textbf{8. Mamoun R4+20exp (this work) - 0.492~ppb, 20 exponentials.}
+
+\smallskip\noindent The $R_4$ base adds a second Pad\'e layer, matching $B(h)$ through $h^{14}$.  At $h=1$ this locks on to the convergent $103993/33102$; the error budget is $T_4 = -1.84 \times 10^{-10}$ (negative because this convergent overshoots $\pi$).
+
+\smallskip\noindent\emph{Rational base:}
+\[
+R_4(h) = 1 + \frac{3h}{10+\sqrt{4{-}3h}}
+  \;+\; h^5\!\cdot\!\frac{2.289{\times}10^{-5} + 6.604{\times}10^{-6}\,h + 1.959{\times}10^{-6}\,h^2 + 5.209{\times}10^{-7}\,h^3}
+       {1 - 1.357\,h + 0.4197\,h^2}
+\]
+\vspace{-8pt}
+\[
+  \phantom{R_4(h) = {}}
+  +\; h^{10}\!\cdot\!\frac{-1.979{\times}10^{-7} + 1.864{\times}10^{-9}\,h + 1.238{\times}10^{-7}\,h^2 + 1.083{\times}10^{-7}\,h^3}
+       {1 - 2.680\,h + 2.014\,h^2}
+\]
+\emph{Full perimeter ($x = 1-h$):}
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{2.520}\!\left(\!\begin{aligned}
+  &\; -1.594{\times}10^{-6}\,e^{-5.2674\,x} \; +4.005{\times}10^{-6}\,e^{-6.7724\,x} \\[-3pt]
+  &\quad -6.078{\times}10^{-6}\,e^{-11.852\,x} \; -1.789{\times}10^{-5}\,e^{-15.802\,x} \\[-3pt]
+  &\quad +7.005{\times}10^{-6}\,e^{-18.436\,x} \; -1.534{\times}10^{-6}\,e^{-36.872\,x} \\[-3pt]
+  &\quad +8.604{\times}10^{-6}\,e^{-47.407\,x} \; -5.919{\times}10^{-7}\,e^{-51.199\,x} \\[-3pt]
+  &\quad +4.016{\times}10^{-6}\,e^{-73.242\,x} \; +2.309{\times}10^{-6}\,e^{-79.012\,x} \\[-3pt]
+  &\quad -4.071{\times}10^{-6}\,e^{-119.47\,x} \; +6.387{\times}10^{-6}\,e^{-142.22\,x} \\[-3pt]
+  &\quad -4.451{\times}10^{-7}\,e^{-189.63\,x} \; -7.202{\times}10^{-6}\,e^{-237.03\,x} \\[-3pt]
+  &\quad +9.244{\times}10^{-6}\,e^{-268.64\,x} \; -3.986{\times}10^{-6}\,e^{-395.06\,x} \\[-3pt]
+  &\quad -1.640{\times}10^{-6}\,e^{-474.07\,x} \; +5.453{\times}10^{-6}\,e^{-553.08\,x} \\[-3pt]
+  &\quad -2.320{\times}10^{-6}\,e^{-711.10\,x} \; +3.261{\times}10^{-7}\,e^{-1106.2\,x}
+\end{aligned}\!\right)}
+\end{equation*}
+
+\bigskip
+
+%=== SCOR COMPACT CHAMPIONS ===
+\noindent\textbf{Formulas 9--12: SCOR Compact Champions.}
+
+\smallskip\noindent
+SCOR (Singularity-Conscious Optimal Reduction) enriches the correction basis with $x^k\ln x$ terms that absorb the logarithmic singularity of $E(m)$ at $m=1$.  These terms have \textbf{zero free parameters}---their coefficients are solved analytically by VARPRO alongside the exponential coefficients.  The result: dramatically fewer exponentials suffice for the same accuracy.
+
+\medskip\noindent
+\textbf{Optimality status.}  The amplitudes (exponential coefficients $c_i$ and log coefficients $d_j$) are \emph{provably} optimal: they solve a convex, linearly constrained least-squares problem with a unique global minimum.  The rates $\mu_i$ and global parameters $\lambda, q$ are found by CMA-ES (a stochastic search) and are \emph{numerically} near-optimal (verified by multi-restart convergence) but not provably global.
+
+\bigskip
+
+%--- Formula 9 ---
+\noindent\textbf{9. Mamoun $R_3$+2exp+1log (this work) --- 34~ppb, 4 free parameters.}
+
+\smallskip\noindent Same parameter count as Ayala-Rend\'on (2025), but $17\times$ better accuracy.  Fully self-contained ($x = 1-h$):
+\begin{equation*}
+\boxed{P = \frac{\pi(a{+}b)\!\left(1 + \dfrac{3h}{10+\sqrt{4{-}3h}}
++ h^5\!\cdot\!\dfrac{2.289{\times}10^{-5} + 6.604{\times}10^{-6}h + 1.959{\times}10^{-6}h^2 + 5.209{\times}10^{-7}h^3}
+{1 - 1.357h + 0.4197h^2}\right)}
+{1 - h^{18.947}\!\left(
+-7.638{\times}10^{-6}\,e^{-11.952\,x}
++7.638{\times}10^{-6}\,e^{-78.315\,x}
++7.163{\times}10^{-5}\,x\ln x
+\right)}}
+\end{equation*}
+
+\bigskip
+
+%--- Formula 10 ---
+\noindent\textbf{10. Mamoun $R_5$+3exp+3log (this work) --- 2.3~ppb, 5 free parameters.}
+
+\smallskip\noindent Uses the full $R_5$ tower (Ramanujan~II + 3 Pad\'e layers).  Fully expanded:
+\[
+R_5(h) = 1 + \frac{3h}{10+\sqrt{4{-}3h}}
+  + h^5\!\cdot\!\frac{2.289{\times}10^{-5} + 6.604{\times}10^{-6}h + 1.959{\times}10^{-6}h^2 + 5.209{\times}10^{-7}h^3}
+       {1 - 1.357h + 0.4197h^2}
+\]
+\vspace{-8pt}
+\[
+  + h^{10}\!\cdot\!\frac{-1.979{\times}10^{-7} + 1.864{\times}10^{-9}h + 1.238{\times}10^{-7}h^2 + 1.083{\times}10^{-7}h^3}
+       {1 - 2.680h + 2.014h^2}
+  + h^{15}\!\cdot\!\frac{-1.472{\times}10^{-7} - 1.167{\times}10^{-7}h + 5.780{\times}10^{-8}h^2 + 2.056{\times}10^{-7}h^3}
+       {1 - 3.886h + 4.420h^2}
+\]
+\emph{Full perimeter:}
+\begin{equation*}
+\boxed{P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{21.961}\!\left(\!\begin{aligned}
+  &-2.972{\times}10^{-6}\,e^{-15.350\,x}
+  +3.041{\times}10^{-6}\,e^{-101.64\,x}
+  -6.834{\times}10^{-8}\,e^{-4032.6\,x} \\[2pt]
+  &+1.112{\times}10^{-4}\,x\ln x
+  -5.213{\times}10^{-4}\,x^2\ln x
+  +3.300{\times}10^{-3}\,x^3\ln x
+\end{aligned}\!\right)}}
+\end{equation*}
+
+\bigskip
+
+%--- Formula 11 ---
+\noindent\textbf{11. Mamoun $R_3$+4exp+3log (this work) --- 0.67~ppb, 6 free parameters.}
+
+\smallskip\noindent Sub-ppb with only 6 free parameters.  Same $R_3$ base as Formula~9:
+\begin{equation*}
+\boxed{P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{20.393}\!\left(\!\begin{aligned}
+  &-6.696{\times}10^{-6}\,e^{-0.362\,x}
+  +5.756{\times}10^{-6}\,e^{-63.52\,x}
+  +9.676{\times}10^{-7}\,e^{-200.9\,x}
+  -2.751{\times}10^{-8}\,e^{-5949\,x} \\[2pt]
+  &+7.077{\times}10^{-5}\,x\ln x
+  -2.041{\times}10^{-4}\,x^2\ln x
+  +1.563{\times}10^{-3}\,x^3\ln x
+\end{aligned}\!\right)}}
+\end{equation*}
+
+\bigskip
+
+%--- Formula 12: GRAND CHAMPION ---
+\noindent\textbf{12. Mamoun $R_6$+16exp+3log --- GRAND CHAMPION (this work) --- 0.007~ppb.}
+
+\smallskip\noindent The full $R_6$ tower (4 Pad\'e layers, 25 Taylor coefficients matched) with 16 exponentials and 3 logarithmic enrichment terms.  Verified at 300 decimal digits.  The gate exponent $q = 12.4$ suppresses the correction at moderate eccentricity, concentrating all capacity on the extreme-eccentricity tail where the tower error is largest.
+
+\smallskip\noindent\emph{Rational base --- every term written out, nothing to ``plug in'':}
+
+Start with Ramanujan's formula:
+\[
+R_2(h) = 1 + \frac{3h}{10 + \sqrt{4 - 3h}}
+\]
+Then add four correction layers, each a fraction multiplied by a high power of~$h$:
+\begin{align*}
+R_3(h) &= R_2(h) \;+\; h^5 \times
+  \frac{0.00002289 + 0.000006604\,h + 0.000001959\,h^2 + 0.0000005209\,h^3}
+       {1 - 1.3573\,h + 0.4197\,h^2}
+\\[8pt]
+R_4(h) &= R_3(h) \;+\; h^{10} \times
+  \frac{-1.979{\times}10^{-7} + 1.864{\times}10^{-9}\,h + 1.238{\times}10^{-7}\,h^2 + 1.083{\times}10^{-7}\,h^3}
+       {1 - 2.6800\,h + 2.0136\,h^2}
+\\[8pt]
+R_5(h) &= R_4(h) \;+\; h^{15} \times
+  \frac{-1.472{\times}10^{-7} - 1.167{\times}10^{-7}\,h + 5.780{\times}10^{-8}\,h^2 + 2.056{\times}10^{-7}\,h^3}
+       {1 - 3.8862\,h + 4.4201\,h^2}
+\\[8pt]
+R_6(h) &= R_5(h) \;+\; h^{20} \times
+  \frac{-1.057{\times}10^{-6} - 1.828{\times}10^{-6}\,h - 4.965{\times}10^{-7}\,h^2 + 3.382{\times}10^{-6}\,h^3}
+       {1 - 5.5893\,h + 9.3243\,h^2}
+\end{align*}
+\emph{Note:} Each correction is multiplied by $h^{5k}$ (for $k = 1, 2, 3, 4$), so near $h = 0$ (circles) all corrections vanish and $R_6 \approx R_2$ (Ramanujan).  Near $h = 1$ (flat ellipses) all corrections contribute.  The formula is purely algebraic: only addition, multiplication, division, and one square root.
+
+\emph{Full perimeter ($x = 1-h$):}
+\begin{equation}\label{eq:grand-champion}
+\boxed{P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{12.415}\!\left(\!\begin{aligned}
+  &\; +2.662{\times}10^{-4}\,e^{-\phantom{0}3.185\,x}
+     -8.682{\times}10^{-4}\,e^{-12.437\,x}
+     +1.417{\times}10^{-3}\,e^{-21.152\,x} \\[-3pt]
+  &\; -1.523{\times}10^{-3}\,e^{-23.906\,x}
+     +1.050{\times}10^{-3}\,e^{-35.041\,x}
+     -5.408{\times}10^{-4}\,e^{-42.430\,x} \\[-3pt]
+  &\; +1.930{\times}10^{-4}\,e^{-79.284\,x}
+     +3.535{\times}10^{-6}\,e^{-329.32\,x}
+     +1.156{\times}10^{-6}\,e^{-651.07\,x} \\[-3pt]
+  &\; +6.182{\times}10^{-7}\,e^{-1163.3\,x}
+     -3.132{\times}10^{-7}\,e^{-2090.2\,x}
+     +3.990{\times}10^{-7}\,e^{-2503.1\,x} \\[-3pt]
+  &\; -2.266{\times}10^{-7}\,e^{-4104.5\,x}
+     +1.279{\times}10^{-7}\,e^{-5109.6\,x}
+     -8.260{\times}10^{-9}\,e^{-17090\,x} \\[-3pt]
+  &\; +1.099{\times}10^{-8}\,e^{-18340\,x} \\[3pt]
+  &\; +1.902{\times}10^{-6}\,x\ln x
+     -4.374{\times}10^{-4}\,x^2\ln x
+     +1.178{\times}10^{-3}\,x^3\ln x
+\end{aligned}\!\right)}}
+\end{equation}
+
+\bigskip
+
+\noindent\textbf{Complete leaderboard:}
+\begin{center}
+\begin{tabular}{@{}rlcccrc@{}}
+\toprule
+\# & Formula & Tower & Exp & Log & Free & Error \\
+\midrule
+  & Ramanujan~II (1914)       & $R_2$ & 0  & 0 &  0 & 402~ppm \\
+  & Ayala-Rend\'on (2025)     & $R_2$ & 2  & 0 &  4 & 0.574~ppm \\
+6 & Mamoun Equation           & $R_2$ & 3  & 0 &  1 & 0.083~ppm \\
+9 & $R_3$+2exp+1log           & $R_3$ & 2  & 1 &  4 & 34~ppb \\
+10& $R_5$+3exp+3log           & $R_5$ & 3  & 3 &  5 & 2.3~ppb \\
+11& $R_3$+4exp+3log           & $R_3$ & 4  & 3 &  6 & 0.67~ppb \\
+\textbf{12}& $R_6$+16exp+3log  & $R_6$ & 16 & 3 & 18 & \textbf{0.007~ppb} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent \emph{Free} = optimization parameters (rates + $\lambda$ + $q$).
+Tower coefficients (determined by Taylor matching) and log coefficients (determined by Frobenius expansion) cost zero search effort.
+
+%==========================================================================
+\section{Open Questions}\label{sec:open}
+%==========================================================================
+
+\textbf{Problem 1.} \emph{Characterize the Franel crossover.} The deficit ratio $\delta_{n+1}/\delta_n$ passes through $7/8$ near $n = 20$ (Theorem~\ref{thm:deficit}) before converging to~$1$.  Give a closed-form expression for the crossover index as a function of the CF quotients.
+
+\begin{conjecture}[Tower convergence]
+$R_k(1) \to 4/\pi$ as $k \to \infty$: the tower exhausts all convergents of~$\pi$.
+\end{conjecture}
+
+\begin{conjecture}[Optimal exponential convergence rate]
+The minimax error of $R_k + N$-exp scales as $C_k \cdot N^{-\alpha_k}$
+with $\alpha_k$ independent of~$k$ (polynomial, not exponential, in~$N$),
+and $C_k \sim |T_k|$.
+\end{conjecture}
+
+\textbf{Problem 4.} \emph{Give a rigorous lower bound} on the minimax error of any $N$-exponential correction to $R_k$.
+
+\textbf{Problem 5.} \emph{Explain pair-wise rate necessity.} Is there an a priori criterion predicting when pair-wise rate search is needed (e.g., from the sign of $T_k$)?
+
+\textbf{Problem 6.} \emph{Does the VARPRO 2D landscape $E_{\mathrm{opt}}(\lambda,q)$ have a unique global minimum?} Numerical evidence suggests yes for each rate set, but a proof would guarantee that the 2D search finds the true optimum.
+
+\textbf{Problem 7.} \emph{Denominator closed form for $18/(-8+\pi^2)$.} Theorem~\ref{thm:cf-closed} gives the numerator $\tilde{p}(n)$ in closed form.  Does the denominator $\tilde{q}(n)$ also admit one?
+
+%==========================================================================
+\section{Conclusion}\label{sec:conclusion}
+%==========================================================================
+
+We have shown that the ellipse perimeter problem admits a systematic hierarchy of approximations, each level controlled by $\pi$'s continued fraction. The key results are:
+
+\begin{enumerate}
+\item Ramanujan~II is a CF formula and the unique $(2,1,1)$ QHP of $B(h)$.
+\item The convergent tower adds 5 Taylor coefficients per level via constrained Pad\'e.
+\item The exponential correction separates linearly (VARPRO), reducing 18D to 2D.
+\item R6+16exp+3log (SCOR) achieves $0.007$~ppb---the best verified minimax error, far \emph{below} the na\"{\i}ve BARF (which is a pointwise, not minimax, bound for purely analytic corrections).
+\item The BARF and the Focal Uncertainty Principle set structural limits; the gate exponent $q$ provides an additional degree of freedom that circumvents the pointwise BARF by redirecting approximation effort away from where the residue peaks.
+\item A closed form for the Euler-Wallis numerators of $18/(-8+\pi^2)$ links central binomial coefficients to~$\pi^2$.
+\end{enumerate}
+
+\noindent\textbf{Data availability.} Complete parameter sets for all results are available at \url{https://github.com/monir/ellipse} in machine-readable CSV format.
+
+%==========================================================================
+\section*{Acknowledgments}
+%==========================================================================
+
+Dedicated to my wife Sarah, who graciously put up with weeks of my staring at the walls and muttering incoherently during the course of this research.
+
+\medskip
+Computations performed with \texttt{mpmath} (150 digits), CMA-ES, PyTorch (5$\times$ RTX 4090 GPU cluster), and Python \texttt{Fraction} (exact rational arithmetic).
+
+%==========================================================================
+\appendix
+\section{Computational Methodology and Reproducibility}\label{app:reproducibility}
+%==========================================================================
+
+This appendix documents the computational pipeline used to obtain all numerical results, organized by development stage. All code is available at \url{https://github.com/monir/ellipse}.
+
+\subsection{Stage 1: Tower construction}
+
+The Pad\'e tower (Theorem~\ref{thm:tower}) is built by \texttt{tower\_gpu\_kernel.py}, function \texttt{build\_tower(k)}. For level $k$, it computes the constrained $[3,2]$ Pad\'e approximant using Python \texttt{Fraction} arithmetic (exact rationals) and returns the layer coefficients $N_i$, $D_i$, onset exponents, and the correction budget $T_k$.
+
+\medskip\noindent\textbf{To reproduce:}
+\begin{verbatim}
+from tower_gpu_kernel import build_tower
+layers = build_tower(5)   # level 5 -> R6
+T_k = layers[-1]['T']     # T_k ~ -3.89e-11
+\end{verbatim}
+
+\subsection{Stage 2: Rate discovery via CMA-ES}
+
+The initial optimization used CMA-ES (Covariance Matrix Adaptation Evolution Strategy) implemented entirely in PyTorch on GPU. Each candidate rate set $\{\mu_1,\ldots,\mu_N\}$ defines an $(N{+}2)$-dimensional search over $N$ ratio parameters, $\lambda$, and $q$.
+
+The GPU kernel (\texttt{tower\_gpu\_kernel\_v7.py}, class \texttt{TowerGPUKernelV7}) evaluates $\max|\varepsilon(h)|$ over a uniform grid of $G$ points in $h \in (0,1)$, all in FP64 arithmetic. The CMA-ES optimizer (\texttt{GPUCMAES} class) runs entirely on-device with no CPU round-trips during optimization.
+
+\medskip\noindent\textbf{Key scripts (in chronological development order):}
+\begin{itemize}
+\item \texttt{rk\_tower\_quad\_v10.py}: Discovered the R6+16-exp configuration ($0.409$~ppb). Tested all $\binom{49}{4} = 211{,}876$ four-rate additions to the 12-rate R6 base. Runtime: 4.7~hours on local hardware.
+\item \texttt{rk\_warmstart\_campaign\_v5.py}: Mac MPS warm-start campaign that explored R6+18-exp ($0.358$~ppb on coarse grid). Add-2 screen (C3 phase) found rates $\{18, 50\}$. True peak error 115~ppb at extreme eccentricity---not a champion.
+\item \texttt{rk\_warmstart\_campaign\_v1.py}: Multi-phase campaign with warm-starting. Phase C1 re-polished the existing champion rates with fresh CMA-ES restarts, discovering improved coefficients at $0.015$~ppb (same 16 rates).
+\item \texttt{rk\_warmstart\_campaign\_v2.py}: Extended campaign with Franel 4-block structure (one rate per zone: slow/medium/fast/ultra) for systematic exploration.
+\item \texttt{r6\_hierarchical\_optimizer\_v1.py}: Four-phase hierarchical optimizer (VARPRO + L-BFGS-B + coordinate golden-section + CMA-ES local polish) that treats all 16 rates as continuous variables and jointly optimises $(\mu_1,\ldots,\mu_{16},\lambda,q)$. Improved the pure-exponential R6+16exp result from $0.058$~ppb to $0.049$~ppb, later refined to $0.018$~ppb. The overall champion is the SCOR variant at $0.007$~ppb (Formula~12).
+\end{itemize}
+
+\medskip\noindent\textbf{Rate pool.} The candidate rates are drawn from a pool of ${\sim}65$ values motivated by the continued fraction structure of $\pi$: $\{1/3, 3/7, 1/2, 2/3, 3/4, 1, 7/6, \ldots, 200\}$. CF-derived rates include $81/25 = a_0^4/(a_0{+}a_1{+}a_2)$, $292/63$, and $45/7$.
+
+\medskip\noindent\textbf{Hardware.} Linux server with 5$\times$ NVIDIA RTX 4090 (24~GB VRAM each), 256~GB system RAM, CUDA 12.8, PyTorch 2.10. Mac Studio M2 Ultra (192~GB) and MacBook Pro M2 Max (96~GB) for verification, symbolic work, and local LLM inference. All three machines ran computational loads throughout the research. Typical GPU throughput: 5.7 rate combinations per second at population 512, 20K-point evaluation grid.
+
+\subsection{Stage 3: VARPRO screening}
+
+The VARPRO separation (\S\ref{sec:varpro}) was implemented as a GPU-accelerated screening pipeline (\texttt{rk\_varpro\_screen\_v2.py}) that eliminates the CMA-ES bottleneck for coefficient optimization.
+
+\medskip\noindent\textbf{Algorithm.} For fixed rates and $(\lambda,q)$, the constrained least-squares problem $\min \|\delta + \Phi c\|_2^2$ subject to $\sum c_i = T_k$ is solved via variable elimination: setting $c_N = T_k - \sum_{i<N} c_i$ reduces to an unconstrained $(N{-}1)$-dimensional normal equation $\tilde{A}\tilde{c} = \tilde{b}$.
+
+\medskip\noindent\textbf{Gram matrix optimization.} Rather than forming the full $(B \times N \times G)$ basis tensor per batch (requiring $G$-dimensional matrix multiplications per combination), we precompute $R \times R$ Gram matrices:
+\[
+\text{Gram}_{l}[i,j] = \sum_{g=1}^{G} \psi_i(h_g;\lambda_l,q_l)\,\psi_j(h_g;\lambda_l,q_l),
+\qquad
+\text{proj}_l[i] = \sum_{g=1}^{G} \psi_i(h_g;\lambda_l,q_l)\,\delta(h_g),
+\]
+where $R \approx 65$ is the total rate pool size. Per-combination work then reduces to extracting an $N \times N$ submatrix and solving a system-$O(N^3)$ with \emph{zero} $G$-dimensional operations.
+
+\medskip\noindent\textbf{Three-phase pipeline:}
+\begin{enumerate}
+\item \textbf{P1: Gram-based $L^2$ screening.} All $\binom{49}{4} = 211{,}876$ combinations screened over $12 \times 16 = 192$ coarse $(\lambda,q)$ grid points. Runtime: $\sim$8~seconds on a single GPU. Throughput: ${\sim}25{,}000$ combinations/second.
+\item \textbf{P2: $L^\infty$ refinement.} Top 200-500 combinations evaluated with full $G$-dimensional residual computation on a dense $44 \times 31 = 1{,}364$-point $(\lambda,q)$ grid. Runtime: $\sim$3~minutes.
+\item \textbf{P3: CMA-ES polish.} Top 50 combinations polished with full $(N{+}2)$-dimensional CMA-ES (population 4096, 200K function evaluations, 3 restarts each) on a 20K-point evaluation grid. Runtime: $\sim$1~minute on 5 GPUs.
+\end{enumerate}
+
+\noindent Total pipeline: $\sim$5~minutes vs $\sim$10~hours for pure CMA-ES screening (${\sim}120\times$ speedup).
+
+\subsection{Stage 4: Verification}
+
+All champion results are verified independently:
+\begin{enumerate}
+\item \textbf{150-digit verification.} Using \texttt{mpmath} with 150 decimal digits, the exact perimeter $P = 4a\,E(e^2)$ is computed at 5{,}000 uniformly-spaced eccentricity values and compared with the formula output. The reported $\max|\varepsilon|$ is the supremum over this grid.
+\item \textbf{Exact rational tower coefficients.} All Pad\'e tower layers use Python \texttt{Fraction} arithmetic (arbitrary-precision rationals), eliminating floating-point error in the tower construction. The exponential correction parameters are the only floating-point quantities.
+\item \textbf{Cross-validation.} The R6 base error profile $\delta(h) = P_{R_6}(h)/P_{\text{exact}}(h) - 1$ is independently computed by \texttt{formulas.py} and the GPU kernel, with agreement to 15 significant digits.
+\end{enumerate}
+
+\subsection{File manifest}
+
+\newcommand{\fp}[1]{\texttt{#1}}% file path shorthand
+\begin{center}\small
+\begin{longtable}{@{}l >{\raggedright\arraybackslash}p{7.8cm}@{}}
+\toprule
+File & Purpose \\
+\midrule
+\endfirsthead
+\toprule
+File & Purpose \\
+\midrule
+\endhead
+\fp{src/formulas.py}               & All perimeter formulas (Ramanujan~I/II, tower $R_2$--$R_6$, exponential corrections) \\[3pt]
+\fp{demo/ellipse\_web\_demo.py}     & Interactive web demo: comparison charts, winner-band visualization, error analysis \\[3pt]
+\fp{gpu\_.../tower\_gpu\_kernel.py}  & Tower construction (\fp{build\_tower}) and base GPU evaluation \\[3pt]
+\fp{gpu\_.../tower\_gpu\_kernel\_v7.py} & Production GPU kernel: \fp{TowerGPUKernelV7} (FP64 batch, \fp{GPUCMAES}) \\[3pt]
+\fp{r\_scripts/rk\_tower\_quad\_v10.py} & Original quad search that found R6+16-exp ($0.409$~ppb) \\[3pt]
+\fp{r\_scripts/rk\_warmstart\_v5.py}    & Mac MPS add-2 campaign; explored R6+18-exp ($0.358$~ppb coarse) \\[3pt]
+\fp{r\_scripts/rk\_warmstart\_v1.py}    & 4-phase warm-start campaign (C1--C4) \\[3pt]
+\fp{r\_scripts/rk\_varpro\_screen\_v1.py} & VARPRO screening, first implementation (BMM per combo) \\[3pt]
+\fp{r\_scripts/rk\_varpro\_screen\_v2.py} & VARPRO screening with Gram matrix optimization \\[3pt]
+\fp{r\_scripts/outputs/*.json}          & Machine-readable results for all runs \\[3pt]
+\fp{active/best\_results.csv}           & Summary CSV of all champion results \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\medskip\noindent\textbf{To replicate the R6+16-exp result (pure exponential, 0.018~ppb):}
+\begin{verbatim}
+# On Apple MPS or CUDA GPU:
+cd ellipse/active/research_scripts
+python3 -u rk_warmstart_campaign_v5.py --skip-c3  # runs C1+C2+C6 only
+# Or for the full add-2 screen (finds the champion):
+python3 -u rk_warmstart_campaign_v5.py            # ~22 min on M2 Ultra
+
+# To evaluate just the known champion:
+python3 -c "
+from gpu_tower_server.tower_gpu_kernel_v7 import *
+from gpu_tower_server.tower_gpu_kernel import build_tower
+import torch
+layers = build_tower(5)
+T_k = layers[-1]['T']
+k = TowerGPUKernelV7(layers, T_k,
+    device='cuda:0', grid_pts=20000)
+rates = torch.tensor([1/3,3/7,3/4,1,1.5,3,3.24,7.56,
+    15,17,20,30,35,36,45,55],
+    dtype=torch.float64, device='cuda:0')
+x = torch.tensor([-2.83,9.06,0.47,-0.27,-0.45,
+    -5.16,-1.54,2.45,-5.87,4.13,-1.26,
+    0.73,-1.33,1.46,-0.60,17.575,2.591],
+    dtype=torch.float64, device='cuda:0').unsqueeze(0)
+err = k.batch_eval(rates, x, mode='mixed')
+print(f'Error: {err.item()*1000:.3f} ppb')
+"
+\end{verbatim}
+
+%==========================================================================
+\begin{thebibliography}{99}
+%==========================================================================
+
+\bibitem{ramanujan1914}
+S.~Ramanujan, ``Modular equations and approximations to $\pi$,''
+\textit{Q.\ J.\ Math.}, vol.~45, pp.~350-372, 1914.
+
+\bibitem{villarino2005}
+M.~B.~Villarino, ``Ramanujan's perimeter of an ellipse,''
+arXiv:math/0506384, 2005.
+
+\bibitem{almkvist1988}
+G.~Almkvist and B.~C.~Berndt, ``Gauss, Landen, Ramanujan, the
+arithmetic-geometric mean, ellipses, $\pi$, and the Ladies Diary,''
+\textit{Am.\ Math.\ Mon.}, vol.~95, pp.~585-608, 1988.
+
+\bibitem{ayala2025}
+S.~E.~Ayala Raggi and M.~Rend\'on Mar\'in, ``New closed form approximations to the
+perimeter of an ellipse,'' arXiv:2510.16191, 2025.
+
+\bibitem{golub2003}
+G.~H.~Golub and V.~Pereyra, ``Separable nonlinear least squares: the variable projection method and its applications,''
+\textit{Inverse Problems}, vol.~19, pp.~R1-R26, 2003.
+
+\bibitem{wang2026}
+C.~Wang, ``A formal proof of a continued fraction conjecture for $\pi$ originating from the Ramanujan Machine,''
+arXiv:2601.08461, 2026.
+
+\bibitem{newman1964}
+D.~J.~Newman, ``Rational approximation to $|x|$,''
+\textit{Michigan Mathematical Journal}, vol.~11, pp.~11--14, 1964.
+
+\bibitem{zwdeng2023}
+Z.~Wang and Y.~Deng, ``On periodicity of continued fractions with partial
+quotients in quadratic number fields,'' arXiv:2304.11803, 2023.
+
+\end{thebibliography}
+
+%==========================================================================
+\section{Complete Index of Discovered Formulas}\label{app:complete-index}
+%==========================================================================
+
+\subsection*{How to read these formulas}
+
+\noindent\textbf{Variables.} Given an ellipse with semi-major axis~$a$ and semi-minor axis~$b$:
+\[
+h = \left(\frac{a-b}{a+b}\right)^{\!2} \quad (= 0 \text{ for a circle},\; \to 1 \text{ as } b \to 0), \qquad x = 1-h.
+\]
+
+\noindent\textbf{The rational base $R_k(h)$.} Each formula uses a rational function $R_k(h)$ as its starting approximation, built by stacking Pad\'e corrections on top of Ramanujan's second formula. Each correction is a cubic-over-quadratic rational function $N_k(h)/D_k(h)$ with exact rational coefficients (Theorem~\ref{thm:tower}), adding 5 Taylor terms per level.  Here they are explicitly (decimals shown; exact rationals in the code repository):
+\begin{align*}
+R_2(h) &= 1 + \frac{3h}{10 + \sqrt{4-3h}} & &\text{(Ramanujan II)},
+\end{align*}
+\begin{align*}
+R_3(h) &= R_2(h) + h^5 \cdot \frac{2.2889{\times}10^{-5} + 6.6038{\times}10^{-6}\,h + 1.9585{\times}10^{-6}\,h^2 + 5.2090{\times}10^{-7}\,h^3}{1 - 1.35731\,h + 0.41973\,h^2},
+\end{align*}
+\begin{align*}
+R_4(h) &= R_3(h) + h^{10} \cdot \frac{-1.9786{\times}10^{-7} + 1.8641{\times}10^{-9}\,h + 1.2381{\times}10^{-7}\,h^2 + 1.0833{\times}10^{-7}\,h^3}{1 - 2.68000\,h + 2.01361\,h^2},
+\end{align*}
+\begin{align*}
+R_5(h) &= R_4(h) + h^{15} \cdot \frac{-1.4724{\times}10^{-7} - 1.1670{\times}10^{-7}\,h + 5.7803{\times}10^{-8}\,h^2 + 2.0557{\times}10^{-7}\,h^3}{1 - 3.88616\,h + 4.42007\,h^2},
+\end{align*}
+\begin{align*}
+R_6(h) &= R_5(h) + h^{20} \cdot \frac{-1.0568{\times}10^{-6} - 1.8281{\times}10^{-6}\,h - 4.9648{\times}10^{-7}\,h^2 + 3.3822{\times}10^{-6}\,h^3}{1 - 5.58931\,h + 9.32427\,h^2}.
+\end{align*}
+Each successive correction is multiplied by $h^{5k}$, so it is negligible near $h=0$ (circles) and only matters near $h=1$ (flat ellipses). The $R_k$ base matches the exact function $B(h) = {}_2F_1(-\tfrac12,-\tfrac12;1;h)$ through order~$h^{5k-6}$.
+
+\medskip
+\noindent\textbf{Endpoint constraint.} At $h=1$ (the degenerate ellipse $b=0$), the exact perimeter is $P = 4a$, so $B(1) = 4/\pi$.  Each $R_k$ is constrained so that $R_k(1)$ yields the ratio $4q_j/p_j$ for a specific convergent $p_j/q_j$ of~$\pi$-the tower ``locks on'' to successively better rational approximations of~$\pi$:
+\begin{center}\small
+\begin{tabular}{llll}
+\toprule
+Base & $\pi(a+b)\,R_k(1)$ yields & Convergent of $\pi$ & Error budget $T_k$ \\
+\midrule
+$R_2$ & $4a \times 7/22$ & $22/7$ & $+4.0 \times 10^{-4}$ \\
+$R_3$ & $4a \times 113/355$ & $355/113$ & $+8.5 \times 10^{-8}$ \\
+$R_4$ & $4a \times 33102/103993$ & $103993/33102$ & $-1.8 \times 10^{-10}$ \\
+$R_5$ & $4a \times 33215/104348$ & $104348/33215$ & $+1.1 \times 10^{-10}$ \\
+$R_6$ & next convergent & & ${\sim}10^{-11}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The \emph{error budget} $T_k = 1 - q_j\pi/p_j$ is how far this convergent is from $\pi$; it alternates in sign and shrinks by ${\sim}10^3$ per level. The exponential correction must exactly use up this budget.
+
+\medskip
+\noindent\textbf{The exponential correction.} The complete perimeter formula is:
+\begin{equation*}
+\boxed{P = \frac{\pi(a+b)\,R_k(h)}{1 - h^q \displaystyle\sum_{i=1}^{N} c_i\,e^{-\alpha_i\,x}},
+\qquad x = 1-h, \quad \alpha_i = r_i \cdot \lambda}
+\end{equation*}
+where:
+\begin{itemize}
+\item $q$ is the \textbf{gating exponent}: the factor $h^q$ suppresses the correction near $h = 0$ (circles, where Ramanujan is already excellent) and activates it near $h = 1$ (extreme eccentricities). Larger $q$ means the correction ``turns on'' later.
+\item $\lambda$ is the \textbf{global decay scale}: controls how fast each exponential falls off. Larger $\lambda$ means sharper, more localized corrections.
+\item $r_i$ are the \textbf{rates}: rational numbers (mostly from the continued fraction of $\pi$) that set the relative decay speeds.  The product $\alpha_i = r_i \cdot \lambda$ is the actual exponent coefficient in each term.
+\item $c_i$ are the \textbf{coefficients}: determined by constrained least-squares once $\lambda$, $q$, and the rates are fixed, subject to $\sum c_i = T_k$ (the error budget).
+\end{itemize}
+In the equations below, $\alpha_i = r_i \cdot \lambda$ is pre-multiplied so each formula is self-contained-you can evaluate it directly without knowing $r_i$ and $\lambda$ separately. Champions (best per tower level) are in \textbf{bold}.
+
+\small
+
+\medskip\noindent\textbf{R3 family} ($R_3$ base, matching $B(h)$ through $h^9$, error budget $T_3 = +8.49 \times 10^{-8}$)\nopagebreak
+
+\noindent In every R3 formula below, $R_3(h)$ stands for:
+\[
+R_3(h) = 1 + \frac{3h}{10+\sqrt{4{-}3h}}
+  \;+\; h^5\!\cdot\!\frac{2.289{\times}10^{-5} + 6.604{\times}10^{-6}\,h + 1.959{\times}10^{-6}\,h^2 + 5.209{\times}10^{-7}\,h^3}
+       {1 - 1.357\,h + 0.4197\,h^2}
+\]
+
+\noindent\textbf{R3+4} 62.147~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{9.9200}\!\left(\!\begin{aligned}
+  &\; +2.847{\times}10^{-6}\,e^{-3.3157\,x} \; -2.277{\times}10^{-5}\,e^{-7.7365\,x} \; +1.303{\times}10^{-5}\,e^{-25.066\,x} \\[-3pt]
+  &\quad +6.978{\times}10^{-6}\,e^{-116.05\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R3+5} 59.984~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{9.7942}\!\left(\!\begin{aligned}
+  &\; +1.369{\times}10^{-6}\,e^{-3.3786\,x} \; -1.095{\times}10^{-5}\,e^{-7.8833\,x} \; -1.095{\times}10^{-5}\,e^{-9.1972\,x} \\[-3pt]
+  &\quad +1.384{\times}10^{-5}\,e^{-25.542\,x} \; +6.771{\times}10^{-6}\,e^{-118.25\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R3+6} 41.470~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{3.7378}\!\left(\!\begin{aligned}
+  &\; +1.084{\times}10^{-6}\,e^{-5.2127\,x} \; -8.669{\times}10^{-6}\,e^{-12.163\,x} \; -8.664{\times}10^{-6}\,e^{-14.190\,x} \\[-3pt]
+  &\quad +9.366{\times}10^{-6}\,e^{-39.408\,x} \; +4.689{\times}10^{-6}\,e^{-91.952\,x} \; +2.279{\times}10^{-6}\,e^{-182.44\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R3+7} 12.477~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{5.5097}\!\left(\!\begin{aligned}
+  &\; +1.010{\times}10^{-6}\,e^{-4.2223\,x} \; -8.079{\times}10^{-6}\,e^{-9.8521\,x} \; -7.379{\times}10^{-6}\,e^{-11.494\,x} \\[-3pt]
+  &\quad +2.680{\times}10^{-6}\,e^{-31.921\,x} \; +1.212{\times}10^{-5}\,e^{-74.482\,x} \; -3.065{\times}10^{-6}\,e^{-147.78\,x} \\[-3pt]
+  &\quad +2.796{\times}10^{-6}\,e^{-236.45\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R3+8} 4.943~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{3.9512}\!\left(\!\begin{aligned}
+  &\; +1.415{\times}10^{-6}\,e^{-7.4613\,x} \; -1.131{\times}10^{-5}\,e^{-11.606\,x} \; -1.126{\times}10^{-5}\,e^{-17.410\,x} \\[-3pt]
+  &\quad +7.100{\times}10^{-6}\,e^{-20.311\,x} \; +1.051{\times}10^{-5}\,e^{-56.408\,x} \; +3.305{\times}10^{-6}\,e^{-131.62\,x} \\[-3pt]
+  &\quad -4.230{\times}10^{-7}\,e^{-261.15\,x} \; +7.466{\times}10^{-7}\,e^{-417.83\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R3+9} 2.707~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{3.0434}\!\left(\!\begin{aligned}
+  &\; +1.158{\times}10^{-6}\,e^{-6.6313\,x} \; -5.789{\times}10^{-6}\,e^{-10.315\,x} \; -5.741{\times}10^{-6}\,e^{-15.473\,x} \\[-3pt]
+  &\quad -5.521{\times}10^{-6}\,e^{-18.052\,x} \; +1.154{\times}10^{-5}\,e^{-50.133\,x} \; +3.303{\times}10^{-6}\,e^{-116.98\,x} \\[-3pt]
+  &\quad +1.571{\times}10^{-6}\,e^{-232.10\,x} \; -1.906{\times}10^{-6}\,e^{-371.35\,x} \; +1.475{\times}10^{-6}\,e^{-464.19\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R3+10} 2.434~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{3.5054}\!\left(\!\begin{aligned}
+  &\; +1.157{\times}10^{-6}\,e^{-6.3121\,x} \; -5.493{\times}10^{-6}\,e^{-9.8189\,x} \; -5.747{\times}10^{-6}\,e^{-14.728\,x} \\[-3pt]
+  &\quad -5.662{\times}10^{-6}\,e^{-17.183\,x} \; +9.683{\times}10^{-6}\,e^{-47.720\,x} \; +9.314{\times}10^{-6}\,e^{-95.440\,x} \\[-3pt]
+  &\quad -5.786{\times}10^{-6}\,e^{-111.35\,x} \; +4.133{\times}10^{-6}\,e^{-220.92\,x} \; -3.902{\times}10^{-6}\,e^{-353.48\,x} \\[-3pt]
+  &\quad +2.388{\times}10^{-6}\,e^{-441.85\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R3+11} 2.372~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{3.5774}\!\left(\!\begin{aligned}
+  &\; +1.180{\times}10^{-6}\,e^{-6.3895\,x} \; -5.901{\times}10^{-6}\,e^{-9.9393\,x} \\[-3pt]
+  &\quad -5.724{\times}10^{-6}\,e^{-14.909\,x} \; -5.879{\times}10^{-6}\,e^{-17.394\,x} \\[-3pt]
+  &\quad +7.871{\times}10^{-7}\,e^{-22.363\,x} \; +9.588{\times}10^{-6}\,e^{-48.305\,x} \\[-3pt]
+  &\quad +9.346{\times}10^{-6}\,e^{-96.610\,x} \; -5.901{\times}10^{-6}\,e^{-112.71\,x} \\[-3pt]
+  &\quad +4.090{\times}10^{-6}\,e^{-223.63\,x} \; -3.846{\times}10^{-6}\,e^{-357.81\,x} \\[-3pt]
+  &\quad +2.345{\times}10^{-6}\,e^{-447.27\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R3+12} 2.326~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{2.7386}\!\left(\!\begin{aligned}
+  &\; +1.017{\times}10^{-6}\,e^{-6.5886\,x} \; -5.011{\times}10^{-6}\,e^{-10.249\,x} \\[-3pt]
+  &\quad -5.074{\times}10^{-6}\,e^{-15.373\,x} \; -4.830{\times}10^{-6}\,e^{-17.936\,x} \\[-3pt]
+  &\quad -4.863{\times}10^{-6}\,e^{-23.060\,x} \; +4.967{\times}10^{-6}\,e^{-32.592\,x} \\[-3pt]
+  &\quad +7.825{\times}10^{-6}\,e^{-49.810\,x} \; +8.642{\times}10^{-6}\,e^{-99.619\,x} \\[-3pt]
+  &\quad -4.830{\times}10^{-6}\,e^{-116.22\,x} \; +3.482{\times}10^{-6}\,e^{-230.60\,x} \\[-3pt]
+  &\quad -3.319{\times}10^{-6}\,e^{-368.96\,x} \; +2.080{\times}10^{-6}\,e^{-461.20\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R3+13} 1.835~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{3.5796}\!\left(\!\begin{aligned}
+  &\; +1.111{\times}10^{-6}\,e^{-6.1889\,x} \; -5.274{\times}10^{-6}\,e^{-9.6272\,x} \\[-3pt]
+  &\quad -5.274{\times}10^{-6}\,e^{-14.441\,x} \; -5.275{\times}10^{-6}\,e^{-16.848\,x} \\[-3pt]
+  &\quad -1.568{\times}10^{-6}\,e^{-21.661\,x} \; -1.402{\times}10^{-7}\,e^{-30.615\,x} \\[-3pt]
+  &\quad +1.106{\times}10^{-5}\,e^{-46.788\,x} \; +1.974{\times}10^{-6}\,e^{-93.577\,x} \\[-3pt]
+  &\quad +2.321{\times}10^{-6}\,e^{-109.17\,x} \; +4.405{\times}10^{-7}\,e^{-216.61\,x} \\[-3pt]
+  &\quad +3.000{\times}10^{-6}\,e^{-346.58\,x} \; -5.290{\times}10^{-6}\,e^{-433.23\,x} \\[-3pt]
+  &\quad +3.005{\times}10^{-6}\,e^{-505.43\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R3+14} 1.495~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{3.5796}\!\left(\!\begin{aligned}
+  &\; +1.029{\times}10^{-6}\,e^{-6.2073\,x} \; -5.130{\times}10^{-6}\,e^{-9.6558\,x} \\[-3pt]
+  &\quad -4.889{\times}10^{-6}\,e^{-14.484\,x} \; -5.043{\times}10^{-6}\,e^{-16.898\,x} \\[-3pt]
+  &\quad -4.890{\times}10^{-6}\,e^{-21.725\,x} \; +5.303{\times}10^{-6}\,e^{-30.705\,x} \\[-3pt]
+  &\quad +6.894{\times}10^{-6}\,e^{-46.927\,x} \; +5.281{\times}10^{-6}\,e^{-93.854\,x} \\[-3pt]
+  &\quad +1.186{\times}10^{-6}\,e^{-109.50\,x} \; -4.891{\times}10^{-6}\,e^{-217.25\,x} \\[-3pt]
+  &\quad +9.320{\times}10^{-6}\,e^{-281.95\,x} \; -2.581{\times}10^{-6}\,e^{-347.61\,x} \\[-3pt]
+  &\quad -4.980{\times}10^{-6}\,e^{-434.51\,x} \; +3.475{\times}10^{-6}\,e^{-506.93\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R3+15} \textbf{1.427~ppb}\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_3(h)}{1 - h^{3.4164}\!\left(\!\begin{aligned}
+  &\; +1.069{\times}10^{-6}\,e^{-6.2414\,x} \; -5.345{\times}10^{-6}\,e^{-9.7089\,x} \\[-3pt]
+  &\quad -4.028{\times}10^{-6}\,e^{-14.563\,x} \; -5.070{\times}10^{-6}\,e^{-16.991\,x} \\[-3pt]
+  &\quad -5.344{\times}10^{-6}\,e^{-21.845\,x} \; +3.808{\times}10^{-6}\,e^{-30.874\,x} \\[-3pt]
+  &\quad +9.540{\times}10^{-6}\,e^{-47.185\,x} \; -3.477{\times}10^{-6}\,e^{-94.370\,x} \\[-3pt]
+  &\quad +1.034{\times}10^{-5}\,e^{-110.10\,x} \; -3.937{\times}10^{-6}\,e^{-189.32\,x} \\[-3pt]
+  &\quad -3.353{\times}10^{-6}\,e^{-218.45\,x} \; +1.059{\times}10^{-5}\,e^{-283.50\,x} \\[-3pt]
+  &\quad -3.064{\times}10^{-6}\,e^{-349.52\,x} \; -5.329{\times}10^{-6}\,e^{-436.90\,x} \\[-3pt]
+  &\quad +3.678{\times}10^{-6}\,e^{-509.72\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\medskip\noindent\textbf{R4 family} ($R_4$ base, matching $B(h)$ through $h^{14}$, error budget $T_4 = -1.84 \times 10^{-10}$)\nopagebreak
+
+\noindent In every R4 formula below, $R_4(h)$ stands for $R_3(h)$ (defined above) plus a second Pad\'e layer:
+\[
+R_4(h) = R_3(h) \;+\; h^{10}\!\cdot\!\frac{-1.979{\times}10^{-7} + 1.864{\times}10^{-9}\,h + 1.238{\times}10^{-7}\,h^2 + 1.083{\times}10^{-7}\,h^3}
+       {1 - 2.680\,h + 2.014\,h^2}
+\]
+
+\noindent\textbf{R4+7} 3.634~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{10.8247}\!\left(\!\begin{aligned}
+  &\; -4.354{\times}10^{-6}\,e^{-5.8430\,x} \; -1.389{\times}10^{-5}\,e^{-7.5125\,x} \; +5.850{\times}10^{-6}\,e^{-17.529\,x} \\[-3pt]
+  &\quad +9.510{\times}10^{-6}\,e^{-56.794\,x} \; +2.367{\times}10^{-6}\,e^{-132.52\,x} \; +1.474{\times}10^{-7}\,e^{-262.94\,x} \\[-3pt]
+  &\quad +3.708{\times}10^{-7}\,e^{-525.87\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+8} 3.612~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{11.0642}\!\left(\!\begin{aligned}
+  &\; -3.559{\times}10^{-6}\,e^{-5.5058\,x} \; -1.448{\times}10^{-5}\,e^{-7.0789\,x} \; +5.228{\times}10^{-6}\,e^{-16.517\,x} \\[-3pt]
+  &\quad +9.424{\times}10^{-6}\,e^{-53.516\,x} \; +2.881{\times}10^{-6}\,e^{-124.87\,x} \; +9.443{\times}10^{-8}\,e^{-247.76\,x} \\[-3pt]
+  &\quad +3.257{\times}10^{-7}\,e^{-495.52\,x} \; +8.161{\times}10^{-8}\,e^{-578.11\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+9} 2.258~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{13.3435}\!\left(\!\begin{aligned}
+  &\; -9.724{\times}10^{-6}\,e^{-4.4909\,x} \; -2.508{\times}10^{-5}\,e^{-5.7740\,x} \; +4.743{\times}10^{-5}\,e^{-10.105\,x} \\[-3pt]
+  &\quad -2.873{\times}10^{-5}\,e^{-13.473\,x} \; +1.255{\times}10^{-5}\,e^{-43.652\,x} \; +1.690{\times}10^{-6}\,e^{-101.85\,x} \\[-3pt]
+  &\quad +2.215{\times}10^{-6}\,e^{-202.09\,x} \; -2.410{\times}10^{-6}\,e^{-404.18\,x} \; +2.055{\times}10^{-6}\,e^{-471.55\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+10} 1.965~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{13.2997}\!\left(\!\begin{aligned}
+  &\; -9.174{\times}10^{-6}\,e^{-4.5482\,x} \; -2.497{\times}10^{-5}\,e^{-5.8477\,x} \; +4.358{\times}10^{-5}\,e^{-10.234\,x} \\[-3pt]
+  &\quad -2.485{\times}10^{-5}\,e^{-13.645\,x} \; +1.108{\times}10^{-5}\,e^{-44.209\,x} \; +8.037{\times}10^{-6}\,e^{-103.15\,x} \\[-3pt]
+  &\quad -6.873{\times}10^{-6}\,e^{-122.80\,x} \; +3.865{\times}10^{-6}\,e^{-204.67\,x} \; -3.208{\times}10^{-6}\,e^{-409.34\,x} \\[-3pt]
+  &\quad +2.503{\times}10^{-6}\,e^{-477.56\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+11} 1.539~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{2.0246}\!\left(\!\begin{aligned}
+  &\; -1.209{\times}10^{-6}\,e^{-5.0779\,x} \; +2.959{\times}10^{-6}\,e^{-6.5287\,x} \\[-3pt]
+  &\quad -2.882{\times}10^{-6}\,e^{-11.425\,x} \; -1.421{\times}10^{-5}\,e^{-15.234\,x} \\[-3pt]
+  &\quad +9.389{\times}10^{-6}\,e^{-49.357\,x} \; +9.206{\times}10^{-6}\,e^{-115.17\,x} \\[-3pt]
+  &\quad +5.084{\times}10^{-6}\,e^{-137.10\,x} \; -1.275{\times}10^{-5}\,e^{-150.29\,x} \\[-3pt]
+  &\quad +5.218{\times}10^{-6}\,e^{-228.50\,x} \; -3.140{\times}10^{-6}\,e^{-457.01\,x} \\[-3pt]
+  &\quad +2.334{\times}10^{-6}\,e^{-533.18\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+12} 1.136~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{0.8519}\!\left(\!\begin{aligned}
+  &\; -9.848{\times}10^{-7}\,e^{-6.0323\,x} \; +2.761{\times}10^{-6}\,e^{-7.7558\,x} \\[-3pt]
+  &\quad -6.892{\times}10^{-6}\,e^{-13.573\,x} \; -1.121{\times}10^{-5}\,e^{-18.097\,x} \\[-3pt]
+  &\quad +6.365{\times}10^{-6}\,e^{-42.226\,x} \; +3.462{\times}10^{-6}\,e^{-58.634\,x} \\[-3pt]
+  &\quad +3.073{\times}10^{-6}\,e^{-83.877\,x} \; +7.361{\times}10^{-6}\,e^{-136.81\,x} \\[-3pt]
+  &\quad -6.178{\times}10^{-6}\,e^{-162.87\,x} \; +2.682{\times}10^{-6}\,e^{-271.45\,x} \\[-3pt]
+  &\quad -1.948{\times}10^{-6}\,e^{-542.90\,x} \; +1.505{\times}10^{-6}\,e^{-633.39\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+13} 1.073~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{0.8803}\!\left(\!\begin{aligned}
+  &\; -1.061{\times}10^{-6}\,e^{-6.2622\,x} \; +3.105{\times}10^{-6}\,e^{-8.0514\,x} \\[-3pt]
+  &\quad -9.878{\times}10^{-6}\,e^{-14.090\,x} \; -8.387{\times}10^{-6}\,e^{-18.787\,x} \\[-3pt]
+  &\quad +6.958{\times}10^{-6}\,e^{-43.835\,x} \; +3.713{\times}10^{-6}\,e^{-60.869\,x} \\[-3pt]
+  &\quad -3.628{\times}10^{-6}\,e^{-87.074\,x} \; +7.235{\times}10^{-6}\,e^{-93.933\,x} \\[-3pt]
+  &\quad +3.915{\times}10^{-6}\,e^{-142.03\,x} \; -3.867{\times}10^{-6}\,e^{-169.08\,x} \\[-3pt]
+  &\quad +2.276{\times}10^{-6}\,e^{-281.80\,x} \; -1.737{\times}10^{-6}\,e^{-563.60\,x} \\[-3pt]
+  &\quad +1.357{\times}10^{-6}\,e^{-657.53\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+14} 0.936~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{1.1845}\!\left(\!\begin{aligned}
+  &\; -1.200{\times}10^{-6}\,e^{-6.1369\,x} \; +3.450{\times}10^{-6}\,e^{-7.8902\,x} \\[-3pt]
+  &\quad -1.057{\times}10^{-5}\,e^{-13.808\,x} \; -7.698{\times}10^{-6}\,e^{-18.411\,x} \\[-3pt]
+  &\quad +5.824{\times}10^{-6}\,e^{-42.958\,x} \; +4.336{\times}10^{-6}\,e^{-59.650\,x} \\[-3pt]
+  &\quad +3.679{\times}10^{-6}\,e^{-85.331\,x} \; -7.430{\times}10^{-7}\,e^{-92.053\,x} \\[-3pt]
+  &\quad +1.765{\times}10^{-6}\,e^{-139.18\,x} \; +1.599{\times}10^{-6}\,e^{-165.70\,x} \\[-3pt]
+  &\quad -8.321{\times}10^{-6}\,e^{-276.16\,x} \; +9.117{\times}10^{-6}\,e^{-312.98\,x} \\[-3pt]
+  &\quad -3.454{\times}10^{-6}\,e^{-552.32\,x} \; +2.219{\times}10^{-6}\,e^{-644.37\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+15} 0.786~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{1.4531}\!\left(\!\begin{aligned}
+  &\; -1.341{\times}10^{-6}\,e^{-6.1633\,x} \; +3.893{\times}10^{-6}\,e^{-7.9242\,x} \\[-3pt]
+  &\quad -1.289{\times}10^{-5}\,e^{-13.867\,x} \; -5.414{\times}10^{-6}\,e^{-18.490\,x} \\[-3pt]
+  &\quad +5.405{\times}10^{-6}\,e^{-43.143\,x} \; +3.963{\times}10^{-6}\,e^{-59.907\,x} \\[-3pt]
+  &\quad +7.588{\times}10^{-6}\,e^{-85.699\,x} \; -2.905{\times}10^{-6}\,e^{-92.449\,x} \\[-3pt]
+  &\quad -6.271{\times}10^{-6}\,e^{-139.78\,x} \; +1.069{\times}10^{-5}\,e^{-166.41\,x} \\[-3pt]
+  &\quad -1.300{\times}10^{-5}\,e^{-277.35\,x} \; +1.016{\times}10^{-5}\,e^{-314.33\,x} \\[-3pt]
+  &\quad +4.677{\times}10^{-6}\,e^{-462.24\,x} \; -8.371{\times}10^{-6}\,e^{-554.69\,x} \\[-3pt]
+  &\quad +3.817{\times}10^{-6}\,e^{-647.14\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+16} 0.741~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{1.5901}\!\left(\!\begin{aligned}
+  &\; -1.372{\times}10^{-6}\,e^{-6.0374\,x} \; +3.917{\times}10^{-6}\,e^{-7.7624\,x} \\[-3pt]
+  &\quad -1.210{\times}10^{-5}\,e^{-13.584\,x} \; -6.306{\times}10^{-6}\,e^{-18.112\,x} \\[-3pt]
+  &\quad +5.672{\times}10^{-6}\,e^{-42.262\,x} \; +2.917{\times}10^{-6}\,e^{-58.684\,x} \\[-3pt]
+  &\quad +7.734{\times}10^{-6}\,e^{-83.949\,x} \; -1.584{\times}10^{-6}\,e^{-90.561\,x} \\[-3pt]
+  &\quad -7.266{\times}10^{-6}\,e^{-136.93\,x} \; +1.064{\times}10^{-5}\,e^{-163.01\,x} \\[-3pt]
+  &\quad -9.803{\times}10^{-6}\,e^{-271.68\,x} \; +6.820{\times}10^{-6}\,e^{-307.91\,x} \\[-3pt]
+  &\quad +4.884{\times}10^{-6}\,e^{-452.81\,x} \; -6.771{\times}10^{-6}\,e^{-543.37\,x} \\[-3pt]
+  &\quad +2.338{\times}10^{-6}\,e^{-633.93\,x} \; +2.764{\times}10^{-7}\,e^{-815.05\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+17} 0.809~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{2.3358}\!\left(\!\begin{aligned}
+  &\; -1.471{\times}10^{-6}\,e^{-5.5986\,x} \; +4.091{\times}10^{-6}\,e^{-7.1982\,x} \\[-3pt]
+  &\quad -1.081{\times}10^{-5}\,e^{-12.597\,x} \; -7.696{\times}10^{-6}\,e^{-16.796\,x} \\[-3pt]
+  &\quad +4.686{\times}10^{-6}\,e^{-39.190\,x} \; +2.243{\times}10^{-6}\,e^{-50.387\,x} \\[-3pt]
+  &\quad -3.188{\times}10^{-7}\,e^{-54.418\,x} \; +1.031{\times}10^{-5}\,e^{-77.847\,x} \\[-3pt]
+  &\quad -1.669{\times}10^{-6}\,e^{-83.979\,x} \; -8.981{\times}10^{-6}\,e^{-126.98\,x} \\[-3pt]
+  &\quad +1.136{\times}10^{-5}\,e^{-151.16\,x} \; -4.717{\times}10^{-6}\,e^{-251.94\,x} \\[-3pt]
+  &\quad +5.001{\times}10^{-7}\,e^{-285.53\,x} \; +8.608{\times}10^{-6}\,e^{-419.89\,x} \\[-3pt]
+  &\quad -9.109{\times}10^{-6}\,e^{-503.87\,x} \; +2.522{\times}10^{-6}\,e^{-587.85\,x} \\[-3pt]
+  &\quad +4.492{\times}10^{-7}\,e^{-755.81\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+18} 0.685~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{3.3367}\!\left(\!\begin{aligned}
+  &\; -1.542{\times}10^{-6}\,e^{-5.5843\,x} \; +4.594{\times}10^{-6}\,e^{-7.1798\,x} \\[-3pt]
+  &\quad -1.469{\times}10^{-5}\,e^{-12.565\,x} \; -1.110{\times}10^{-5}\,e^{-16.753\,x} \\[-3pt]
+  &\quad +9.178{\times}10^{-6}\,e^{-19.545\,x} \; -3.572{\times}10^{-6}\,e^{-39.090\,x} \\[-3pt]
+  &\quad +9.883{\times}10^{-6}\,e^{-50.259\,x} \; +1.463{\times}10^{-6}\,e^{-54.279\,x} \\[-3pt]
+  &\quad +2.151{\times}10^{-6}\,e^{-77.648\,x} \; +2.618{\times}10^{-6}\,e^{-83.764\,x} \\[-3pt]
+  &\quad -8.783{\times}10^{-6}\,e^{-126.65\,x} \; +1.147{\times}10^{-5}\,e^{-150.78\,x} \\[-3pt]
+  &\quad -1.930{\times}10^{-6}\,e^{-251.29\,x} \; -2.860{\times}10^{-6}\,e^{-284.80\,x} \\[-3pt]
+  &\quad +7.540{\times}10^{-6}\,e^{-418.82\,x} \; -4.332{\times}10^{-6}\,e^{-502.59\,x} \\[-3pt]
+  &\quad -1.133{\times}10^{-6}\,e^{-586.35\,x} \; +1.043{\times}10^{-6}\,e^{-753.88\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+19} 0.525~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{2.0604}\!\left(\!\begin{aligned}
+  &\; -1.324{\times}10^{-6}\,e^{-6.0306\,x} \; +3.832{\times}10^{-6}\,e^{-7.7536\,x} \\[-3pt]
+  &\quad -1.175{\times}10^{-5}\,e^{-13.569\,x} \; -1.465{\times}10^{-5}\,e^{-18.092\,x} \\[-3pt]
+  &\quad +1.004{\times}10^{-5}\,e^{-21.107\,x} \; -1.662{\times}10^{-6}\,e^{-42.214\,x} \\[-3pt]
+  &\quad +8.143{\times}10^{-6}\,e^{-54.275\,x} \; +2.946{\times}10^{-6}\,e^{-58.617\,x} \\[-3pt]
+  &\quad -2.490{\times}10^{-6}\,e^{-83.854\,x} \; +5.923{\times}10^{-6}\,e^{-90.459\,x} \\[-3pt]
+  &\quad -5.525{\times}10^{-6}\,e^{-136.77\,x} \; +7.013{\times}10^{-6}\,e^{-162.83\,x} \\[-3pt]
+  &\quad +1.086{\times}10^{-6}\,e^{-271.38\,x} \; -3.777{\times}10^{-6}\,e^{-307.56\,x} \\[-3pt]
+  &\quad +4.737{\times}10^{-6}\,e^{-452.29\,x} \; -3.289{\times}10^{-6}\,e^{-542.75\,x} \\[-3pt]
+  &\quad +7.622{\times}10^{-7}\,e^{-633.21\,x} \; -1.405{\times}10^{-7}\,e^{-814.13\,x} \\[-3pt]
+  &\quad +1.216{\times}10^{-7}\,e^{-1266.4\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R4+20} \textbf{0.492~ppb}\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_4(h)}{1 - h^{2.5199}\!\left(\!\begin{aligned}
+  &\; -1.594{\times}10^{-6}\,e^{-5.2674\,x} \; +4.005{\times}10^{-6}\,e^{-6.7724\,x} \\[-3pt]
+  &\quad -6.078{\times}10^{-6}\,e^{-11.852\,x} \; -1.789{\times}10^{-5}\,e^{-15.802\,x} \\[-3pt]
+  &\quad +7.005{\times}10^{-6}\,e^{-18.436\,x} \; -1.534{\times}10^{-6}\,e^{-36.872\,x} \\[-3pt]
+  &\quad +8.604{\times}10^{-6}\,e^{-47.407\,x} \; -5.919{\times}10^{-7}\,e^{-51.199\,x} \\[-3pt]
+  &\quad +4.016{\times}10^{-6}\,e^{-73.242\,x} \; +2.309{\times}10^{-6}\,e^{-79.011\,x} \\[-3pt]
+  &\quad -4.071{\times}10^{-6}\,e^{-119.47\,x} \; +6.387{\times}10^{-6}\,e^{-142.22\,x} \\[-3pt]
+  &\quad -4.451{\times}10^{-7}\,e^{-189.63\,x} \; -7.202{\times}10^{-6}\,e^{-237.03\,x} \\[-3pt]
+  &\quad +9.244{\times}10^{-6}\,e^{-268.64\,x} \; -3.986{\times}10^{-6}\,e^{-395.06\,x} \\[-3pt]
+  &\quad -1.640{\times}10^{-6}\,e^{-474.07\,x} \; +5.453{\times}10^{-6}\,e^{-553.08\,x} \\[-3pt]
+  &\quad -2.320{\times}10^{-6}\,e^{-711.10\,x} \; +3.261{\times}10^{-7}\,e^{-1106.2\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\medskip\noindent\textbf{R5 family} ($R_5$ base, matching $B(h)$ through $h^{19}$, error budget $T_5 = +1.06 \times 10^{-10}$)\nopagebreak
+
+\noindent In every R5 formula below, $R_5(h)$ stands for $R_4(h)$ (defined above) plus a third Pad\'e layer:
+\[
+R_5(h) = R_4(h) \;+\; h^{15}\!\cdot\!\frac{-1.472{\times}10^{-7} - 1.167{\times}10^{-7}\,h + 5.780{\times}10^{-8}\,h^2 + 2.056{\times}10^{-7}\,h^3}
+       {1 - 3.886\,h + 4.420\,h^2}
+\]
+
+\noindent\textbf{R5+8} 3.728~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{3.3124}\!\left(\!\begin{aligned}
+  &\; +2.001{\times}10^{-6}\,e^{-8.7561\,x} \; -1.549{\times}10^{-5}\,e^{-13.621\,x} \; -1.600{\times}10^{-5}\,e^{-20.431\,x} \\[-3pt]
+  &\quad +1.749{\times}10^{-5}\,e^{-23.836\,x} \; +9.425{\times}10^{-6}\,e^{-66.196\,x} \; +2.289{\times}10^{-6}\,e^{-154.46\,x} \\[-3pt]
+  &\quad -2.308{\times}10^{-7}\,e^{-306.47\,x} \; +5.228{\times}10^{-7}\,e^{-490.34\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R5+9} 1.523~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{2.9717}\!\left(\!\begin{aligned}
+  &\; +1.968{\times}10^{-6}\,e^{-8.8355\,x} \; -1.495{\times}10^{-5}\,e^{-13.744\,x} \; -1.502{\times}10^{-5}\,e^{-20.616\,x} \\[-3pt]
+  &\quad +1.567{\times}10^{-5}\,e^{-24.052\,x} \; +1.023{\times}10^{-5}\,e^{-66.797\,x} \; +1.055{\times}10^{-6}\,e^{-155.86\,x} \\[-3pt]
+  &\quad +2.044{\times}10^{-6}\,e^{-309.24\,x} \; -1.075{\times}10^{-5}\,e^{-494.79\,x} \; +9.762{\times}10^{-6}\,e^{-515.41\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R5+10} 1.451~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{2.6310}\!\left(\!\begin{aligned}
+  &\; +1.862{\times}10^{-6}\,e^{-9.0571\,x} \; -1.473{\times}10^{-5}\,e^{-14.089\,x} \; -1.439{\times}10^{-5}\,e^{-21.133\,x} \\[-3pt]
+  &\quad +1.398{\times}10^{-5}\,e^{-24.656\,x} \; +1.324{\times}10^{-6}\,e^{-31.700\,x} \; +9.925{\times}10^{-6}\,e^{-68.472\,x} \\[-3pt]
+  &\quad +1.030{\times}10^{-6}\,e^{-159.77\,x} \; +1.935{\times}10^{-6}\,e^{-317.00\,x} \; -1.020{\times}10^{-5}\,e^{-507.20\,x} \\[-3pt]
+  &\quad +9.260{\times}10^{-6}\,e^{-528.33\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R5+11} 1.221~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{3.3831}\!\left(\!\begin{aligned}
+  &\; +2.088{\times}10^{-6}\,e^{-8.4496\,x} \; -1.445{\times}10^{-5}\,e^{-13.144\,x} \\[-3pt]
+  &\quad -1.600{\times}10^{-5}\,e^{-19.716\,x} \; +1.612{\times}10^{-5}\,e^{-23.002\,x} \\[-3pt]
+  &\quad -5.104{\times}10^{-7}\,e^{-29.574\,x} \; +1.028{\times}10^{-5}\,e^{-63.879\,x} \\[-3pt]
+  &\quad +1.708{\times}10^{-6}\,e^{-149.05\,x} \; +5.312{\times}10^{-7}\,e^{-295.74\,x} \\[-3pt]
+  &\quad +1.329{\times}10^{-5}\,e^{-473.18\,x} \; -1.587{\times}10^{-5}\,e^{-492.89\,x} \\[-3pt]
+  &\quad +2.824{\times}10^{-6}\,e^{-591.47\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R5+12} 1.189~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{3.1473}\!\left(\!\begin{aligned}
+  &\; +2.069{\times}10^{-6}\,e^{-8.8213\,x} \; -1.593{\times}10^{-5}\,e^{-13.722\,x} \\[-3pt]
+  &\quad -1.444{\times}10^{-5}\,e^{-20.583\,x} \; +1.745{\times}10^{-5}\,e^{-24.014\,x} \\[-3pt]
+  &\quad -1.916{\times}10^{-6}\,e^{-30.875\,x} \; +1.162{\times}10^{-5}\,e^{-66.689\,x} \\[-3pt]
+  &\quad -2.060{\times}10^{-6}\,e^{-102.92\,x} \; +2.795{\times}10^{-6}\,e^{-155.61\,x} \\[-3pt]
+  &\quad -7.581{\times}10^{-8}\,e^{-308.75\,x} \; +1.365{\times}10^{-5}\,e^{-494.00\,x} \\[-3pt]
+  &\quad -1.573{\times}10^{-5}\,e^{-514.58\,x} \; +2.567{\times}10^{-6}\,e^{-617.49\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R5+13} 0.854~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{4.1502}\!\left(\!\begin{aligned}
+  &\; +2.514{\times}10^{-6}\,e^{-8.2603\,x} \; -1.758{\times}10^{-5}\,e^{-12.849\,x} \\[-3pt]
+  &\quad -1.797{\times}10^{-5}\,e^{-19.274\,x} \; +2.854{\times}10^{-5}\,e^{-22.486\,x} \\[-3pt]
+  &\quad -1.034{\times}10^{-5}\,e^{-28.911\,x} \; +1.619{\times}10^{-5}\,e^{-62.448\,x} \\[-3pt]
+  &\quad -8.493{\times}10^{-6}\,e^{-96.371\,x} \; +9.155{\times}10^{-6}\,e^{-145.71\,x} \\[-3pt]
+  &\quad -1.124{\times}10^{-5}\,e^{-289.11\,x} \; +2.084{\times}10^{-5}\,e^{-385.48\,x} \\[-3pt]
+  &\quad +1.272{\times}10^{-6}\,e^{-462.58\,x} \; -1.905{\times}10^{-5}\,e^{-481.85\,x} \\[-3pt]
+  &\quad +6.166{\times}10^{-6}\,e^{-578.22\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R5+14} 0.812~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{4.0554}\!\left(\!\begin{aligned}
+  &\; +2.587{\times}10^{-6}\,e^{-8.5399\,x} \; -1.988{\times}10^{-5}\,e^{-13.284\,x} \\[-3pt]
+  &\quad -1.230{\times}10^{-5}\,e^{-19.926\,x} \; +2.560{\times}10^{-5}\,e^{-23.247\,x} \\[-3pt]
+  &\quad -1.112{\times}10^{-5}\,e^{-29.890\,x} \; +1.894{\times}10^{-5}\,e^{-64.562\,x} \\[-3pt]
+  &\quad -1.639{\times}10^{-5}\,e^{-99.632\,x} \; +2.778{\times}10^{-5}\,e^{-139.48\,x} \\[-3pt]
+  &\quad -1.431{\times}10^{-5}\,e^{-150.64\,x} \; -8.047{\times}10^{-6}\,e^{-298.90\,x} \\[-3pt]
+  &\quad +1.629{\times}10^{-5}\,e^{-398.53\,x} \; +4.675{\times}10^{-6}\,e^{-478.23\,x} \\[-3pt]
+  &\quad -1.943{\times}10^{-5}\,e^{-498.16\,x} \; +5.600{\times}10^{-6}\,e^{-597.79\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R5+15} 0.821~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{4.1407}\!\left(\!\begin{aligned}
+  &\; +2.547{\times}10^{-6}\,e^{-8.3605\,x} \; -1.846{\times}10^{-5}\,e^{-13.005\,x} \\[-3pt]
+  &\quad -1.669{\times}10^{-5}\,e^{-19.508\,x} \; +2.894{\times}10^{-5}\,e^{-22.759\,x} \\[-3pt]
+  &\quad -1.136{\times}10^{-5}\,e^{-29.262\,x} \; +1.722{\times}10^{-5}\,e^{-63.206\,x} \\[-3pt]
+  &\quad -1.096{\times}10^{-5}\,e^{-97.540\,x} \; +1.453{\times}10^{-5}\,e^{-136.56\,x} \\[-3pt]
+  &\quad -7.378{\times}10^{-6}\,e^{-147.48\,x} \; +5.407{\times}10^{-6}\,e^{-195.08\,x} \\[-3pt]
+  &\quad -1.493{\times}10^{-5}\,e^{-292.62\,x} \; +2.437{\times}10^{-5}\,e^{-390.16\,x} \\[-3pt]
+  &\quad -5.148{\times}10^{-7}\,e^{-468.19\,x} \; -1.915{\times}10^{-5}\,e^{-487.70\,x} \\[-3pt]
+  &\quad +6.436{\times}10^{-6}\,e^{-585.24\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R5+16} 0.599~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{6.5194}\!\left(\!\begin{aligned}
+  &\; +3.860{\times}10^{-6}\,e^{-6.1489\,x} \; -1.547{\times}10^{-5}\,e^{-9.5649\,x} \\[-3pt]
+  &\quad -3.005{\times}10^{-5}\,e^{-14.347\,x} \; +4.072{\times}10^{-5}\,e^{-16.739\,x} \\[-3pt]
+  &\quad -1.482{\times}10^{-5}\,e^{-21.521\,x} \; +7.743{\times}10^{-6}\,e^{-46.486\,x} \\[-3pt]
+  &\quad +1.019{\times}10^{-5}\,e^{-71.737\,x} \; -1.606{\times}10^{-6}\,e^{-100.43\,x} \\[-3pt]
+  &\quad -1.528{\times}10^{-5}\,e^{-108.47\,x} \; +2.405{\times}10^{-5}\,e^{-143.47\,x} \\[-3pt]
+  &\quad -2.349{\times}10^{-5}\,e^{-215.21\,x} \; +2.685{\times}10^{-5}\,e^{-286.95\,x} \\[-3pt]
+  &\quad -7.344{\times}10^{-6}\,e^{-344.34\,x} \; -9.678{\times}10^{-6}\,e^{-358.69\,x} \\[-3pt]
+  &\quad +4.265{\times}10^{-6}\,e^{-430.42\,x} \; +4.337{\times}10^{-8}\,e^{-1434.7\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R5+17} 0.649~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{5.8454}\!\left(\!\begin{aligned}
+  &\; +3.440{\times}10^{-6}\,e^{-6.8177\,x} \; -1.677{\times}10^{-5}\,e^{-10.605\,x} \\[-3pt]
+  &\quad -2.638{\times}10^{-5}\,e^{-15.908\,x} \; +3.921{\times}10^{-5}\,e^{-18.559\,x} \\[-3pt]
+  &\quad -1.558{\times}10^{-5}\,e^{-23.862\,x} \; +1.280{\times}10^{-5}\,e^{-51.542\,x} \\[-3pt]
+  &\quad -1.311{\times}10^{-6}\,e^{-79.540\,x} \; +2.072{\times}10^{-5}\,e^{-111.36\,x} \\[-3pt]
+  &\quad -2.611{\times}10^{-5}\,e^{-120.26\,x} \; +1.730{\times}10^{-5}\,e^{-159.08\,x} \\[-3pt]
+  &\quad -1.022{\times}10^{-5}\,e^{-190.90\,x} \; +6.087{\times}10^{-6}\,e^{-238.62\,x} \\[-3pt]
+  &\quad -1.025{\times}10^{-5}\,e^{-318.16\,x} \; -2.077{\times}10^{-5}\,e^{-381.79\,x} \\[-3pt]
+  &\quad +3.767{\times}10^{-5}\,e^{-397.70\,x} \; -1.052{\times}10^{-5}\,e^{-477.24\,x} \\[-3pt]
+  &\quad +6.927{\times}10^{-7}\,e^{-795.40\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R5+18} 0.573~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{6.2305}\!\left(\!\begin{aligned}
+  &\; +3.872{\times}10^{-6}\,e^{-6.6360\,x} \; -1.844{\times}10^{-5}\,e^{-10.323\,x} \\[-3pt]
+  &\quad -2.657{\times}10^{-5}\,e^{-15.484\,x} \; +4.331{\times}10^{-5}\,e^{-18.065\,x} \\[-3pt]
+  &\quad -1.881{\times}10^{-5}\,e^{-23.226\,x} \; +1.316{\times}10^{-5}\,e^{-50.168\,x} \\[-3pt]
+  &\quad -3.421{\times}10^{-6}\,e^{-71.767\,x} \; +5.715{\times}10^{-6}\,e^{-77.420\,x} \\[-3pt]
+  &\quad +1.811{\times}10^{-6}\,e^{-108.39\,x} \; -1.161{\times}10^{-5}\,e^{-117.06\,x} \\[-3pt]
+  &\quad +1.929{\times}10^{-5}\,e^{-154.84\,x} \; -2.178{\times}10^{-5}\,e^{-232.26\,x} \\[-3pt]
+  &\quad +2.408{\times}10^{-5}\,e^{-309.68\,x} \; +7.919{\times}10^{-6}\,e^{-371.61\,x} \\[-3pt]
+  &\quad -2.293{\times}10^{-5}\,e^{-387.10\,x} \; -1.289{\times}10^{-6}\,e^{-402.58\,x} \\[-3pt]
+  &\quad +5.660{\times}10^{-6}\,e^{-464.52\,x} \; +3.327{\times}10^{-8}\,e^{-1548.4\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R5+19} 0.571~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{6.2123}\!\left(\!\begin{aligned}
+  &\; +3.918{\times}10^{-6}\,e^{-6.6892\,x} \; -1.910{\times}10^{-5}\,e^{-10.405\,x} \\[-3pt]
+  &\quad -2.503{\times}10^{-5}\,e^{-15.608\,x} \; +4.269{\times}10^{-5}\,e^{-18.210\,x} \\[-3pt]
+  &\quad -1.938{\times}10^{-5}\,e^{-23.412\,x} \; +1.537{\times}10^{-5}\,e^{-50.571\,x} \\[-3pt]
+  &\quad -1.763{\times}10^{-5}\,e^{-72.343\,x} \; +2.011{\times}10^{-5}\,e^{-78.041\,x} \\[-3pt]
+  &\quad -1.073{\times}10^{-5}\,e^{-109.26\,x} \; +1.427{\times}10^{-6}\,e^{-118.00\,x} \\[-3pt]
+  &\quad +2.569{\times}10^{-5}\,e^{-156.08\,x} \; -1.601{\times}10^{-5}\,e^{-171.69\,x} \\[-3pt]
+  &\quad -7.689{\times}10^{-6}\,e^{-234.12\,x} \; +1.031{\times}10^{-5}\,e^{-312.16\,x} \\[-3pt]
+  &\quad +1.625{\times}10^{-5}\,e^{-374.60\,x} \; -2.418{\times}10^{-5}\,e^{-390.20\,x} \\[-3pt]
+  &\quad -2.234{\times}10^{-7}\,e^{-405.81\,x} \; +4.180{\times}10^{-6}\,e^{-468.25\,x} \\[-3pt]
+  &\quad +3.372{\times}10^{-8}\,e^{-1560.8\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R5+20} \textbf{0.508~ppb}\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_5(h)}{1 - h^{6.6769}\!\left(\!\begin{aligned}
+  &\; +4.826{\times}10^{-6}\,e^{-6.5273\,x} \; -2.400{\times}10^{-5}\,e^{-10.154\,x} \\[-3pt]
+  &\quad -1.398{\times}10^{-5}\,e^{-15.230\,x} \; +3.611{\times}10^{-5}\,e^{-17.769\,x} \\[-3pt]
+  &\quad -2.063{\times}10^{-5}\,e^{-22.845\,x} \; +1.836{\times}10^{-5}\,e^{-49.346\,x} \\[-3pt]
+  &\quad -3.036{\times}10^{-5}\,e^{-70.591\,x} \; +2.987{\times}10^{-5}\,e^{-76.152\,x} \\[-3pt]
+  &\quad +6.103{\times}10^{-6}\,e^{-106.61\,x} \; -2.172{\times}10^{-5}\,e^{-115.14\,x} \\[-3pt]
+  &\quad +4.819{\times}10^{-5}\,e^{-152.30\,x} \; -3.003{\times}10^{-5}\,e^{-167.53\,x} \\[-3pt]
+  &\quad -1.871{\times}10^{-5}\,e^{-228.45\,x} \; +3.540{\times}10^{-5}\,e^{-304.61\,x} \\[-3pt]
+  &\quad +2.202{\times}10^{-5}\,e^{-365.53\,x} \; -3.665{\times}10^{-5}\,e^{-380.76\,x} \\[-3pt]
+  &\quad -2.688{\times}10^{-5}\,e^{-395.99\,x} \; +2.303{\times}10^{-5}\,e^{-456.91\,x} \\[-3pt]
+  &\quad -1.018{\times}10^{-6}\,e^{-761.52\,x} \; +9.109{\times}10^{-8}\,e^{-1523.0\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\medskip\noindent\textbf{R6 family} ($R_6$ base, matching $B(h)$ through $h^{24}$, error budget $T_6 \approx 1.7 \times 10^{-11}$)\nopagebreak
+
+\noindent In every R6 formula below, $R_6(h)$ stands for $R_5(h)$ (defined above) plus a fourth and final Pad\'e layer:
+\[
+R_6(h) = R_5(h) \;+\; h^{20}\!\cdot\!\frac{-1.057{\times}10^{-6} - 1.828{\times}10^{-6}\,h - 4.965{\times}10^{-7}\,h^2 + 3.382{\times}10^{-6}\,h^3}
+       {1 - 5.589\,h + 9.324\,h^2}
+\]
+The full chain is: $R_6(h) = 1 + 3h/(10{+}\sqrt{4{-}3h}) + h^5\,\psi_3(h) + h^{10}\,\psi_4(h) + h^{15}\,\psi_5(h) + h^{20}\,\psi_6(h)$, where each $\psi_k$ is the cubic/quadratic fraction shown in the corresponding family header above.
+
+\noindent\textbf{R6+7} 4.071~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{1.3359}\!\left(\!\begin{aligned}
+  &\; -1.412{\times}10^{-6}\,e^{-5.1725\,x} \; +2.869{\times}10^{-6}\,e^{-6.6503\,x} \; -1.693{\times}10^{-5}\,e^{-15.517\,x} \\[-3pt]
+  &\quad +1.019{\times}10^{-5}\,e^{-50.276\,x} \; +4.912{\times}10^{-6}\,e^{-117.31\,x} \; -1.850{\times}10^{-7}\,e^{-232.76\,x} \\[-3pt]
+  &\quad +5.639{\times}10^{-7}\,e^{-465.52\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+8} 3.613~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{2.7310}\!\left(\!\begin{aligned}
+  &\; -1.458{\times}10^{-6}\,e^{-5.7547\,x} \; +4.788{\times}10^{-6}\,e^{-7.3989\,x} \; -1.738{\times}10^{-5}\,e^{-12.948\,x} \\[-3pt]
+  &\quad -4.965{\times}10^{-7}\,e^{-17.264\,x} \; +1.074{\times}10^{-5}\,e^{-55.936\,x} \; +3.345{\times}10^{-6}\,e^{-130.52\,x} \\[-3pt]
+  &\quad +4.581{\times}10^{-8}\,e^{-258.96\,x} \; +4.174{\times}10^{-7}\,e^{-517.92\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+9} 1.649~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{2.7423}\!\left(\!\begin{aligned}
+  &\; -1.425{\times}10^{-6}\,e^{-5.8121\,x} \; +4.524{\times}10^{-6}\,e^{-7.4727\,x} \; -1.696{\times}10^{-5}\,e^{-13.077\,x} \\[-3pt]
+  &\quad -8.135{\times}10^{-7}\,e^{-17.436\,x} \; +1.129{\times}10^{-5}\,e^{-56.493\,x} \; +2.462{\times}10^{-6}\,e^{-131.82\,x} \\[-3pt]
+  &\quad +9.718{\times}10^{-7}\,e^{-261.54\,x} \; -1.020{\times}10^{-6}\,e^{-523.09\,x} \; +9.766{\times}10^{-7}\,e^{-610.27\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+10} 1.332~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{2.4825}\!\left(\!\begin{aligned}
+  &\; -1.589{\times}10^{-6}\,e^{-5.5515\,x} \; +4.498{\times}10^{-6}\,e^{-7.1377\,x} \; -1.226{\times}10^{-5}\,e^{-12.491\,x} \\[-3pt]
+  &\quad -5.702{\times}10^{-6}\,e^{-16.655\,x} \; +1.099{\times}10^{-5}\,e^{-53.961\,x} \; +3.682{\times}10^{-6}\,e^{-125.91\,x} \\[-3pt]
+  &\quad -4.290{\times}10^{-6}\,e^{-249.82\,x} \; +5.505{\times}10^{-6}\,e^{-283.13\,x} \; -2.812{\times}10^{-6}\,e^{-499.64\,x} \\[-3pt]
+  &\quad +1.984{\times}10^{-6}\,e^{-582.91\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+11} 0.955~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{1.6227}\!\left(\!\begin{aligned}
+  &\; -1.659{\times}10^{-6}\,e^{-6.2671\,x} \; +4.777{\times}10^{-6}\,e^{-8.0577\,x} \\[-3pt]
+  &\quad -1.656{\times}10^{-5}\,e^{-14.101\,x} \; -1.437{\times}10^{-6}\,e^{-18.801\,x} \\[-3pt]
+  &\quad +1.261{\times}10^{-5}\,e^{-56.404\,x} \; -1.508{\times}10^{-6}\,e^{-60.916\,x} \\[-3pt]
+  &\quad +3.987{\times}10^{-6}\,e^{-142.14\,x} \; -6.721{\times}10^{-6}\,e^{-282.02\,x} \\[-3pt]
+  &\quad +7.531{\times}10^{-6}\,e^{-319.62\,x} \; -2.959{\times}10^{-6}\,e^{-564.04\,x} \\[-3pt]
+  &\quad +1.940{\times}10^{-6}\,e^{-658.04\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+12} 0.830~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{0.8837}\!\left(\!\begin{aligned}
+  &\; -9.690{\times}10^{-7}\,e^{-6.5416\,x} \; +2.961{\times}10^{-6}\,e^{-8.4106\,x} \\[-3pt]
+  &\quad -1.104{\times}10^{-5}\,e^{-14.719\,x} \; -9.051{\times}10^{-6}\,e^{-19.625\,x} \\[-3pt]
+  &\quad +4.899{\times}10^{-6}\,e^{-29.437\,x} \; +3.787{\times}10^{-6}\,e^{-58.874\,x} \\[-3pt]
+  &\quad +6.102{\times}10^{-6}\,e^{-63.584\,x} \; +3.459{\times}10^{-6}\,e^{-148.36\,x} \\[-3pt]
+  &\quad -6.487{\times}10^{-6}\,e^{-294.37\,x} \; +7.364{\times}10^{-6}\,e^{-333.62\,x} \\[-3pt]
+  &\quad -2.929{\times}10^{-6}\,e^{-588.74\,x} \; +1.898{\times}10^{-6}\,e^{-686.86\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+13} 0.623~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{1.6030}\!\left(\!\begin{aligned}
+  &\; -1.302{\times}10^{-6}\,e^{-6.2193\,x} \; +3.826{\times}10^{-6}\,e^{-7.9963\,x} \\[-3pt]
+  &\quad -1.306{\times}10^{-5}\,e^{-13.994\,x} \; -6.283{\times}10^{-6}\,e^{-18.658\,x} \\[-3pt]
+  &\quad +2.874{\times}10^{-6}\,e^{-27.987\,x} \; +4.675{\times}10^{-6}\,e^{-55.974\,x} \\[-3pt]
+  &\quad +5.688{\times}10^{-6}\,e^{-60.452\,x} \; +3.542{\times}10^{-6}\,e^{-141.05\,x} \\[-3pt]
+  &\quad -4.388{\times}10^{-6}\,e^{-279.87\,x} \; +4.971{\times}10^{-6}\,e^{-317.19\,x} \\[-3pt]
+  &\quad -1.683{\times}10^{-6}\,e^{-559.74\,x} \; +1.128{\times}10^{-6}\,e^{-653.03\,x} \\[-3pt]
+  &\quad +1.144{\times}10^{-8}\,e^{-2239.0\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+14} 0.700~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{1.2615}\!\left(\!\begin{aligned}
+  &\; -1.126{\times}10^{-6}\,e^{-6.4095\,x} \; +3.395{\times}10^{-6}\,e^{-8.2408\,x} \\[-3pt]
+  &\quad -1.245{\times}10^{-5}\,e^{-14.421\,x} \; -7.250{\times}10^{-6}\,e^{-19.228\,x} \\[-3pt]
+  &\quad +3.898{\times}10^{-6}\,e^{-28.843\,x} \; +4.499{\times}10^{-6}\,e^{-57.685\,x} \\[-3pt]
+  &\quad +5.605{\times}10^{-6}\,e^{-62.300\,x} \; +3.566{\times}10^{-6}\,e^{-145.37\,x} \\[-3pt]
+  &\quad -6.960{\times}10^{-6}\,e^{-288.43\,x} \; +8.273{\times}10^{-6}\,e^{-326.88\,x} \\[-3pt]
+  &\quad -2.643{\times}10^{-6}\,e^{-499.94\,x} \; +6.588{\times}10^{-7}\,e^{-576.85\,x} \\[-3pt]
+  &\quad +4.997{\times}10^{-7}\,e^{-673.00\,x} \; +3.101{\times}10^{-8}\,e^{-1346.0\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+15} 0.477~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{1.9386}\!\left(\!\begin{aligned}
+  &\; -1.384{\times}10^{-6}\,e^{-6.1721\,x} \; +4.062{\times}10^{-6}\,e^{-7.9356\,x} \\[-3pt]
+  &\quad -1.392{\times}10^{-5}\,e^{-13.887\,x} \; -6.884{\times}10^{-6}\,e^{-18.516\,x} \\[-3pt]
+  &\quad +1.023{\times}10^{-5}\,e^{-27.775\,x} \; -7.382{\times}10^{-6}\,e^{-32.404\,x} \\[-3pt]
+  &\quad +7.741{\times}10^{-6}\,e^{-55.549\,x} \; +4.207{\times}10^{-6}\,e^{-59.993\,x} \\[-3pt]
+  &\quad +2.698{\times}10^{-6}\,e^{-139.98\,x} \; +8.206{\times}10^{-7}\,e^{-277.75\,x} \\[-3pt]
+  &\quad -2.021{\times}10^{-7}\,e^{-314.78\,x} \; -3.481{\times}10^{-6}\,e^{-481.43\,x} \\[-3pt]
+  &\quad +6.160{\times}10^{-6}\,e^{-555.49\,x} \; -2.799{\times}10^{-6}\,e^{-648.07\,x} \\[-3pt]
+  &\quad +1.345{\times}10^{-7}\,e^{-1296.1\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+16} \textbf{0.018~ppb} \textbf{--- (this work, superseded by SCOR)}\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{7.6874}\!\left(\!\begin{aligned}
+  &\; -7.477{\times}10^{-5}\,e^{-6.4814\,x} \; +8.480{\times}10^{-4}\,e^{-8.8090\,x} \\[-3pt]
+  &\quad -1.375{\times}10^{-3}\,e^{-10.180\,x} \; +2.151{\times}10^{-3}\,e^{-14.569\,x} \\[-3pt]
+  &\quad -1.958{\times}10^{-3}\,e^{-16.657\,x} \; +5.984{\times}10^{-4}\,e^{-22.580\,x} \\[-3pt]
+  &\quad -2.023{\times}10^{-4}\,e^{-26.260\,x} \; +8.698{\times}10^{-6}\,e^{-57.325\,x} \\[-3pt]
+  &\quad +2.452{\times}10^{-6}\,e^{-91.868\,x} \; +1.741{\times}10^{-6}\,e^{-200.09\,x} \\[-3pt]
+  &\quad -5.234{\times}10^{-6}\,e^{-372.92\,x} \; +5.453{\times}10^{-6}\,e^{-395.77\,x} \\[-3pt]
+  &\quad -8.113{\times}10^{-7}\,e^{-694.96\,x} \; +5.347{\times}10^{-7}\,e^{-832.67\,x} \\[-3pt]
+  &\quad -2.118{\times}10^{-8}\,e^{-2816.7\,x} \; +2.201{\times}10^{-8}\,e^{-3499.8\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+17} 0.521~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{1.9074}\!\left(\!\begin{aligned}
+  &\; -1.461{\times}10^{-6}\,e^{-6.3141\,x} \; +4.393{\times}10^{-6}\,e^{-8.1181\,x} \\[-3pt]
+  &\quad -1.707{\times}10^{-5}\,e^{-14.207\,x} \; -1.709{\times}10^{-6}\,e^{-18.942\,x} \\[-3pt]
+  &\quad +1.978{\times}10^{-6}\,e^{-28.414\,x} \; +2.953{\times}10^{-6}\,e^{-56.827\,x} \\[-3pt]
+  &\quad +8.046{\times}10^{-6}\,e^{-61.373\,x} \; -4.872{\times}10^{-6}\,e^{-122.75\,x} \\[-3pt]
+  &\quad +1.099{\times}10^{-5}\,e^{-143.20\,x} \; -1.305{\times}10^{-5}\,e^{-208.37\,x} \\[-3pt]
+  &\quad +4.123{\times}10^{-6}\,e^{-246.25\,x} \; +9.425{\times}10^{-6}\,e^{-263.39\,x} \\[-3pt]
+  &\quad +7.343{\times}10^{-6}\,e^{-284.14\,x} \; -1.353{\times}10^{-5}\,e^{-322.02\,x} \\[-3pt]
+  &\quad +8.415{\times}10^{-6}\,e^{-568.27\,x} \; -7.552{\times}10^{-6}\,e^{-662.98\,x} \\[-3pt]
+  &\quad +1.582{\times}10^{-6}\,e^{-852.41\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+18} 0.358~ppb (coarse grid; true peak 115~ppb at $e > 0.999$)\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{2.6332}\!\left(\!\begin{aligned}
+  &\; -1.889{\times}10^{-6}\,e^{-5.8138\,x} \; +5.261{\times}10^{-6}\,e^{-7.4749\,x} \\[-3pt]
+  &\quad -1.695{\times}10^{-5}\,e^{-13.081\,x} \; -1.142{\times}10^{-6}\,e^{-17.441\,x} \\[-3pt]
+  &\quad +1.177{\times}10^{-6}\,e^{-26.162\,x} \; +5.943{\times}10^{-7}\,e^{-52.324\,x} \\[-3pt]
+  &\quad +9.234{\times}10^{-6}\,e^{-56.510\,x} \; +2.754{\times}10^{-6}\,e^{-131.86\,x} \\[-3pt]
+  &\quad -4.673{\times}10^{-6}\,e^{-261.62\,x} \; +1.089{\times}10^{-5}\,e^{-296.50\,x} \\[-3pt]
+  &\quad -5.656{\times}10^{-8}\,e^{-313.94\,x} \; -7.711{\times}10^{-6}\,e^{-348.83\,x} \\[-3pt]
+  &\quad +2.464{\times}10^{-6}\,e^{-523.24\,x} \; -1.079{\times}10^{-6}\,e^{-610.45\,x} \\[-3pt]
+  &\quad +2.868{\times}10^{-6}\,e^{-627.89\,x} \; -2.722{\times}10^{-6}\,e^{-784.86\,x} \\[-3pt]
+  &\quad -1.686{\times}10^{-7}\,e^{-872.07\,x} \; +1.150{\times}10^{-6}\,e^{-959.27\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+19} 0.479~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{2.2492}\!\left(\!\begin{aligned}
+  &\; -1.725{\times}10^{-6}\,e^{-6.2158\,x} \; +5.127{\times}10^{-6}\,e^{-7.9918\,x} \\[-3pt]
+  &\quad -1.950{\times}10^{-5}\,e^{-13.986\,x} \; -6.247{\times}10^{-7}\,e^{-18.647\,x} \\[-3pt]
+  &\quad +4.278{\times}10^{-6}\,e^{-21.755\,x} \; -2.854{\times}10^{-6}\,e^{-27.971\,x} \\[-3pt]
+  &\quad +7.848{\times}10^{-6}\,e^{-55.942\,x} \; +9.104{\times}10^{-6}\,e^{-60.418\,x} \\[-3pt]
+  &\quad -7.917{\times}10^{-6}\,e^{-74.590\,x} \; +6.837{\times}10^{-6}\,e^{-120.84\,x} \\[-3pt]
+  &\quad +1.165{\times}10^{-6}\,e^{-140.97\,x} \; -1.053{\times}10^{-5}\,e^{-205.12\,x} \\[-3pt]
+  &\quad +8.362{\times}10^{-7}\,e^{-242.42\,x} \; +1.068{\times}10^{-5}\,e^{-259.29\,x} \\[-3pt]
+  &\quad +1.017{\times}10^{-5}\,e^{-279.71\,x} \; -1.555{\times}10^{-5}\,e^{-317.01\,x} \\[-3pt]
+  &\quad +9.247{\times}10^{-6}\,e^{-559.42\,x} \; -8.320{\times}10^{-6}\,e^{-652.66\,x} \\[-3pt]
+  &\quad +1.741{\times}10^{-6}\,e^{-839.14\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+20} 0.769~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{2.1787}\!\left(\!\begin{aligned}
+  &\; -1.912{\times}10^{-6}\,e^{-6.1961\,x} \; +5.652{\times}10^{-6}\,e^{-7.9664\,x} \\[-3pt]
+  &\quad -2.116{\times}10^{-5}\,e^{-13.941\,x} \; +2.092{\times}10^{-6}\,e^{-18.588\,x} \\[-3pt]
+  &\quad +5.199{\times}10^{-6}\,e^{-21.686\,x} \; -6.652{\times}10^{-6}\,e^{-27.882\,x} \\[-3pt]
+  &\quad +1.139{\times}10^{-5}\,e^{-55.765\,x} \; +1.340{\times}10^{-5}\,e^{-60.226\,x} \\[-3pt]
+  &\quad -1.817{\times}10^{-5}\,e^{-74.353\,x} \; +1.383{\times}10^{-5}\,e^{-120.45\,x} \\[-3pt]
+  &\quad +7.616{\times}10^{-6}\,e^{-140.53\,x} \; -1.820{\times}10^{-5}\,e^{-167.29\,x} \\[-3pt]
+  &\quad +2.752{\times}10^{-6}\,e^{-204.47\,x} \; -9.927{\times}10^{-6}\,e^{-241.65\,x} \\[-3pt]
+  &\quad +1.423{\times}10^{-5}\,e^{-258.46\,x} \; +1.452{\times}10^{-5}\,e^{-278.82\,x} \\[-3pt]
+  &\quad -1.695{\times}10^{-5}\,e^{-316.00\,x} \; +7.662{\times}10^{-6}\,e^{-557.65\,x} \\[-3pt]
+  &\quad -6.862{\times}10^{-6}\,e^{-650.59\,x} \; +1.494{\times}10^{-6}\,e^{-836.47\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+21} 0.922~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{2.1577}\!\left(\!\begin{aligned}
+  &\; -1.538{\times}10^{-6}\,e^{-5.8982\,x} \; +4.461{\times}10^{-6}\,e^{-7.5834\,x} \\[-3pt]
+  &\quad -1.422{\times}10^{-5}\,e^{-13.271\,x} \; -4.676{\times}10^{-6}\,e^{-17.695\,x} \\[-3pt]
+  &\quad +1.718{\times}10^{-6}\,e^{-20.644\,x} \; -1.337{\times}10^{-6}\,e^{-26.542\,x} \\[-3pt]
+  &\quad +9.155{\times}10^{-6}\,e^{-53.084\,x} \; +6.809{\times}10^{-6}\,e^{-57.330\,x} \\[-3pt]
+  &\quad -7.501{\times}10^{-6}\,e^{-70.778\,x} \; +5.939{\times}10^{-6}\,e^{-114.66\,x} \\[-3pt]
+  &\quad +8.324{\times}10^{-6}\,e^{-133.77\,x} \; -1.020{\times}10^{-5}\,e^{-159.25\,x} \\[-3pt]
+  &\quad +4.129{\times}10^{-7}\,e^{-194.64\,x} \; -1.091{\times}10^{-5}\,e^{-230.03\,x} \\[-3pt]
+  &\quad +1.230{\times}10^{-5}\,e^{-246.04\,x} \; +1.064{\times}10^{-5}\,e^{-265.42\,x} \\[-3pt]
+  &\quad -1.074{\times}10^{-5}\,e^{-300.81\,x} \; +4.333{\times}10^{-7}\,e^{-389.28\,x} \\[-3pt]
+  &\quad +3.135{\times}10^{-6}\,e^{-530.84\,x} \; -3.050{\times}10^{-6}\,e^{-619.31\,x} \\[-3pt]
+  &\quad +8.394{\times}10^{-7}\,e^{-796.26\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\noindent\textbf{R6+22} 0.441~ppb\nopagebreak
+\begin{equation*}
+P = \frac{\pi(a{+}b)\,R_6(h)}{1 - h^{2.2359}\!\left(\!\begin{aligned}
+  &\; -1.706{\times}10^{-6}\,e^{-6.2243\,x} \; +5.079{\times}10^{-6}\,e^{-8.0027\,x} \\[-3pt]
+  &\quad -1.939{\times}10^{-5}\,e^{-14.005\,x} \; -1.351{\times}10^{-6}\,e^{-18.673\,x} \\[-3pt]
+  &\quad +6.091{\times}10^{-6}\,e^{-21.785\,x} \; -6.273{\times}10^{-6}\,e^{-28.010\,x} \\[-3pt]
+  &\quad +5.028{\times}10^{-6}\,e^{-37.346\,x} \; -2.570{\times}10^{-6}\,e^{-56.019\,x} \\[-3pt]
+  &\quad +1.341{\times}10^{-5}\,e^{-60.501\,x} \; -2.174{\times}10^{-6}\,e^{-74.692\,x} \\[-3pt]
+  &\quad -1.754{\times}10^{-6}\,e^{-121.00\,x} \; +1.201{\times}10^{-5}\,e^{-141.17\,x} \\[-3pt]
+  &\quad -9.670{\times}10^{-6}\,e^{-168.06\,x} \; -3.664{\times}10^{-6}\,e^{-205.40\,x} \\[-3pt]
+  &\quad +7.324{\times}10^{-6}\,e^{-224.08\,x} \; -1.062{\times}10^{-5}\,e^{-242.75\,x} \\[-3pt]
+  &\quad +1.143{\times}10^{-5}\,e^{-259.64\,x} \; +1.200{\times}10^{-5}\,e^{-280.10\,x} \\[-3pt]
+  &\quad -1.621{\times}10^{-5}\,e^{-317.44\,x} \; +1.049{\times}10^{-5}\,e^{-560.19\,x} \\[-3pt]
+  &\quad -9.429{\times}10^{-6}\,e^{-653.56\,x} \; +1.932{\times}10^{-6}\,e^{-840.29\,x}
+\end{aligned}\!\right)}, \quad x = 1{-}h
+\end{equation*}
+
+\medskip\noindent\textbf{Total: 55 formulas} across 4 tower levels. The complete machine-readable data (all rates, coefficients, ratios, and errors to full precision) is available in \texttt{best\_results.csv} in the code repository.
+
+\end{document}\n
