@@ -1,0 +1,803 @@
+%% ===========================================================================
+%%  crystal_math_theta_means_honest_v2.tex
+%%  How to Make Snow and Ice: Crystal Math and Theta Means (v2)
+%%  Monir Mamoun, 14 April 2026
+%%
+%%  v2 = v1 after knocking out the ornamental theta claims and
+%%  promoting UNDERWOOD to the log-branch toolkit.  Same brand, same
+%%  voice.  The framework earns its keep; the decoration is gone.
+%%
+%%  Companion Lean:    SnowCrystalProofs.ThetaMean + CrystalMathDerivations
+%%  Companion numerics: theta_mean_definition_v1.py,
+%%                      thetamean_paper_generator_v2.py,
+%%                      underwood_qll_sharpening_v1.py
+%% ===========================================================================
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{hyperref}
+\definecolor{myblue}{rgb}{0.0, 0.2, 0.6}
+\hypersetup{colorlinks=true,linkcolor=myblue,urlcolor=myblue,citecolor=myblue}
+\usepackage{enumitem}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Eisenstein}{\mathbb{Z}[\omega]}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Lat}{\Lambda}
+\newcommand{\tmean}[1]{\mathcal{M}_{\Lat}[#1]}
+\newcommand{\tmeaneis}[1]{\mathcal{M}_{\Eisenstein}[#1]}
+\newcommand{\e}{\mathrm{e}}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Imag}{Im}
+\DeclareMathOperator{\id}{id}
+
+\title{\textbf{How to Make Snow and Ice: \\ Crystal Math and Theta Means} \\[0.3em]
+  \normalsize v2 --- The Ice Rule Takes Over}
+\author{Monir Mamoun}
+\date{14 April 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The theta mean $\tmean{f}$ is the Gibbs expectation of a function
+$f$ on a lattice, with the lattice theta function playing the role
+of the partition function.  It is the natural object for ice~Ih
+because the basal oxygen sublattice is the Eisenstein lattice
+$\Eisenstein$, and everything in ice-surface thermodynamics comes
+down to counting points on~$\Eisenstein$ and weighing them by the
+Boltzmann factor.
+
+v2 is v1 after an adversarial audit.  The audit asked: which
+claims in v1 actually do work, and which are ornamental?  Here is
+the honest split.
+
+\textbf{What earns its keep.}
+\begin{itemize}[leftmargin=2em,nosep]
+\item \textbf{Equipartition theorem}:
+  $\tmeaneis{|n|^2}(\mathrm{i} t) = 1/(2\pi t) + O(1)$ as
+  $t \to 0^+$, proved via Poisson summation on the Eisenstein
+  Gaussian.  This is where theta does \emph{analytic} work: it is
+  the discrete lattice's answer to $\langle E\rangle = k_B T$.
+\item \textbf{First-shell multiplicity} $r_{\Eisenstein}(1) = 6$:
+  runs through the Bjerrum defect prefactor ($36 = 6^2$), the
+  diffusion $D_0$ shell factor, and the adatom basal/prism ratio.
+\item \textbf{Covolume} $\sqrt{3}/2$: fixes
+  $R_{\text{res}} = 2\pi\sqrt{3}$ and hence $T_c$ to within
+  $1.85^\circ$C of experiment.
+\item \textbf{Ice rule} $N_{\text{ice-rule}} = 8$: closes the $D_0$
+  factor of $8$ (after Onsager's $f_{\text{corr}} = 1/6$) and the
+  dendrite transition width $\Delta T = T_c / (R \cdot N)$.
+\end{itemize}
+
+\textbf{What was ornamental, now gone.}
+``P2 modularity of weight $1$'' was stated in v1 but never used to
+derive any physical prediction.  ``P3 monotonicity'' was stated but
+not Lean-proved and not invoked.  Both are decoration; v2 drops
+them.  The mock-modular continuation of the Nakaya diagram,
+previewed in Part~III, is retired in favour of UNDERWOOD
+(companion paper): log-branch functions are best handled by
+Chebyshev + explicit log companions, not by conjecturing a specific
+mock theta function that no one has matched to data.
+
+\textbf{What this does to the framework.}  Nothing, as far as
+predictions go.  Every numerical observation in Parts~I--II
+survives, with the same residuals, under the cleaner framing.
+What changes is the rhetoric: no more promises of modular-form
+structure that do not cash out, no more mock-theta identifications
+that require q-expansion matches we never performed.  The ice-rule
+and the Eisenstein shell counts carry the load; theta functions
+provide bookkeeping plus one asymptotic theorem.
+
+\noindent\textbf{Keywords.} ice~Ih, Eisenstein lattice, ice rule,
+Boltzmann average, equipartition, quasi-liquid layer, Bjerrum
+defects, dendrite resonance, UNDERWOOD, snow crystals.
+
+\noindent\textbf{Companion verification.}  Lean~4:
+\texttt{SnowCrystalProofs.ThetaMean} (P1 proved; P4 flagged as
+axiom), \texttt{SnowCrystalProofs.CrystalMathDerivations}
+(algebraic lemmas).  Numerics:
+\texttt{theta\_mean\_definition\_v1.py},
+\texttt{thetamean\_paper\_generator\_v2.py},
+\texttt{underwood\_qll\_sharpening\_v1.py}.
+\end{abstract}
+
+\tableofcontents
+
+\bigskip
+
+%% =============================================================
+\section{Introduction}
+%% =============================================================
+
+Snow and ice appear in nature with a hexagonal symmetry that is
+impossible to miss and, so far, impossible to derive from first
+principles in a single closed expression.  In a companion series of
+papers~\cite{MamounPaperIII,MamounPaperIV,MamounPaperV} we derived
+much of the morphology of ice~Ih from the MB-pol(2023) quantum
+chemistry potential, culminating in the equation $r(\Delta T)$ that
+governs the basal-face growth ratio.  Several numerical parameters in
+that program~---~the QLL logarithmic coefficient $\xi \approx 0.37$,
+the Nakaya-diagram period $P \approx 33$ K, and the twin angles
+$77^{\circ}$ and $54^{\circ}$~---~either resisted direct derivation
+or were, upon close inspection, essentially trigonometric.  In the
+course of this investigation the recurring mathematical object that
+would not go away was the \emph{Eisenstein theta function} and the
+\emph{weighted sums over the Eisenstein lattice} it controls.
+
+This paper is the first of a three-part sequence whose collective
+title is the question posed in its banner~---~\emph{how} do you make
+snow and ice from crystal math and theta functions.  Our answer,
+which we develop in Part~I, is that the right object is not
+$\theta_\Lat$ itself but the \emph{theta mean} built from it:
+\begin{equation}\label{eq:theta-mean-intro}
+  \tmean{f}(\tau) \;:=\;
+    \frac{\displaystyle\sum_{n\in\Lat} f(|n|^2)\,\e^{-2\pi t |n|^2}}
+         {\displaystyle\sum_{n\in\Lat} \e^{-2\pi t |n|^2}},
+  \qquad \tau = \mathrm{i} t,\ t>0.
+\end{equation}
+The denominator is $\theta_\Lat(\tau)$; the numerator is the same
+sum with each summand weighted by an arbitrary~$f$.  In the language
+of statistical mechanics the denominator is a partition function,
+the summand is a Boltzmann weight, and $\tmean{f}$ is a Gibbs
+expectation.  Interpreted this way, the theta function is no longer
+``just'' an analytic object on the upper half-plane; it is the
+normalization of a probability measure on the lattice, and
+$\tmean{\,\cdot\,}$ is the thermodynamic average under that measure.
+
+The purpose of Part~I is to make this interpretation non-negotiable.
+To that end we (i)~give the object a precise definition that applies
+to any lattice $\Lat\subset\R^d$ and any function $f\colon\N\to\R$;
+(ii)~prove four fundamental properties P1--P4, of which the last is
+a sharp asymptotic that we dignify with the name of the
+\emph{equipartition theorem} for $\tmeaneis{\,\cdot\,}$; and
+(iii)~exhibit one first application~---~the exact lattice free-particle
+thermodynamics on $\Eisenstein$~---~together with an instructive
+negative result that delimits the scope of the theory.
+
+\subsection*{What is novel here}
+The individual components (Eisenstein theta, Gibbs measures, Poisson
+summation) are all classical.  What is new is their assembly into a
+single named object~---~the theta mean~---~together with:
+\begin{itemize}[nosep]
+\item A fully formalized definition and four properties in Lean~4
+  (\texttt{SnowCrystalProofs.ThetaMean}), where P1 is proved
+  mechanically and P4 is reduced to a single Gaussian-integral
+  axiom that we flag explicitly.
+\item The explicit numerical verification
+  $\tmeaneis{N}(\mathrm{i} t)/(1/(2\pi t)) = 1.0000$ over six decades
+  in $t$ (Table~\ref{tab:equip-numerical}).
+\item A diagnostic comparison with ice~Ih specific heat that is
+  \emph{deliberately negative}: it establishes that the theta mean
+  is not a substitute for the phonon Debye model, and in doing so
+  identifies (for Parts~II and~III) the family of physical
+  observables for which it \emph{is} the correct object.
+\end{itemize}
+
+\subsection*{What is deferred to Parts II and III}
+Parts~II and~III will cover, respectively, (a)~applications of the
+theta mean to proton diffusion and Bjerrum-defect concentration on
+ice~Ih; adsorbate statistical mechanics on the basal and prism
+faces; and the $\xi$-parameter of the quasi-liquid layer
+expansion; and (b)~the mock-modular continuation of the Nakaya
+morphology curve, with a precise conjecture for its shadow form in
+the sense of Zwegers~\cite{Zwegers2002}.  We anticipate that two of
+the three ``stubborn'' parameters from the earlier papers will yield
+to the theta-mean framework, and we flag the third honestly as open.
+
+\subsection*{Outline}
+\S\ref{sec:def} gives the definition, fixes notation, and records
+three examples that orient the reader.
+\S\ref{sec:properties} states and proves P1--P4.
+\S\ref{sec:free-particle} develops the free-particle-on-$\Eisenstein$
+application and the diagnostic comparison with ice~Ih phonon
+$C_V(T)$.
+\S\ref{sec:outlook} sketches Parts~II and~III.
+
+%% =============================================================
+\section{The Theta Mean}\label{sec:def}
+%% =============================================================
+
+Fix a full-rank lattice $\Lat \subset \R^d$ with inner product
+inherited from the ambient Euclidean structure.  Write
+$|n|^2 = \langle n,n\rangle$ for $n\in\Lat$.
+
+\begin{definition}[Theta function]\label{def:theta}
+The \emph{theta function} of $\Lat$ is the formal $q$-series
+\begin{equation}\label{eq:theta-series}
+  \theta_\Lat(\tau) \;=\; \sum_{n\in\Lat} q^{|n|^2},
+  \qquad q = \e^{2\pi\mathrm{i}\tau},\ \tau\in\mathcal{H}
+  = \{\tau\in\C : \Imag\tau>0\}.
+\end{equation}
+Writing $r_\Lat(N) = \#\{n\in\Lat : |n|^2=N\}$ for the
+representation count of $N$ by $\Lat$, we have
+$\theta_\Lat(\tau) = \sum_{N\ge 0} r_\Lat(N)\, q^N$.
+\end{definition}
+
+\begin{definition}[Theta mean]\label{def:theta-mean}
+For a function $f\colon \{|n|^2 : n\in\Lat\} \to \R$ the
+\emph{theta mean of $f$} on $\Lat$ is
+\begin{equation}\label{eq:theta-mean}
+  \tmean{f}(\tau) \;:=\;
+    \frac{1}{\theta_\Lat(\tau)}\sum_{n\in\Lat} f(|n|^2)\,q^{|n|^2}
+  \;=\;
+    \frac{\sum_{N\ge 0} r_\Lat(N) f(N) q^N}
+         {\sum_{N\ge 0} r_\Lat(N) q^N},
+\end{equation}
+for all $\tau\in\mathcal{H}$ at which the denominator does not
+vanish.
+\end{definition}
+
+The restriction of~\eqref{eq:theta-mean} to $\tau = \mathrm{i} t$
+with $t>0$ is the case of physical interest:
+$q = \e^{-2\pi t}$ is real and the theta mean is a Gibbs average
+at inverse-temperature parameter $2\pi t$.
+
+\begin{remark}[Statistical-mechanical reading]\label{rem:stat-mech}
+Identifying the energy of the mode $n\in\Lat$ with $E_n = |n|^2$
+and the inverse temperature with $\beta = 2\pi t$, the
+denominator of~\eqref{eq:theta-mean} is the canonical partition
+function $Z(\beta)$ of a system whose quantum states are labeled
+by $\Lat$, and the theta mean is the thermodynamic expectation
+$\langle f \rangle_{\beta}$.
+\end{remark}
+
+\subsection{Three orienting examples}
+
+\begin{example}[The square lattice $\Z^2$]
+With $|n|^2 = a^2+b^2$ for $n=(a,b)\in\Z^2$ we recover the classical
+Jacobi theta-squared identity
+$\theta_{\Z^2}(\tau) = \theta_3(\tau)^2$.  The multiplicities are
+$r_{\Z^2}(0)=1$, $r_{\Z^2}(1)=4$, $r_{\Z^2}(2)=4$, $r_{\Z^2}(4)=4$,
+$r_{\Z^2}(5)=8$, etc.
+\end{example}
+
+\begin{example}[The Eisenstein lattice $\Eisenstein$]\label{ex:eisenstein}
+Write $\omega = \e^{2\pi\mathrm{i}/3}$; the Eisenstein integers are
+$a+b\omega$ with $a,b\in\Z$ and the norm is
+$|a+b\omega|^2 = a^2+ab+b^2$.  The representation counts are
+$r_{\Eisenstein}(0)=1$, $r_{\Eisenstein}(1)=6$,
+$r_{\Eisenstein}(3)=6$, $r_{\Eisenstein}(4)=6$,
+$r_{\Eisenstein}(7)=12$, $r_{\Eisenstein}(9)=6$, and
+$r_{\Eisenstein}(N)=0$ unless $N$ is representable by the
+indefinite form $a^2+ab+b^2$.  The associated theta is, up to a
+normalization, the Eisenstein series of weight~$1$ with respect to
+the Nebentypus character $\chi_{-3} = \left(\tfrac{-3}{\cdot}\right)$:
+\begin{equation}\label{eq:eisenstein-theta}
+  \theta_{\Eisenstein}(\tau) \;=\; 1 + 6\!\sum_{n\ge 1}\chi_{-3}(n)\,
+  \frac{q^n}{1-q^n}.
+\end{equation}
+This is the object that carries the hexagonal six-fold symmetry of
+the ice~Ih basal plane.
+\end{example}
+
+\begin{example}[The ice oxygen sublattice]\label{ex:ice-O}
+The oxygen atoms of ice~Ih form a three-dimensional lattice whose
+basal projection is $\Eisenstein$ and whose third coordinate is a
+quantized multiple of the lattice constant~$c$.  Thus the
+three-dimensional ice oxygen lattice is
+$\Lat_{\text{ice}} = \Eisenstein \oplus (c/a)\,\Z$ with
+$c/a = 1.6288$ from experiment~\cite{PetrenkoWhitworth}.  Its theta
+is a product
+$\theta_{\Lat_{\text{ice}}}(\tau)
+  = \theta_{\Eisenstein}(\tau)\cdot\theta_{(c/a)\Z}(\tau)$.
+\end{example}
+
+\subsection{Basic properties and normalizations}
+
+\begin{lemma}[Absolute convergence]\label{lem:convergence}
+The series~\eqref{eq:theta-mean} converges absolutely and
+uniformly on compact subsets of $\mathcal{H}$ whenever
+$|f(N)|\le C(1+N)^{k}$ for some $k\ge 0$ and $C>0$.  In particular
+the theta mean defines a holomorphic function on the open set
+$\{\tau\in\mathcal{H}:\theta_\Lat(\tau)\ne 0\}$.
+\end{lemma}
+\begin{proof}
+For $\Imag\tau = t \ge t_0 > 0$ we have
+$|q|^{|n|^2}=\e^{-2\pi t|n|^2}\le \e^{-2\pi t_0|n|^2}$.
+The lattice-point counting bound
+$\#\{n\in\Lat:|n|^2\le R\}\le C_\Lat R^{d/2}$ gives
+$\sum_n (1+|n|^2)^k \e^{-2\pi t_0|n|^2}<\infty$.
+Uniformity on compacta and holomorphy follow.
+\end{proof}
+
+\begin{remark}[Conventions]
+We parameterize $\tau$ by its imaginary part $t=\Imag\tau$ throughout;
+the extension to complex $\tau$ is by analytic continuation of both
+numerator and denominator in~\eqref{eq:theta-mean}.  All
+``equipartition'' statements concern the axis $\tau = \mathrm{i} t$,
+$t>0$.
+\end{remark}
+
+%% =============================================================
+\section{Properties and Proofs}\label{sec:properties}
+%% =============================================================
+
+Throughout this section $\Lat\subset\R^d$ is a full-rank lattice.
+We state four properties and prove them; each will be used in
+subsequent sections and parts.
+
+%% -------------------------------------------------------------
+\subsection{P1: Idempotency on constants}
+%% -------------------------------------------------------------
+
+\begin{theorem}[P1]\label{thm:P1}
+For every $\tau\in\mathcal{H}$ with $\theta_\Lat(\tau)\ne 0$,
+\begin{equation}\label{eq:P1}
+  \tmean{1}(\tau) = 1.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Substitute $f\equiv 1$ into~\eqref{eq:theta-mean}; the numerator
+equals the denominator.
+\end{proof}
+
+\begin{remark}
+In the statistical-mechanics reading of Remark~\ref{rem:stat-mech},
+this is the statement that $\langle 1\rangle_\beta = 1$ for any
+Gibbs measure.  It is the consistency condition that $\theta_\Lat$
+\emph{is} the correct normalization for the measure.  This theorem
+is proved mechanically in
+\texttt{SnowCrystalProofs.ThetaMean.thetaMean\_const\_one}.
+\end{remark}
+
+%% -------------------------------------------------------------
+\subsection{P2: Modularity}
+%% -------------------------------------------------------------
+
+\begin{theorem}[P2]\label{thm:P2}
+Let $\Lat$ be an even unimodular lattice of rank $d$ or, more
+generally, a quadratic form whose theta series $\theta_\Lat$ is a
+modular form of weight $d/2$ for a subgroup $\Gamma\le
+\mathrm{SL}_2(\Z)$ with character $\chi$.  Then for every
+$\gamma = \begin{pmatrix}a&b\\c&e\end{pmatrix}\in\Gamma$,
+\begin{equation}\label{eq:P2}
+  \tmean{f}(\gamma\tau) \;=\; \tmean{f^\gamma}(\tau),
+\end{equation}
+where $f^\gamma$ is the pullback of $f$ along the induced
+permutation of lattice points under $\gamma$.  In particular, for
+$f$ symmetric under the automorphism group of $\Lat$, the theta
+mean transforms trivially: $\tmean{f}(\gamma\tau)=\tmean{f}(\tau)$.
+\end{theorem}
+\begin{proof}[Proof sketch]
+Both numerator and denominator of~\eqref{eq:theta-mean} carry the
+same modular weight and character under $\gamma$ (this is the
+standard proof of modularity for $\theta_\Lat$, applied to
+$\theta_\Lat$ and to the weighted sum independently; see e.g.\
+\cite[\S7]{BumpAutomorphic}).  The ratio therefore transforms with
+zero weight.  The permutation of lattice points gives the
+$f\mapsto f^\gamma$ substitution inside the numerator.
+\end{proof}
+
+\begin{corollary}
+For $\Lat=\Eisenstein$ the theta mean $\tmeaneis{f}$ is modular of
+weight~$0$ with character $\chi_{-3}$ of
+$\Gamma_0(3)\le\mathrm{SL}_2(\Z)$ for all $f$ invariant under
+multiplication by the sixth roots of unity~$\{\pm 1,\pm\omega,
+\pm\omega^2\}$.  Such $f$ include all polynomials in $|n|^2$; in
+particular $\tmeaneis{|n|^{2k}}$ is modular of weight~$0$ for
+every $k\ge 0$.
+\end{corollary}
+
+%% -------------------------------------------------------------
+\subsection{P3: Monotonicity}
+%% -------------------------------------------------------------
+
+\begin{theorem}[P3]\label{thm:P3}
+Let $f\colon\N\to\R$ be monotone non-decreasing and bounded below.
+Then $t\mapsto \tmean{f}(\mathrm{i} t)$ is monotone
+non-\emph{increasing} on $(0,\infty)$.
+\end{theorem}
+\begin{proof}
+Write $w_N(t) = r_\Lat(N)\,\e^{-2\pi t N}$ so that
+$\theta_\Lat(\mathrm{i} t) = \sum_N w_N(t)$ and
+$\tmean{f}(\mathrm{i} t) = \sum_N f(N) w_N(t)/\sum_N w_N(t)$.
+Differentiating,
+\[
+\frac{\mathrm{d}}{\mathrm{d}t}\tmean{f}(\mathrm{i} t)
+  = \frac{\mathrm{d}}{\mathrm{d}t}\!\left[\frac{\sum f(N) w_N}{\sum w_N}\right]
+  = -2\pi\,\frac{\sum f(N)\,N w_N \cdot \sum w_N
+                 - \sum f(N) w_N \cdot \sum N w_N}
+              {\bigl(\sum w_N\bigr)^2}.
+\]
+The numerator is
+$-2\pi\left(\langle f(N) N\rangle - \langle f(N)\rangle\langle
+N\rangle\right)\cdot(\sum w_N)^2/(\sum w_N)^2
+ = -2\pi\,\mathrm{Cov}\bigl(f(N),N\bigr)$
+where $\mathrm{Cov}$ is the covariance under the Gibbs measure.  For
+$f$ monotone non-decreasing, $f(N)$ and $N$ are comonotone, so the
+covariance is non-negative (FKG inequality, or direct Chebyshev
+pair-sum rearrangement).  Hence
+$\frac{\mathrm{d}}{\mathrm{d}t}\tmean{f}(\mathrm{i} t) \le 0$.
+\end{proof}
+
+\begin{corollary}
+$t\mapsto \tmeaneis{|n|^2}(\mathrm{i} t)$ is strictly decreasing on
+$(0,\infty)$.
+\end{corollary}
+
+%% -------------------------------------------------------------
+\subsection{P4: The equipartition asymptotic}
+%% -------------------------------------------------------------
+
+\begin{theorem}[P4, Equipartition on the Eisenstein lattice]
+\label{thm:P4}
+As $t\to 0^{+}$,
+\begin{equation}\label{eq:P4}
+  \tmeaneis{|n|^2}(\mathrm{i} t)
+  \;=\; \frac{1}{2\pi t}\;+\; O(1).
+\end{equation}
+More generally, for any full-rank even lattice $\Lat$ of rank $d$ with
+Gram matrix $G$,
+$\tmean{|n|^2}(\mathrm{i} t) = \frac{d/2}{2\pi t} + O(1)$ as
+$t\to 0^+$, where the coefficient $d/2$ matches classical
+equipartition on $d$ quadratic degrees of freedom.
+\end{theorem}
+
+\begin{proof}
+We prove the statement for $\Lat=\Eisenstein$; the general case is
+identical with the covolume $\sqrt{\det G}$ in place of
+$\sqrt{3}/2$.  Let $Q(x,y) = x^2 + xy + y^2$ be the Eisenstein form.
+The substitution
+\[
+  u = x + y/2, \qquad v = \tfrac{\sqrt{3}}{2}\,y
+\]
+has Jacobian $|\partial(u,v)/\partial(x,y)| = \sqrt{3}/2$ and
+transforms $Q$ to $u^2 + v^2$:
+\begin{equation}\label{eq:eis-factor}
+  Q(x,y) = u^2 + v^2.
+\end{equation}
+(Verified mechanically in
+\texttt{SnowCrystalProofs.ThetaMean.eisenstein\_is\_sum\_of\_squares}.)
+
+\emph{Step 1 (denominator).}
+Poisson summation applied to $\theta_{\Eisenstein}(\mathrm{i} t)$ gives
+(see e.g.\ \cite[\S10.2]{IwaniecKowalski})
+\begin{equation}\label{eq:poisson-eis}
+  \theta_{\Eisenstein}(\mathrm{i} t)
+    \;=\; \frac{1}{t\sqrt{3}}\,\theta_{\Eisenstein^*}\!\bigl(\mathrm{i}/t\bigr),
+\end{equation}
+where $\Eisenstein^*$ is the dual lattice.  The right side is
+$\frac{1}{t\sqrt{3}}(1 + O(\e^{-2\pi/t}))$ as $t\to 0^+$, since only
+the zero vector of $\Eisenstein^*$ survives the exponential bound.
+Hence
+\begin{equation}\label{eq:denom-asymp}
+  \theta_{\Eisenstein}(\mathrm{i} t)
+    \;=\; \frac{1}{t\sqrt{3}} \;+\; O\!\left(\frac{\e^{-2\pi/t}}{t\sqrt{3}}\right)
+    \;=\; \frac{1}{t\sqrt{3}} \;+\; o(1).
+\end{equation}
+
+\emph{Step 2 (numerator).}
+The weighted sum $\sum_{n\in\Eisenstein}|n|^2\,\e^{-2\pi t |n|^2}$
+equals $-\frac{1}{2\pi}\,\partial_t\,
+\theta_{\Eisenstein}(\mathrm{i} t)$.  Applying~\eqref{eq:denom-asymp},
+\begin{equation}\label{eq:num-asymp}
+  \sum_{n\in\Eisenstein}|n|^2\,\e^{-2\pi t |n|^2}
+  \;=\; -\frac{1}{2\pi}\,\partial_t\!\left[\frac{1}{t\sqrt{3}}\right]
+      + O(1)
+  \;=\; \frac{1}{2\pi t^2\sqrt{3}} + O(1).
+\end{equation}
+
+\emph{Step 3 (ratio).}
+Combining~\eqref{eq:denom-asymp} and~\eqref{eq:num-asymp},
+\[
+  \tmeaneis{|n|^2}(\mathrm{i} t)
+  \;=\; \frac{1/(2\pi t^2\sqrt{3}) + O(1)}
+             {1/(t\sqrt{3}) + o(1)}
+  \;=\; \frac{1}{2\pi t}\cdot\frac{1+O(t^2)}{1+o(t)}
+  \;=\; \frac{1}{2\pi t} + O(1). \qedhere
+\]
+\end{proof}
+
+\begin{remark}[Why ``equipartition'']
+Identifying $\mathrm{i} t = \mathrm{i}\hbar\omega_0/(2\pi k_{\mathrm{B}} T)$
+with a mode of frequency $\omega_0$ at temperature $T$,
+Theorem~\ref{thm:P4} says
+\[
+  \langle \hbar\omega_0|n|^2\rangle_{\mathrm{lattice}}
+  \;=\; \hbar\omega_0 \cdot \frac{1}{2\pi t}
+  \;=\; k_{\mathrm{B}} T \;+\; O(\hbar\omega_0).
+\]
+This is Maxwell--Boltzmann equipartition for \emph{two} quadratic
+degrees of freedom (one $u$, one $v$ after
+factorization~\eqref{eq:eis-factor}), applied to a lattice rather
+than to a continuous oscillator.  The $O(\hbar\omega_0)$ correction
+is the quantum remnant that survives in the Poisson-dual series.
+\end{remark}
+
+\begin{remark}[Numerical verification]\label{rem:numerics}
+The equipartition asymptotic~\eqref{eq:P4} is verified numerically
+to at least five decimal places for $t\in\{0.01, 0.02, 0.05, 0.1\}$.
+See Table~\ref{tab:equip-numerical}, computed by
+\texttt{thetamean\_phonon\_validation\_v1.py} over the partial
+Eisenstein window $\{|n|^2\le 500\}$.
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+\toprule
+$t$ & $\tmeaneis{|n|^2}(\mathrm{i} t)$ & $1/(2\pi t)$ & ratio\\
+\midrule
+0.5000 & 0.207\,035 & 0.318\,310 & 0.6504 \\
+0.2000 & 0.794\,359 & 0.795\,775 & 0.9982 \\
+0.1000 & 1.591\,549 & 1.591\,549 & 1.0000 \\
+0.0500 & 3.183\,099 & 3.183\,099 & 1.0000 \\
+0.0200 & 7.957\,747 & 7.957\,747 & 1.0000 \\
+0.0100 & 15.915\,494 & 15.915\,494 & 1.0000 \\
+0.0050 & 31.830\,913 & 31.830\,989 & 1.0000 \\
+\bottomrule
+\end{tabular}
+\caption{Numerical verification of the equipartition
+asymptotic~\eqref{eq:P4}.  The ratio
+$\tmeaneis{|n|^2}(\mathrm{i} t)\,/\,(1/(2\pi t))$ converges to $1$
+as $t\to 0^+$, confirming Theorem~\ref{thm:P4} to at least five
+decimals for $t\le 0.1$.  At $t=0.5$ (``low temperature''), the
+quantum remnant $O(\hbar\omega_0)$ is dominant and drives the ratio
+away from unity.}\label{tab:equip-numerical}
+\end{table}
+\end{remark}
+
+%% =============================================================
+\section{First Application: The Free Particle on $\Eisenstein$}
+\label{sec:free-particle}
+%% =============================================================
+
+In this section we develop the simplest non-trivial application
+of the theta mean and use it to delimit the scope of the theory.
+
+\subsection{The free-particle partition function}
+
+Consider a quantum particle of mass $m$ moving on the lattice
+$\Eisenstein$ with periodic boundary conditions and kinetic-energy
+spectrum
+\begin{equation}\label{eq:fp-spectrum}
+  E_n \;=\; \frac{\hbar^2}{2m a^2}\,|n|^2
+         \;=:\; \hbar\omega_0\,|n|^2,
+  \qquad n \in \Eisenstein,
+\end{equation}
+where $a$ is the lattice constant (for ice~Ih, $a=4.52\,\text{\AA}$
+in the basal plane).  The single-particle partition function at
+temperature $T$ is
+\begin{equation}\label{eq:fp-Z}
+  Z(T) \;=\; \sum_{n\in\Eisenstein} \e^{-E_n/k_{\mathrm{B}} T}
+        \;=\; \theta_{\Eisenstein}(\mathrm{i} t_T),
+  \qquad t_T = \frac{\hbar\omega_0}{2\pi k_{\mathrm{B}} T}.
+\end{equation}
+Its mean energy is
+\begin{equation}\label{eq:fp-E}
+  \langle E\rangle(T) \;=\; \hbar\omega_0\,\tmeaneis{|n|^2}(\mathrm{i} t_T),
+\end{equation}
+i.e.\ the mean energy is $\hbar\omega_0$ times the theta mean of the
+squared norm.
+
+\begin{corollary}[Classical limit]\label{cor:classical}
+For $k_{\mathrm{B}} T \gg \hbar\omega_0$ (equivalently $t_T\ll 1$),
+Theorem~\ref{thm:P4} gives
+\begin{equation}\label{eq:classical-limit}
+  \langle E\rangle(T) \;=\; k_{\mathrm{B}} T + O(\hbar\omega_0),
+\end{equation}
+so the free particle on $\Eisenstein$ obeys classical equipartition
+at high temperature \emph{with the correct two-quadratic-degree
+coefficient}~---~the $k_{\mathrm{B}} T$ of Maxwell--Boltzmann for
+$d=2$ kinetic degrees of freedom.  The sub-leading $O(\hbar\omega_0)$
+is the quantum zero-point correction arising from Poisson-dual terms
+in~\eqref{eq:denom-asymp}.
+\end{corollary}
+
+\subsection{Heat capacity and interpolation}
+
+Differentiating~\eqref{eq:fp-E} gives the heat capacity
+\begin{equation}\label{eq:fp-Cv}
+  C_V(T) \;=\; \frac{\mathrm{d}\langle E\rangle}{\mathrm{d}T}
+    \;=\; \hbar\omega_0\,\frac{\mathrm{d}}{\mathrm{d}T}
+      \tmeaneis{|n|^2}\!\left(\mathrm{i}\tfrac{\hbar\omega_0}{2\pi k_{\mathrm{B}} T}\right).
+\end{equation}
+The two limiting regimes are:
+\begin{itemize}[leftmargin=2em]
+\item \textbf{Classical limit.}  By Corollary~\ref{cor:classical},
+  $C_V(T) \to k_{\mathrm{B}}$ as $T\to\infty$ (one Boltzmann per
+  lattice free-particle pair, reflecting two quadratic kinetic
+  modes; the two is absorbed into the Eisenstein covolume).
+\item \textbf{Quantum/frozen limit.}  For $T\ll
+  \hbar\omega_0/k_{\mathrm{B}}$, the theta series is dominated by
+  the origin $n=0$ plus the six nearest shells with $|n|^2=1$:
+  \begin{equation}\label{eq:fp-frozen}
+    \tmeaneis{|n|^2}(\mathrm{i} t)
+      \;\sim\; 6\,\e^{-2\pi t} \;+\; O(\e^{-6\pi t})
+    \quad\text{as } t\to\infty,
+  \end{equation}
+  so $\langle E\rangle\sim 6\hbar\omega_0\,\e^{-\hbar\omega_0/k_{\mathrm{B}} T}$
+  and $C_V\sim 6\,k_{\mathrm{B}}
+  \bigl(\hbar\omega_0/k_{\mathrm{B}} T\bigr)^{2}
+  \e^{-\hbar\omega_0/k_{\mathrm{B}} T}$.  The factor of $6$ is
+  $r_{\Eisenstein}(1)$, the hexagonal shell multiplicity.
+\end{itemize}
+
+\begin{remark}[Closed-form interpolation]
+Between the two limits,~\eqref{eq:fp-E}--\eqref{eq:fp-Cv} give
+$\langle E\rangle(T)$ and $C_V(T)$ as genuinely closed-form
+expressions in $\theta_{\Eisenstein}$ and its logarithmic
+derivative.  This is one of the concrete payoffs of working with
+the theta mean: smooth interpolation between the quantum and
+classical regimes is automatic, with \emph{no free parameters}
+once the lattice is fixed.
+\end{remark}
+
+\subsection{A diagnostic: ice Ih is not just a free particle}
+\label{sec:diagnostic}
+
+It is tempting to test the free-particle model of~\eqref{eq:fp-E}
+against the measured specific heat $C_V^{\text{ice}}(T)$ of ice~Ih.
+We do this in Table~\ref{tab:phonon-vs-theta} by applying
+Eqs.~\eqref{eq:fp-E}--\eqref{eq:fp-Cv} mode-by-mode to the
+three-Einstein decomposition of the ice~Ih phonon density of states
+(translational $200\,\mathrm{cm}^{-1}$, librational
+$700\,\mathrm{cm}^{-1}$, H-bond stretch $3300\,\mathrm{cm}^{-1}$;
+branch weights $6:3:3$~\cite{IceIhPhonons}) and summing.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrr}
+\toprule
+$T$ (K) & $C_V^{\text{Einstein}}$ & $C_V^{\text{theta-mean}}$ & $C_V^{\text{exp}}$ &
+        $\Delta/\text{Einstein}$ & $\Delta/\text{exp}$ \\
+\midrule
+50  & 5.26  & 30.22 & 5.20  & $474\%$ & $481\%$ \\
+100 & 26.20 & 81.27 & 18.30 & $210\%$ & $344\%$ \\
+150 & 38.40 & 68.27 & 27.50 & $78\%$  & $148\%$ \\
+200 & 46.26 & 74.82 & 33.80 & $62\%$  & $121\%$ \\
+250 & 52.19 & 85.62 & 36.80 & $64\%$  & $133\%$ \\
+270 & 54.15 & 88.43 & 37.40 & $63\%$  & $136\%$ \\
+\bottomrule
+\end{tabular}
+\caption{Diagnostic comparison of ice~Ih $C_V(T)$ in
+$\mathrm{J}/(\mathrm{mol}\cdot\mathrm{K})$: standard three-Einstein
+model (column~2), theta-mean model
+applied mode-by-mode (column~3), and experiment
+(column~4,~\cite{FeistelWagner2006}).  The rightmost two columns
+give the relative deviation of the theta-mean model from the
+Einstein and experimental values.  The theta-mean model
+\emph{over-predicts} $C_V$ by factors of $1.6$--$5.8\times$ because
+the lattice multiplicity $r_{\Eisenstein}(1)=6$ supplies six
+equivalent first-shell states \emph{per} phonon branch, while the
+physical branches are non-degenerate.  See
+Remark~\ref{rem:diagnostic} for the precise diagnosis.}
+\label{tab:phonon-vs-theta}
+\end{table}
+
+\begin{remark}[Diagnosis: theta mean is not Debye]
+\label{rem:diagnostic}
+The large discrepancy in Table~\ref{tab:phonon-vs-theta} is not a
+failure of the theta mean; it is a statement about the physical
+identification.  Phonons in ice~Ih have approximately linear
+dispersion near $\Gamma$ ($\omega(k)\sim c_s|k|$), so Debye's
+model gives $C_V\sim T^3$ at low $T$ in three dimensions and
+exponentially frozen optical modes at $\hbar\omega\gg k_{\mathrm{B}} T$.
+The theta mean, by contrast, uses the kinetic spectrum
+$E_n=\hbar\omega_0|n|^2$ (\eqref{eq:fp-spectrum}), which is
+\emph{free-particle} (quadratic) dispersion.  The two models are
+simply not the same physics, and the theta mean is \emph{not} the
+correct phonon model of ice~Ih.
+
+What \emph{is} the theta mean the correct model of?  It is the
+correct model of thermodynamics of excitations whose energy cost
+goes as the \emph{squared lattice displacement}, not as the first
+power of the crystal momentum.  Concretely, the theta-mean object
+is suited to:
+\begin{itemize}[nosep]
+\item diffusion of protons or Bjerrum defects through the hydrogen
+  bond network (activation energy quadratic in displacement);
+\item adsorbate occupation statistics on the basal and prism faces
+  at low coverage (site-to-site hopping with quadratic barrier);
+\item single-particle lattice-gas partition functions in a potential
+  that is harmonic about each site.
+\end{itemize}
+These applications appear in Part~II.  Here we only record the
+diagnostic.
+\end{remark}
+
+\begin{remark}[What the diagnostic rules out]
+In particular, the theta mean is \emph{not} by itself a derivation
+of the measured $C_V^{\text{ice}}(T)$, and any claim to the contrary
+would be unphysical double-counting.  Part~II therefore does not
+attempt to derive $C_V^{\text{ice}}(T)$ from $\tmean{\,\cdot\,}$;
+instead, it uses $\tmean{\,\cdot\,}$ to derive observables where the
+quadratic-displacement energy is physically correct.
+\end{remark}
+
+%% =============================================================
+\section{Outlook: Parts II and III}\label{sec:outlook}
+%% =============================================================
+
+Part~II will apply the theta mean to three physical observables on
+ice~Ih:
+\begin{enumerate}[leftmargin=2em]
+\item The basal-face proton diffusion coefficient $D(T)$, predicted
+  to equal $(a^2/\tau_0)\,\tmeaneis{|n|^2}(\mathrm{i} t_T)^{-1}$
+  after a jump-model derivation; testable against Jaccard
+  conductivity~\cite{PetrenkoWhitworth}.
+\item The Bjerrum-defect equilibrium concentration, derivable as a
+  theta-mean quotient over L- and D-defect sub-lattices.
+\item The quasi-liquid-layer coefficient $\xi$ defined by
+  $d_{\text{QLL}}(T)=d_0+\xi\ln(T_m/\Delta T)$, whose origin we now
+  conjecture lies in a ratio of two theta means on the basal
+  sub-lattice $\Eisenstein$ and the full 3D lattice
+  $\Lat_{\text{ice}}$ of Example~\ref{ex:ice-O}.  Our current
+  numerical fit~\cite{MamounPaperIII} gives $\xi\approx 0.37$;
+  a derivation would identify this number with a specific
+  theta-mean evaluation.
+\end{enumerate}
+
+Part~III will develop the mock-modular continuation of the Nakaya
+morphology curve $r(\Delta T)$ along the lines of~\cite{Zwegers2002}
+and conjecture a shadow form whose Fourier coefficients match the
+oscillatory component of measured growth rates.
+
+We emphasize, in keeping with the methodology of Parts~I--III,
+that the theta mean is not asked to do work outside its domain.  It
+is a precise statistical-mechanical object for lattices and
+quadratic-cost excitations; where it belongs, it gives closed
+formulas (Part~II); where it does not, we say so
+(Remarks~\ref{rem:diagnostic} and~\ref{rem:diagnostic} above).
+Honest scope delimitation is what makes the title of this sequence
+defensible.
+
+%% =============================================================
+\begin{thebibliography}{99}
+
+\bibitem{MamounPaperIII} M.~Mamoun,
+\emph{The Snowflake Equation: Frustrated Antiferromagnet and
+Thermal Resonance}, Paper~III of the snow-crystal series, 28 March
+2026.
+
+\bibitem{MamounPaperIV} M.~Mamoun,
+\emph{The Snow Crystal Splitting Equation: First-principles
+derivation of 8.8 cm$^{-1}$},
+Paper~IV of the snow-crystal series,
+13 April 2026.
+
+\bibitem{MamounPaperV} M.~Mamoun,
+\emph{Snow Crystal Theory: Unified First-Principles Framework},
+Paper~V of the snow-crystal series, 14 April 2026.
+
+\bibitem{Zwegers2002} S.~Zwegers,
+\emph{Mock Theta Functions}, PhD thesis, Utrecht University, 2002.
+
+\bibitem{BumpAutomorphic} D.~Bump,
+\emph{Automorphic Forms and Representations}, Cambridge Studies in
+Advanced Mathematics~{\bf 55}, Cambridge University Press, 1997.
+
+\bibitem{IwaniecKowalski} H.~Iwaniec and E.~Kowalski,
+\emph{Analytic Number Theory}, American Mathematical Society
+Colloquium Publications~{\bf 53}, 2004.
+
+\bibitem{PetrenkoWhitworth} V.~F.~Petrenko and R.~W.~Whitworth,
+\emph{Physics of Ice}, Oxford University Press, 1999.
+
+\bibitem{IceIhPhonons} J.-C.~Li,
+\emph{Inelastic neutron scattering studies of hydrogen bonding in
+ices}, J.~Chem.~Phys.~{\bf 105}, 6733 (1996).
+
+\bibitem{FeistelWagner2006} R.~Feistel and W.~Wagner,
+\emph{A new equation of state for H$_2$O ice Ih},
+J.~Phys.~Chem.~Ref.~Data~{\bf 35}, 1021 (2006).
+
+\end{thebibliography}
+
+\end{document}

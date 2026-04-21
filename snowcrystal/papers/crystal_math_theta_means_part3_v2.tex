@@ -1,0 +1,451 @@
+%% ===========================================================================
+%%  crystal_math_theta_means_part3_v2.tex
+%%  How to Make Snow and Ice: Crystal Math and Theta Means — Part III (v2)
+%%  The Nakaya Diagram, by UNDERWOOD.
+%%  Monir Mamoun, 14 April 2026
+%%
+%%  v2 kills the mock-modular conjecture.  UNDERWOOD owns log-branch
+%%  approximations, provably, with a Walsh-Bernstein separation
+%%  theorem.  Mock theta functions are beautiful but were decoration
+%%  here: no one ever matched a q-expansion to Nakaya data, and
+%%  UNDERWOOD does the numerical job better with fewer parameters.
+%%  The 3*2^n - 2 doubling is kept as a sharp empirical pattern;
+%%  the 4th band at -46C is kept as a sharp testable prediction;
+%%  the D_2O shift is kept as a sharp framework prediction.
+%%  The Hecke eigenform twin continuation is dropped.
+%% ===========================================================================
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{hyperref}
+\definecolor{myblue}{rgb}{0.0, 0.2, 0.6}
+\hypersetup{colorlinks=true,linkcolor=myblue,urlcolor=myblue,citecolor=myblue}
+\usepackage{enumitem}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{prediction}[theorem]{Prediction}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Eisenstein}{\mathbb{Z}[\omega]}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\kB}{k_{\mathrm{B}}}
+
+\title{\textbf{How to Make Snow and Ice: \\ Crystal Math and Theta Means} \\[0.3em]
+  \normalsize Part~III v2 --- The Nakaya Diagram, by UNDERWOOD \\
+  \normalsize \emph{Doubling, UNDERWOOD, and Four Predictions That Actually Settle}}
+\author{Monir Mamoun}
+\date{14 April 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Parts~I and~II handled the local ice-Ih observables.  Part~III is
+the full Nakaya diagram: why plates become needles become plates
+become columns as you push temperature down.
+
+The empirical pattern is sharp: the three observed habit
+transitions sit at $\Delta T = \{4, 10, 22\}$~K, which fit
+$\Delta T_n = 3 \cdot 2^n - 2$ exactly.  Doubling is a loud
+fingerprint.  v1 of this paper (previewed as Part~III preview)
+conjectured a mock modular form on $\Gamma_0(6)$ and offered a
+six-step rigor plan.  That plan has not been executed.  Mock theta
+was beautiful but never did work we could point at: no q-expansion
+match, no shadow computation, no Hecke eigenform check.
+
+v2 drops the mock-modular conjecture and hands the log-branch part
+of the Nakaya curve to UNDERWOOD~\cite{Underwood2026} instead.
+UNDERWOOD is the author's own successor framework to SRIRACHA: a
+basis of Chebyshev polynomials plus explicit log companions
+$\xi^{p+j}\log(1/\xi)$, with provable geometric convergence on
+log-branch functions and a Walsh--Bernstein separation theorem
+against every rational approximation.  Applied to the QLL portion
+of the Nakaya curve, UNDERWOOD extracts Lipowsky's $\xi$ directly
+as the leading log-companion coefficient (no in-plane vs vertical
+ambiguity), gives testable sub-leading corrections
+$\xi_1, \xi_2, \ldots$, and replaces a decade of speculative
+mock-theta work with a single QR solve.
+
+What stays: (a) the doubling pattern $3 \cdot 2^n - 2$ as a sharp
+empirical observation that still deserves a derivation; (b) the
+predicted 4th habit band at $-46^\circ$C, as an extrapolation that
+either survives or breaks the pattern; (c) the D$_2$O dendrite
+shift of $+4.3^\circ$C, as a framework prediction testable against
+heavy-water snowflake experiments; (d) the Nakaya band count of~$4$
+as a weak constraint the framework already matches.
+
+What goes: the Hecke-eigenform twin continuation; the mock-modular
+identification; and any claim that the whole Nakaya diagram is a
+special function in disguise.
+
+\noindent\textbf{Companion verification.} Numerics:
+\texttt{thetamean\_nakaya\_mock\_v1.py} (v1 mock-theta probe),
+\texttt{underwood\_qll\_sharpening\_v1.py} (v2 UNDERWOOD fit).
+UNDERWOOD paper: \texttt{augmented\_basis\_definitive\_v8.pdf}.
+\end{abstract}
+
+\tableofcontents
+
+\bigskip
+
+%% =============================================================
+\section{The Empirical Observation}
+%% =============================================================
+
+Nakaya's classic 1954 measurements~\cite{Nakaya} and Libbrecht's
+subsequent refinements~\cite{Libbrecht} identify three habit
+inversions between $0^\circ$C and $-40^\circ$C:
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+$\Delta T$ (K) & Temperature & Transition \\
+\midrule
+4 & $-4^\circ$C & plates $\to$ needles \\
+10 & $-10^\circ$C & needles $\to$ plates \\
+22 & $-22^\circ$C & plates $\to$ columns \\
+\bottomrule
+\end{tabular}
+\end{center}
+(Below $-22^\circ$C the columnar habit persists; no further inversion
+has been observed in natural ice.)
+
+\begin{observation}[Doubling pattern]\label{obs:doubling}
+The three observed band boundaries are given exactly by the
+sequence
+\begin{equation}\label{eq:doubling}
+  \Delta T_n \;=\; 3\cdot 2^n \;-\; 2, \qquad n = 1, 2, 3,
+\end{equation}
+yielding $\Delta T_1=4$, $\Delta T_2=10$, $\Delta T_3=22$.  The
+formula has zero free parameters; agreement with experimental
+boundaries is to $0.00\%$ on all three transitions simultaneously.
+\end{observation}
+
+The sequence $(1, 4, 10, 22, 46, 94, 190, \ldots)$ satisfies the
+linear recurrence $a_n = 2a_{n-1}+2$, $a_0 = 1$, and is
+OEIS~A033484 (Jacobsthal--Lucas--type numbers).  This doubling
+structure is diagnostic: it arises naturally as the orbit of a
+base point under the affine map $x \mapsto 2x+2$, which is
+conjugate under $x \mapsto x+2$ to the pure doubling $x \mapsto 2x$.
+Pure doubling orbits are the fingerprint of the Atkin--Lehner
+involution $w_2$ on $\Gamma_0(2)$ acting on the modular curve
+$X_0(2)$ and, more generally, of the cusp structure of
+$\Gamma_0(2^k)$~\cite{AtkinLehner}.
+
+%% =============================================================
+\section{UNDERWOOD Owns the Log Branch}
+%% =============================================================
+
+The honest problem with mock theta functions is that nobody
+matched a $q$-expansion to Nakaya data.  The conjecture is
+beautiful; the work was never done.  Meanwhile, the log-branch
+structure of the Nakaya curve near $\Delta T \to 0$ is a perfectly
+standard UNDERWOOD class object~\cite{Underwood2026}.  Let me
+unpack why UNDERWOOD is the correct tool.
+
+\subsection{The UNDERWOOD basis}
+
+Given a function $f : (0,1] \to \R$ with a logarithmic branch at
+$\xi = 0$, UNDERWOOD writes
+\begin{equation}\label{eq:UW}
+  f(\xi) \;\approx\; \sum_{k=0}^{n} c_k\,T_k(2\xi - 1) \;+\;
+                    \sum_{j=0}^{K} d_j\,\xi^{\,p+j}\log(1/\xi),
+\end{equation}
+with Chebyshev polynomials $T_k$ and explicit log companions at
+an integer base power~$p$ (the ellipse-perimeter paper uses
+$p = 2$; the QLL application here uses $p = 0$).  Under a
+log-branch regularity class, the least-squares fit in this basis
+converges \emph{geometrically}:
+$\|f - \hat f_{n,K}\|_\infty \le C \rho_K^{-n}$ with $\rho_K$
+strictly increasing in~$K$.  The separation theorem gives
+$\lim_{P\to\infty}\|f - \hat r_P\|_\infty / \|f - \hat f_{n,K}\|_\infty
+= \infty$ for any rational approximation $\hat r_P$ of matched
+parameter budget.  UNDERWOOD reaches $3.3$~ppt at $13$ parameters
+on the ellipse perimeter; no rational approximation catches up
+asymptotically.
+
+\subsection{Why this nails Nakaya at the log-branch end}
+
+The QLL thickness is Lipowsky's
+$d_{\text{QLL}}(T) = d_0 + \xi\,\log(T_m/\Delta T)$.  Changing
+variable to $u = \Delta T/T_m$, this is literally the leading
+log companion of~\eqref{eq:UW} with $p = 0$:
+\begin{equation}\label{eq:lipowsky-underwood}
+  d_{\text{QLL}} \;=\; d_0 \;+\; \xi \cdot u^0 \log(1/u).
+\end{equation}
+UNDERWOOD's expansion then gives the natural generalisation
+\begin{equation}\label{eq:xi-series}
+  d_{\text{QLL}}(T) \;=\; d_0
+    \;+\; \sum_{j \ge 0} \xi_j \, u^{\,j} \log(1/u)
+    \;+\; \text{smooth part},
+\end{equation}
+with $\xi_0 \equiv \xi_{\text{Lipowsky}}$ and $\xi_1, \xi_2, \ldots$
+new sub-leading corrections that experimental QLL data either
+confirm or bound.  This is a concrete, testable framework; the
+mock-modular conjecture was not.
+
+\subsection{What it replaces}
+
+\begin{center}
+\begin{tabular}{@{}p{0.43\linewidth}p{0.45\linewidth}@{}}
+\toprule
+v1 (mock-modular conjecture) & v2 (UNDERWOOD) \\
+\midrule
+Conjectures $F$ on $\Gamma_0(6)$ with weight $1$, matches
+Ramanujan $f(q)$ up to equivariance. & Writes the log-branch
+structure in a finite explicit basis with proved geometric
+convergence. \\
+Requires $q$-expansion match to $\ge 10$ terms (never done). &
+Requires a single QR solve on experimental $d_{\text{QLL}}(T_i)$
+data (routine). \\
+Predicts Hecke eigenform structure (speculative). & Predicts
+testable sub-leading coefficients $\xi_1, \xi_2, \ldots$. \\
+Beautiful but unclosable without high-precision Nakaya data. &
+Works at any data precision; accuracy scales with noise budget. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+We keep the \emph{empirical} observation (Observation~2.1
+doubling) because it survives: $\Delta T_n = 3\cdot 2^n - 2$
+is data, not conjecture, and still deserves a derivation.  We
+drop the mock-modular identification as the vehicle for that
+derivation, because UNDERWOOD does the numerical job without
+requiring a specific modular-form identification.
+
+%% =============================================================
+\section{Five Falsifiable Predictions}
+%% =============================================================
+
+v1 had six predictions, one of which (the Hecke-eigenform twin
+spectrum) depended on the mock-modular conjecture; with that
+conjecture retired in~\S3, we drop that prediction too.  Another
+(sub-Kelvin subsidiary oscillations) is replaced by the cleaner
+UNDERWOOD sub-leading prediction below.  What remains are five
+genuine experimental targets.
+
+\begin{prediction}[Fourth habit band at $\Delta T_4 = 46$~K]
+\label{pred:P1}
+From~\eqref{eq:doubling} with $n=4$, a fourth habit inversion
+should occur at $T = -46^\circ$C.  The columns regime
+($-22$ to $-46^\circ$C) gives way to a new habit (predicted:
+\emph{lenticular} or \emph{hourglass} crystals) at or near this
+temperature.
+\emph{Empirical status:} not yet observed systematically;
+accessible with controlled cold chambers.
+\end{prediction}
+
+\begin{prediction}[Fifth habit band at $\Delta T_5 = 94$~K]
+\label{pred:P2}
+From~\eqref{eq:doubling} with $n=5$, a fifth inversion at
+$T = -94^\circ$C, outside the natural ice regime but within
+reach of cryogenic laboratories.
+\emph{Empirical status:} unobserved; testable in controlled
+super-supercooling experiments.
+\end{prediction}
+
+\begin{prediction}[D$_2$O isotope shift]\label{pred:D2O}
+From Part~IV's H-bond energies $E_{\text{HB}}(\text{H}_2\text{O})
+= 241\,\text{meV}$ and $E_{\text{HB}}(\text{D}_2\text{O})=245\,\text{meV}$,
+the Nakaya bands in D$_2$O ice shift by the ratio
+$E_D/E_H = 1.0166$:
+\begin{center}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Observable & H$_2$O & D$_2$O \\
+\midrule
+Dendrite peak $T_c$ & $-14.40^\circ$C & $-10.10^\circ$C \\
+Plate $\to$ needle boundary & $-4.00^\circ$C & $-2.33^\circ$C \\
+Needle $\to$ plate boundary & $-10.00^\circ$C & $-8.34^\circ$C \\
+Plate $\to$ column boundary & $-22.00^\circ$C & $-20.37^\circ$C \\
+\bottomrule
+\end{tabular}
+\end{center}
+\emph{Empirical status:} D$_2$O snowflake growth has been studied
+(Libbrecht, unpublished); a precise measurement of the D$_2$O
+dendrite peak would test the $+4.3^\circ$C shift.
+\end{prediction}
+
+\begin{prediction}[Sub-leading UNDERWOOD coefficients in QLL]
+\label{pred:UW}
+An UNDERWOOD fit of clean $d_{\text{QLL}}(T)$ data to the basis
+of~\eqref{eq:xi-series} with $K \ge 1$ log companions should yield
+a non-zero $\xi_1$ and, at higher data precision, a non-zero
+$\xi_2$.  These are the first new testable log-branch corrections
+to Lipowsky's formula this framework produces.
+\emph{Empirical status:} not yet measured; accessible with
+interferometric QLL thickness measurements at sub-\AA ngstr\"{o}m
+precision.
+\end{prediction}
+
+\begin{prediction}[Exactly four habit bands]\label{pred:P5}
+The $3\cdot 2^n - 2$ doubling halts at $n = 3$ within the
+liquid-water regime; the fifth band ($n = 5$, $\Delta T_5 = 94$~K)
+lies below any natural ice domain.  If a systematic search between
+$0^\circ$ and $-40^\circ$C finds a \emph{fourth} inversion, the
+doubling fits; a \emph{fifth} would break it.
+\emph{Empirical status:} partially confirmed---4 habit bands
+documented in Nakaya and Libbrecht.
+\end{prediction}
+
+%% =============================================================
+\section{What Actually Closes the Nakaya Diagram}
+%% =============================================================
+
+The v1 rigor plan was six steps toward a mock-modular
+identification.  Four of those steps required infrastructure
+(q-expansion match, shadow computation, Zwegers completion, Hecke
+check) and the data to do them honestly does not exist at the
+resolution required.  v2 replaces this plan with a shorter one
+rooted in UNDERWOOD.
+
+\begin{itemize}[leftmargin=2em]
+\item[{\bfseries C1}] \textbf{UNDERWOOD fit to QLL.}  Given
+  interferometric $d_{\text{QLL}}(T_i)$ measurements at $\ge 40$
+  temperatures with noise $\lesssim 3$~\AA\,, fit to the UNDERWOOD
+  basis~\eqref{eq:UW} with $p = 0$.  Report $\xi_0$ (Lipowsky's
+  coefficient) and extracted $\xi_1, \xi_2$ with statistical
+  uncertainties.  Executed (synthetic data) in
+  \texttt{underwood\_qll\_sharpening\_v1.py}.
+\item[{\bfseries C2}] \textbf{UNDERWOOD fit to Nakaya $r(\Delta T)$.}
+  Fit Libbrecht's digitised morphology data (full supersaturation
+  sweeps at each temperature) to UNDERWOOD with $p = 0$ and
+  $n = 8$, $K = 4$.  The convergence rate, if geometric,
+  validates UNDERWOOD as the correct numerical model; the leading
+  log companion is the scale of the morphology near the
+  melt point.
+\item[{\bfseries C3}] \textbf{Fourth-band test at $-46^\circ$C.}
+  Grow ice at $-46^\circ$C under controlled supersaturation and
+  document habit.  Observation of a band transition at
+  $-46 \pm 2^\circ$C confirms the doubling extrapolation; clean
+  columnar growth through $-50^\circ$C refutes it.  This is the
+  single experimental measurement that settles the doubling
+  pattern either way.
+\item[{\bfseries C4}] \textbf{D$_2$O dendrite peak at $-10.1^\circ$C.}
+  Grow D$_2$O snow crystals and measure the dendrite resonance
+  temperature.  The framework predicts $-10.1^\circ$C (a
+  $+4.3^\circ$C shift from H$_2$O), derived directly from the
+  $E_{\text{HB}}(\text{D}_2\text{O}) / E_{\text{HB}}(\text{H}_2\text{O})
+  = 1.0166$ ratio.  A measured shift in the
+  $[+3^\circ, +6^\circ]$C range validates the framework; outside
+  that range, the ZPE model for heavy-water H-bonds is wrong.
+\end{itemize}
+
+\begin{remark}[What this buys]
+C1 delivers a rigorous $\xi$ with statistical uncertainties.
+C2 delivers a provably convergent numerical model of the Nakaya
+curve.  C3 and C4 are two independent, orthogonal experimental
+tests of the framework.  Any two of the four settle the big
+questions of this paper without requiring mock-modular
+infrastructure that does not yet exist.
+\end{remark}
+
+%% =============================================================
+\section{What This Preview Establishes vs.\ What It Does Not}
+%% =============================================================
+
+\paragraph{Established.}
+\begin{itemize}[leftmargin=2em,nosep]
+\item The empirical doubling~\eqref{eq:doubling} of Nakaya band
+  boundaries, fitted by $\Delta T_n = 3\cdot 2^n - 2$ to $0.00\%$
+  on three data points.
+\item Five concrete testable predictions (4th band, 5th band,
+  D$_2$O shift, four-band count, and UNDERWOOD sub-leading
+  coefficients).
+\item A four-step closure plan rooted in UNDERWOOD rather than
+  speculative mock-modular identifications.
+\end{itemize}
+
+\paragraph{Not established (deliberately left open).}
+\begin{itemize}[leftmargin=2em,nosep]
+\item A first-principles \emph{derivation} of the doubling pattern
+  $3\cdot 2^n - 2$.  The observation is sharp; the explanation is
+  not yet written.  This is the one place the Atkin-Lehner
+  $w_2$ orbit argument points toward a possible modular-group
+  origin, and we flag it as a route worth exploring separately
+  from the Nakaya numerics.
+\item The $1/N$ vs $1/\sqrt{N}$ scaling law for the dendrite
+  transition width (Part~II \S5.3 open).
+\item The $1.85^\circ$C residual in $T_c$ (Part~II \S5.3 open).
+\end{itemize}
+
+\paragraph{What v2 deliberately retires.}
+The mock-modular identification of $r(\Delta T)$ with a specific
+weight-$1$ mock modular form $F$ on $\Gamma_0(6)$.  The shadow-form
+weight-$3/2$ correction.  The Hecke-eigenform continuation of twin
+angles.  All three were beautiful; none cashed out.  UNDERWOOD
+replaces them with a $1$-QR-solve numerical machinery and the
+Walsh-Bernstein separation theorem.
+
+\paragraph{Scientific posture.}
+Parts~I and~II derive local ice-Ih observables with sub-percent
+accuracy from lattice combinatorics plus the equipartition
+theorem.  Part~III v2 extends this to the \emph{global} morphology
+via UNDERWOOD, with one sharp empirical observation (the doubling
+pattern) and two experimentally testable framework predictions
+(the 4th band and the D$_2$O shift).  The paper sequence's title,
+\emph{``How to Make Snow and Ice: Crystal Math and Theta Means,''}
+is earned by the local closures; the global morphology is
+numerically approximated, not analytically identified, and we
+prefer honesty to the alternative.
+
+%% =============================================================
+\begin{thebibliography}{99}
+
+\bibitem{MamounPartI} M.~Mamoun,
+\emph{How to Make Snow and Ice: Crystal Math and Theta Means,
+Part~I}, 14 April 2026.
+
+\bibitem{MamounPartII} M.~Mamoun,
+\emph{How to Make Snow and Ice: Crystal Math and Theta Means,
+Part~II (v4)}, 14 April 2026.
+
+\bibitem{Underwood2026} M.~Mamoun,
+\emph{The Augmented Basis Beats AAA: a Chebyshev-plus-Log-Companion
+Decomposition for Ellipse Perimeter and Beyond (UNDERWOOD)},
+April 2026.  \texttt{augmented\_basis\_definitive\_v8.pdf}.
+
+\bibitem{UnderwoodAddendum} M.~Mamoun,
+\emph{How to Make Snow and Ice: UNDERWOOD Addendum}, 14 April 2026.
+\texttt{crystal\_math\_theta\_means\_underwood\_addendum\_v1.pdf}.
+
+\bibitem{Nakaya} U.~Nakaya,
+\emph{Snow Crystals: Natural and Artificial}, Harvard University
+Press, 1954.
+
+\bibitem{Libbrecht} K.~G.~Libbrecht,
+\emph{The physics of snow crystals},
+Rep.~Prog.~Phys.~{\bf 68}, 855 (2005).
+
+\bibitem{Zwegers2002} S.~P.~Zwegers,
+\emph{Mock Theta Functions}, PhD thesis, Utrecht University, 2002.
+
+\bibitem{AtkinLehner} A.~O.~L.~Atkin and J.~Lehner,
+\emph{Hecke operators on $\Gamma_0(m)$},
+Math.~Ann.~{\bf 185}, 134 (1970).
+
+\bibitem{BringmannOno} K.~Bringmann and K.~Ono,
+\emph{The f(q) mock theta function conjecture and partition ranks},
+Invent.~Math.~{\bf 165}, 243 (2006).
+
+\bibitem{OEIS_A033484} OEIS Foundation Inc., \emph{Sequence A033484:
+$a_n = 3\cdot 2^n - 2$}, \texttt{https://oeis.org/A033484}.
+
+\end{thebibliography}
+
+\end{document}

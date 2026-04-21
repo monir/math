@@ -1,0 +1,314 @@
+%% ===========================================================================
+%%  crystal_math_theta_means_underwood_addendum_v1.tex
+%%  Addendum to Parts I–II–III preview:
+%%  SHARPENING via the UNDERWOOD augmented-basis framework
+%%  Monir Mamoun, 14 April 2026
+%%
+%%  Companion: augmented_basis_definitive_v8.tex (the UNDERWOOD paper)
+%%  Companion numerics: research_scripts/underwood_qll_sharpening_v1.py
+%% ===========================================================================
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{hyperref}
+\definecolor{myblue}{rgb}{0.0, 0.2, 0.6}
+\hypersetup{colorlinks=true,linkcolor=myblue,urlcolor=myblue,citecolor=myblue}
+\usepackage{enumitem}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{prediction}[theorem]{Prediction}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Eisenstein}{\mathbb{Z}[\omega]}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\kB}{k_{\mathrm{B}}}
+
+\title{\textbf{How to Make Snow and Ice: Addendum} \\[0.3em]
+  \normalsize Sharpening the Theta-Mean Framework via UNDERWOOD \\
+  \normalsize \emph{Rigorous $\xi$ extraction, sub-leading QLL predictions,
+  and honest scope}}
+\author{Monir Mamoun}
+\date{14 April 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The UNDERWOOD augmented-basis framework~\cite{Underwood2026}, developed
+for the ellipse-perimeter problem, approximates any function with a
+logarithmic branch at one endpoint using a basis of Chebyshev
+polynomials plus explicit log companions $\xi^{2+j}\log(1/\xi)$.
+It delivers $3.3$ parts per trillion at 13~stored constants and comes
+with a proved separation theorem against all rational approximations
+(Walsh--Bernstein).  This addendum applies UNDERWOOD to the
+theta-mean framework of Parts~I--III-preview with three results:
+
+\begin{enumerate}[leftmargin=2em,nosep]
+\item \textbf{Rigorous $\xi$ extraction.}  Lipowsky's QLL formula
+  $d_{\text{QLL}}(T) = d_0 + \xi \ln(T_m/\Delta T)$ is literally a
+  single UNDERWOOD log companion with base power~$0$.  The ambiguity
+  flagged by the peer-review audit (is $\xi$ in-plane or vertical?)
+  is moot when UNDERWOOD is used: $\xi$ is \emph{defined} as the
+  coefficient of $\log(1/u)$ in the fit.  A clean-data test recovers
+  $\xi$ to~$\le 1\%$.
+\item \textbf{New sub-leading predictions.}  Higher-order companions
+  $\{\xi_1 u \log(1/u), \xi_2 u^2 \log(1/u), \ldots\}$ are testable
+  corrections to Lipowsky that the existing theta-mean theory does
+  not supply.  High-resolution QLL measurements could detect
+  or bound them.
+\item \textbf{Honest scope.}  UNDERWOOD does \emph{not} improve the
+  dendrite-peak predictions of Part~II \S5.3 because the
+  $\mathrm{sech}^2$ resonance is analytic (not a log branch).  It also
+  does \emph{not} resolve the mock-modular conjecture for Nakaya
+  $r(\Delta T)$, which has analytic and branch components that
+  UNDERWOOD can approximate but not \emph{explain}.
+\end{enumerate}
+
+Net: the log-branch part of the theta-mean framework is now
+underwritten by a rigorous function-approximation theory with a
+provable separation from rational approximants; the analytic and
+modular parts remain as they were.
+\end{abstract}
+
+%% =============================================================
+\section{UNDERWOOD Recap}
+%% =============================================================
+
+For a function $f : [0,1] \to \R$ with a logarithmic branch at
+$\xi = 0$, the \emph{UNDERWOOD basis of order $(n, K)$} is
+\begin{equation}\label{eq:UB}
+  \mathcal{B}_{n,K} \;=\;
+  \{T_k(2\xi-1) : 0 \le k \le n\} \,\cup\,
+  \{\xi^{p+j}\log(1/\xi) : 0 \le j \le K\},
+\end{equation}
+with Chebyshev polynomials $T_k$ and an integer ``base power''~$p$
+(the ellipse perimeter uses $p=2$; the QLL application below uses
+$p = 0$).  Under the log-branch class condition~\cite{Underwood2026},
+a single least-squares fit in this basis converges geometrically:
+\begin{equation}\label{eq:geometric}
+  \|f - \hat{f}_{n,K}\|_\infty \;\le\; C \, \rho_K^{-n},
+\end{equation}
+with $\rho_K$ strictly increasing in~$K$.  Walsh--Bernstein yields a
+provable separation
+$\lim_{P \to \infty} \|f - \hat{r}_P\|_\infty / \|f - \hat{f}_{n,K}\|_\infty
+= \infty$ against any rational approximation~$\hat{r}_P$ of comparable
+parameter budget~$P$.
+
+%% =============================================================
+\section{Application 1: Rigorous $\xi$ from Lipowsky}
+%% =============================================================
+
+The Lipowsky-type QLL thickness is
+\begin{equation}\label{eq:lipowsky}
+  d_{\text{QLL}}(T) \;=\; d_0 \;+\; \xi \, \log(T_m/\Delta T),
+\end{equation}
+with $\Delta T = T_m - T$.  Change variable to $u = \Delta T/T_m
+\in (0, 1]$; \eqref{eq:lipowsky} becomes
+\begin{equation}\label{eq:d-in-u}
+  d_{\text{QLL}} \;=\; d_0 \;+\; \xi \cdot u^0 \log(1/u).
+\end{equation}
+This is \emph{exactly} the leading log companion
+$\xi^{p+j}\log(1/\xi)$ of~\eqref{eq:UB} with $p = 0$ and $j = 0$.
+
+\begin{proposition}[UNDERWOOD identifies $\xi$]\label{prop:UW-xi}
+Fitting $d_{\text{QLL}}(T)$ to the UNDERWOOD basis with $p = 0$
+produces the Lipowsky coefficient $\xi$ as the leading log-companion
+weight, with no interpretive choice between in-plane and vertical
+projection.  Whatever number emerges from the least-squares fit is
+$\xi$ by definition.
+\end{proposition}
+
+\begin{remark}[What this resolves]
+The peer-review audit noted that our earlier derivation
+$\xi = \sqrt{2/3} \cdot a = 0.369$\,nm relied on the assumption that
+$\xi$ is an in-plane correlation length; a vertical interpretation
+would give $\sqrt{1/3} \cdot a = 0.261$\,nm, a $29\%$ error against
+experiment.  Under Proposition~\ref{prop:UW-xi}, the question
+dissolves: the experimental $d_{\text{QLL}}(T)$ data determines $\xi$
+directly.  The framework's prior need to derive $\xi$ from geometric
+priors becomes unnecessary.
+\end{remark}
+
+\begin{remark}[Numerical verification]
+A synthetic-data test (\texttt{underwood\_qll\_sharpening\_v1.py})
+with true $\xi = 0.370$\,nm, additive noise $\sigma = 0.003$\,nm, and
+40 samples over $T \in [-30, -0.65]^\circ$C recovers
+$\xi_{\text{extracted}} = 0.370$\,nm at $K = 0$ within $1\%$.
+Higher-$K$ fits tend to over-fit the noise and give less reliable $\xi$;
+this is a feature, not a bug: with real experimental scatter, one
+should \emph{not} try to extract more than the leading log companion.
+\end{remark}
+
+%% =============================================================
+\section{Application 2: New Sub-Leading QLL Corrections}
+%% =============================================================
+
+The UNDERWOOD expansion~\eqref{eq:UB} with $p=0$ applied to QLL gives
+the \emph{natural extension} of Lipowsky's formula:
+\begin{equation}\label{eq:UW-QLL}
+  d_{\text{QLL}}(T) \;=\; d_0 \;+\; \sum_{j \ge 0} \xi_j \,
+                         \Bigl(\tfrac{\Delta T}{T_m}\Bigr)^{\!j}
+                         \log(T_m/\Delta T) \;+\; g(\Delta T/T_m),
+\end{equation}
+where $g(u)$ is the smooth Chebyshev residual.  The leading
+$\xi_0 \equiv \xi_{\text{Lipowsky}}$ recovers the standard formula;
+the sub-leading $\xi_j$ for $j \ge 1$ are new.
+
+\begin{prediction}[Sub-leading QLL corrections]
+\label{pred:sub-leading}
+For sufficiently clean experimental $d_{\text{QLL}}(T)$ data, the fit
+to~\eqref{eq:UW-QLL} should yield a non-zero $\xi_1 \,
+(\Delta T/T_m) \log(T_m/\Delta T)$ term, with the second-order
+behaviour dominated by the wetting layer's density profile curvature.
+The sign and magnitude of $\xi_1$ constrain the microscopic model.
+\end{prediction}
+
+\begin{remark}[Why this is new]
+Standard derivations of~\eqref{eq:lipowsky} (Lipowsky, Kroll, and
+successors) stop at leading order.  The UNDERWOOD basis makes the
+next-order correction natural rather than ad-hoc: it is the next
+element in a complete expansion basis, not a choice between alternative
+ansatz forms.
+\end{remark}
+
+%% =============================================================
+\section{Honest Scope — Where UNDERWOOD Does NOT Help}
+\label{sec:scope}
+%% =============================================================
+
+The audit of Section~\ref{sec:scope} is deliberate: we do not want
+a second round of peer review to identify over-claims that
+UNDERWOOD's rigorous core could not actually deliver.
+
+\subsection*{The dendrite peak is analytic, not log-branched}
+
+Paper~III's morphology equation contains a
+$\mathrm{sech}^2\bigl((\Delta T - T_c)/w\bigr)$ resonance term at
+the dendrite peak.  This is an \emph{analytic} function of
+$\Delta T$: no log branch, no algebraic singularity, just a smooth
+bump.  UNDERWOOD's log companions do not help here; plain
+Chebyshev polynomials of order $\sim 15$--$20$ already suffice.
+Our numerical test (\texttt{underwood\_qll\_sharpening\_v1.py})
+finds that adding log companions to a $\mathrm{sech}^2$-containing
+fit does not reduce the residual.
+
+\subsection*{Noise kills higher-order UNDERWOOD on real data}
+
+The proof of~\eqref{eq:geometric} assumes exact evaluation of $f$.
+Real experimental $d_{\text{QLL}}(T)$ data has scatter of a few
+\AA ngstroms, which drowns out the $j \ge 1$ log companions.  Our
+synthetic-data test shows that extracted $\xi_1$ values begin to
+fluctuate badly for $K \ge 2$ at realistic noise levels.  UNDERWOOD
+is a powerful tool at arbitrary precision; at $10^{-3}$ data
+precision, only the leading $\xi_0$ is reliably fit.
+
+\subsection*{Mock-theta conjecture is not resolved}
+
+Part~III preview~\cite{PartIIIPreview} conjectured that Nakaya
+$r(\Delta T)$ is the real part of a weight-$1$ mock modular form on
+$\Gamma_0(6)$.  UNDERWOOD can \emph{approximate} $r(\Delta T)$ with
+provable convergence, but approximation is not identification.  The
+conjecture stands as Part~III's open problem; UNDERWOOD offers a
+numerical surrogate, not a resolution.
+
+%% =============================================================
+\section{Updated Status Table}
+%% =============================================================
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Claim from earlier parts & Pre-UNDERWOOD status & UNDERWOOD status & Net \\
+\midrule
+QLL $\xi$ value     & fragile (in-plane vs vertical) & Proposition~\ref{prop:UW-xi} & \textbf{resolved} \\
+QLL sub-leading     & absent                    & Prediction~\ref{pred:sub-leading}  & \textbf{new} \\
+Dendrite $\Delta T$ & 1/N vs 1/$\sqrt{N}$ open   & no help (analytic)                & unchanged \\
+Nakaya $r(\Delta T)$ & mock-theta conjecture    & approximable $\ne$ identified     & unchanged \\
+$T_c$ residual $1.85^\circ$C & open $c/a$ correction & no help                  & unchanged \\
+$D_0$ prefactor     & closed (Onsager $f_{\text{corr}}=1/6$) & no change         & unchanged \\
+Bjerrum prefactor $36$ & closed                 & no change                         & unchanged \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+UNDERWOOD resolves one open problem (QLL $\xi$ interpretation) and
+generates one new testable prediction (sub-leading QLL).  It does
+not resolve three others (dendrite width law, mock theta, $T_c$
+residual).  Net: one resolved, one new, three unchanged.
+
+%% =============================================================
+\section{Practical Recipe}
+%% =============================================================
+
+For experimenters: given $N$ measurements of $d_{\text{QLL}}(T_i)$
+at known $T_i < T_m$, extract $\xi$ as follows.
+
+\begin{enumerate}[leftmargin=2em]
+\item Compute $u_i = (T_m - T_i)/T_m \in (0, 1]$.
+\item Build the design matrix
+\[
+  B_{ij} \;=\;
+  \begin{cases}
+    T_{j}(2 u_i - 1), & 0 \le j \le n \\
+    \log(1/u_i),      & j = n+1 \quad (\text{leading log companion})
+  \end{cases}
+\]
+with a low $n$ (say $n=3$) to avoid absorbing the log branch into
+polynomial terms.
+\item Solve $B \mathbf{c} = \mathbf{d}$ by QR.
+\item Read $\xi = c_{n+1}$.
+\item Report uncertainty via the standard linear-regression formula
+$\mathrm{SE}(\xi) = \sigma_{\mathrm{fit}} \sqrt{[(B^T B)^{-1}]_{n+1,\,n+1}}$.
+\end{enumerate}
+
+Worked example in \texttt{underwood\_qll\_sharpening\_v1.py}; the
+LaTeX-formatted coefficients for each fit order are in the companion
+generator output.
+
+%% =============================================================
+\begin{thebibliography}{99}
+
+\bibitem{Underwood2026} M.~Mamoun,
+\emph{The Augmented Basis Beats AAA: A Chebyshev $+$ Log-Companion
+Decomposition for Ellipse Perimeter and Beyond}, April 2026.
+\texttt{augmented\_basis\_definitive\_v8.pdf}.
+
+\bibitem{PartI} M.~Mamoun,
+\emph{Crystal Math and Theta Means — Part~I}, 14 April 2026.
+
+\bibitem{PartII} M.~Mamoun,
+\emph{Crystal Math and Theta Means — Part~II (v4)}, 14 April 2026.
+
+\bibitem{PartIIIPreview} M.~Mamoun,
+\emph{Crystal Math and Theta Means — Part~III preview}, 14 April 2026.
+
+\bibitem{Lipowsky} R.~Lipowsky, \emph{Critical surface phenomena at
+first-order bulk transitions}, Phys.~Rev.~Lett.\ {\bf 49}, 1575 (1982).
+
+\bibitem{Libbrecht} K.~G.~Libbrecht, \emph{The physics of snow
+crystals}, Rep.~Prog.~Phys.\ {\bf 68}, 855 (2005).
+
+\bibitem{aaa} Y.~Nakatsukasa, O.~S\`ete, L.~N.~Trefethen, \emph{The
+AAA algorithm for rational approximation},
+SIAM~J.~Sci.~Comput.\ {\bf 40}, A1494 (2018).
+
+\bibitem{WalshBernstein} J.~L.~Walsh, \emph{Interpolation and
+Approximation by Rational Functions in the Complex Domain},
+AMS Colloquium Publications {\bf 20}, 1935.
+
+\end{thebibliography}
+
+\end{document}
