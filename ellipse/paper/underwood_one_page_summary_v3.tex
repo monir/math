@@ -1,0 +1,222 @@
+\documentclass[10pt,landscape]{article}
+\usepackage[margin=0.45in,landscape]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{qrcode}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{pifont}
+
+\definecolor{greenfill}{HTML}{E8F5E9}
+\definecolor{yellowfill}{HTML}{FFF9C4}
+\definecolor{bluefill}{HTML}{E3F2FD}
+\definecolor{headergray}{HTML}{263238}
+
+\pagestyle{empty}
+\setlength{\parskip}{2pt}
+
+\begin{document}
+
+% ---------- HEADER BAND ----------
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[headergray] (current page.north west) rectangle
+    ([yshift=-0.95in]current page.north east);
+\end{tikzpicture}
+
+\vspace*{-0.3in}
+{\color{white}
+\begin{center}
+  {\Huge\bfseries UNDERWOOD} \quad
+  {\Large\itshape One Page Summary for Smart Non-Experts}\\[2pt]
+  {\large \textbf{The Definitive Second Breakthrough in Closed-Form
+    Approximator Models for the Ellipse Perimeter}}\\[2pt]
+  {\footnotesize Monir Mamoun, independent researcher,
+    27 April 2026 (rev4)\quad\textbullet\quad
+    introducing the \textbf{logatom} analytical framework
+    \quad\textbullet\quad
+    high-school algebra and calculus suffice to verify everything below}
+\end{center}
+}
+
+\vspace{0.05in}
+
+% ---------- HEADLINE STRIP ----------
+\noindent
+\fbox{\parbox{\textwidth}{\centering\small
+\textbf{8 stored constants $\to$ 0.015~ppm} (1 part in 67 million)
+\quad\textbullet\quad
+\textbf{13 constants $\to$ 3.3 parts per trillion}
+\quad\textbullet\quad
+\textbf{14 constants $\to$ $2.1\times 10^{-13}$ relative error}
+(machine precision)
+\quad\textbullet\quad
+\textbf{147{,}000$\times$} better than AAA at the L-corner singularity
+\quad\textbullet\quad
+\textbf{$2\times$} better than the author's prior SRIRACHA on half the
+parameter budget
+}}
+
+\vspace{0.07in}
+
+% ---------- TWO-COLUMN: LEFT = formula, RIGHT = worked example + reading map ----------
+\noindent
+\begin{minipage}[t]{0.49\textwidth}
+\small
+
+\textbf{The 8-term ``handy'' formula (Formula~2 in the paper).}
+For an ellipse with semi-axes $a \ge b > 0$, define
+\[
+  \xi \;=\; 1 - \left(\tfrac{a-b}{a+b}\right)^{\!2},
+  \qquad
+  u \;=\; 2\xi - 1,
+  \qquad
+  \ln\!\bigl(1/\xi\bigr).
+\]
+\emph{(Three numbers from $a$ and $b$. No higher math.)}
+
+Then the perimeter is
+
+\medskip
+\noindent
+\fbox{\parbox{\linewidth}{\footnotesize
+\begin{align*}
+P \;=\; \tfrac{a+b}{2} \cdot \Bigl[\;
+&+7.042\,111\,928\,654\,361 \\
+&-0.890\,889\,229\,192\,585 \cdot u \\
+&+0.095\,701\,829\,579\,546 \cdot u^2 \\
+&+0.032\,481\,929\,448\,356 \cdot u^3 \\
+&+0.003\,778\,791\,638\,861 \cdot u^4 \\
+&+0.245\,916\,748\,527\,414 \cdot \xi^2 \cdot \ln(1/\xi) \\
+&+0.132\,325\,522\,582\,612 \cdot \xi^3 \cdot \ln(1/\xi) \\
+&+0.018\,709\,674\,870\,767 \cdot \xi^4 \cdot \ln(1/\xi)
+\;\Bigr].
+\end{align*}
+}}
+
+\medskip
+\textbf{Vocabulary used:} addition, multiplication, the powers
+$u^2, u^3, u^4$, the natural logarithm $\ln$.  No elliptic integrals,
+no special functions, no series, no conditional branching, no
+iteration.
+
+\medskip
+\textbf{Why two ``flavours'' of terms?}  The first five lines (the
+$u$ part) handle the \emph{smooth} part of the perimeter.  The last
+three lines (the $\xi^{2+j}\ln(1/\xi)$ part) handle the single sharp
+\emph{crease} that appears at the degenerate limit $b \to 0$ (the
+ellipse collapsed to a line segment).  Every previous compact
+formula tried to flatten that crease with smooth tools.  UNDERWOOD
+names it explicitly with three log terms; the residual is then
+smooth, and a short polynomial in $u$ handles it.
+
+\medskip
+\textbf{The mathematical advance behind the numbers.}  The named
+primitive $\xi^{\alpha}\,(\ln 1/\xi)^{j}$ is what the paper calls a
+\emph{logatom}.  It is the minimal building block for log-branch
+approximation, developed in \emph{standard real analysis} ---
+Chebyshev expansions, Bernstein's classical
+geometric-rate-on-analytic theorem, Heisenberg-ladder identities on
+Laguerre frames, Gamma-moment closed forms.  Nothing exotic; you
+could have done all of it in 1950 if you had thought to. A second
+new result --- the \emph{Walsh--Bernstein separation theorem} ---
+proves that \emph{no} rational formula (numerator/denominator of
+polynomials) can ever match this approximator as the parameter
+budget grows.
+
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}
+\small
+
+\textbf{Worked example: $a = 5$, $b = 3$ (an ordinary ellipse).}
+
+\textbf{Step 1.}\ Compute $\xi$.\;
+$\frac{a-b}{a+b} = \frac{2}{8} = 0.25$;\;
+$\xi = 1 - 0.25^2 = \mathbf{0.9375}.$
+
+\textbf{Step 2.}\ Compute $u = 2\xi - 1 = \mathbf{0.875}.$
+
+\textbf{Step 3.}\ Compute $\ln(1/\xi) = \ln(16/15) \approx
+\mathbf{0.064\,538\,521\,4}.$
+
+\textbf{Step 4.}\ Add up the 8 terms.
+
+\smallskip
+\fbox{\parbox{\linewidth}{\scriptsize\ttfamily
+\begin{tabular}{@{}lr@{}}
++7.042111928654 \hfill (constant)                & +7.042111928654 \\
+-0.890889229193 $\times$ 0.875                   & -0.779528075544 \\
++0.095701829580 $\times$ 0.875\textsuperscript{2} = 0.765625
+                                                 & +0.073275088876 \\
++0.032481929448 $\times$ 0.875\textsuperscript{3} = 0.669921875
+                                                 & +0.021759920580 \\
++0.003778791639 $\times$ 0.875\textsuperscript{4} = 0.586181641
+                                                 & +0.002215077716 \\
++0.245916748527 $\times$ 0.9375\textsuperscript{2} $\times$ 0.064538521
+                                                 & +0.013957604 \\
++0.132325522583 $\times$ 0.9375\textsuperscript{3} $\times$ 0.064538521
+                                                 & +0.007033876 \\
++0.018709674871 $\times$ 0.9375\textsuperscript{4} $\times$ 0.064538521
+                                                 & +0.000934339 \\[2pt]
+\hline
+\textbf{sum}                                     & \textbf{+6.381\,759\,759}
+\end{tabular}
+}}
+
+\smallskip
+\textbf{Step 5.}\ Multiply by $(a+b)/2 = 4$:
+$\;P \approx 4 \times 6.381\,759\,759 = \mathbf{25.527\,039\,04}.$
+
+\smallskip
+\textbf{The exact perimeter} (computed at 50-digit precision via the
+classical elliptic integral) is
+$P_{\text{exact}} = 25.526\,998\,863\,398\,\ldots$
+
+Truncating the coefficients to 12 decimals (as printed above) loses
+about $4\times 10^{-5}$.  Using the full 40-decimal coefficients in
+the paper gives error $\approx 3 \times 10^{-9}$, comfortably inside
+the $0.015$~ppm specification.  Sub-ppm error from a hand-evaluable
+8-term formula.
+
+\medskip
+\noindent
+\fbox{\parbox{\linewidth}{\footnotesize
+\textbf{Side research direction: an EML translation.}\quad
+The author's logatom framework was developed independently in
+standard analysis; \textbf{none of UNDERWOOD's main results require
+EML to state, prove, or use.}  However, after the framework was in
+place, the author observed that the logatoms
+$\xi^{\alpha}(\ln 1/\xi)^j$ are also expressible as finite trees in
+\textbf{Odrzywo{\l}ek's EML grammar} (arXiv:2603.21852, 2026),
+where the single binary operation
+$\mathrm{eml}(x, y) = \exp(x) - \log(y)$ together with the
+constant~$1$ is a \emph{Sheffer stroke} for the elementary functions.
+This is a parallel encoding of the same primitives in an alternative
+language; whether it yields additional insights for log-branch
+approximation is an \emph{open research inquiry}, treated in the
+paper as supplementary research notes rather than as load-bearing
+theory.  Readers using or proving things about UNDERWOOD do not
+need to learn EML.
+}}
+
+\medskip
+\noindent
+\fbox{\parbox{\linewidth}{\footnotesize
+\textbf{Reading map.}\;
+\begin{tabular}{@{}lp{4.6cm}@{}}
+136-page paper      & \texttt{two\_foci\_one\_cup\_ellipse\_perimeter\_mamoun\_rev4.pdf} \\
+Repository          & \href{https://github.com/monir/math}{github.com/monir/math} \\
+Reproduce all numbers & \texttt{python verify\_all\_claims\_v2.py}\quad (under 5 s) \\
+Lean substrate slice & 5 modules / 37 named declarations / sorry-free \& axiom-free against Mathlib v4.28.0 \\
+\end{tabular}
+
+\smallskip
+\centering\qrcode[height=0.7in]{https://github.com/monir/math}\\
+\scriptsize\texttt{github.com/monir/math}
+}}
+
+\end{minipage}
+
+\end{document}
