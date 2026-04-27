@@ -118,7 +118,7 @@ canonical headline that combines and supersedes the rest:
   - Paper IV: Snow-Crystal Splitting Equation
   - **Paper V (★)** Unified Theory — twinning, Hamiltonian hierarchy,
     phase-field morphology, 6 falsifiable predictions.
-Companion: Crystal-Math θ-means series (parts 1, 2, 3 + UNDERWOOD addendum).
+Companion: Crystal Math and Theta Means series (parts 1, 2, 3 + UNDERWOOD addendum).
 
 ---
 
