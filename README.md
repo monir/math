@@ -13,6 +13,22 @@ view; this README is the contributor's-eye view.
 
 ## Recent updates
 
+> [!TIP]
+> **2026-04-27 — [NEW] Top-level README is now data-driven; first dated changelog at the top**
+>
+> The top-level README is now generated from a single master YAML data
+> file (`infra/publishing/sources/monir_math_repo.yaml` in the upstream
+> master) by a renderer (`render_monir_math_readme.py`).  Future README
+> updates are made by prepending entries to that file's `update_log`,
+> bumping the topics table, and prepending to the papers directory; old
+> entries stay verbatim, so this section reads newest-at-top with full
+> history preserved.  The same publish mechanism that handles paper
+> releases now also drift-audits all declared downstream copies (e.g.,
+> a Zenodo deposit bundle) after every publish and refuses to silently
+> overwrite drifted files.
+>
+> Commits: [`b77f053`](https://github.com/monir/math/commit/b77f053) (data-driven README first publish) · [`82573e88`](https://github.com/gitscratch/ellipse/commit/82573e88) (renderer + master YAML) · [`50f3551d`](https://github.com/gitscratch/ellipse/commit/50f3551d) (drift check on downstream copies)
+
 > [!NOTE]
 > **2026-04-27 — [UPDATE] rev4 abstract aligned with the deposited Logatoms slice**
 >
