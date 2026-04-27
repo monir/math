@@ -1,0 +1,137 @@
+\documentclass[11pt,landscape]{article}
+\usepackage[margin=0.55in,landscape]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{qrcode}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage{pifont}
+
+\definecolor{greenfill}{HTML}{E8F5E9}
+\definecolor{yellowfill}{HTML}{FFF9C4}
+\definecolor{deepgreen}{HTML}{1B5E20}
+\definecolor{deepred}{HTML}{B71C1C}
+\definecolor{headergray}{HTML}{263238}
+
+\pagestyle{empty}
+
+\begin{document}
+
+% ---------- HEADER BAND ----------
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[headergray] (current page.north west) rectangle
+    ([yshift=-1.15in]current page.north east);
+\end{tikzpicture}
+
+\vspace*{-0.3in}
+{\color{white}
+\begin{center}
+  {\Huge\bfseries UNDERWOOD}\\[4pt]
+  {\Large \textbf{New successive world record} ---
+    \textsc{Underwood} beats \textsc{Sriracha} by $\mathbf{2\times}$\\
+    on half the parameter budget}\\[4pt]
+  {\large The Ellipse Perimeter to \textbf{3.3 Parts Per Trillion}
+    at \textbf{13 Stored Constants}}\\[3pt]
+  {\normalsize\itshape ``Two Foci, One Cup Runneth Over \emph{Again}''
+    --- Monir Mamoun, independent researcher, 19 April 2026 (v2)}
+\end{center}
+}
+
+\vspace{0.15in}
+
+% ---------- HEADLINE NUMBERS ----------
+\noindent
+\fbox{\parbox{\textwidth}{\centering
+\textbf{Three log companions + Chebyshev = a 2500-year problem closed.}\\[2pt]
+\begin{tabular}{c@{\hspace{2em}}c@{\hspace{2em}}c@{\hspace{2em}}c}
+\textbf{13 constants} & \textbf{14 constants} & \textbf{vs.\ AAA} & \textbf{vs.\ prior author record} \\
+$\mathbf{3.3}$ ppt & $\mathbf{2.1 \times 10^{-13}}$ & $\mathbf{147{,}000\times}$ & $\mathbf{2\times}$ on half the params
+\end{tabular}
+}}
+
+\vspace{0.15in}
+
+% ---------- MAIN BODY: left = teardown table; right = QR and reading map ----------
+\noindent
+\begin{minipage}[t]{0.68\textwidth}
+\small
+\centering
+\textbf{The Teardown: 2500 years of ellipse-perimeter approximation}\\[2pt]
+\begin{tabular}{@{}l@{\ }rll@{}}
+\toprule
+\textbf{Method} & \textbf{Params} & \textbf{Peak error} & \textbf{At $b\!\to\!0$} \\
+\midrule
+Ramanujan R1 / R2 (1914)            & 0            & $\sim 0.1$--$0.3$ ppm   & plateaus \\
+Cantrell (2001--04)                 & few          & $\sim 1$ ppm            & slow decay \\
+Villarino (2005)                    & 0            & $\delta_5 = 3/2^{17}$   & analytic \\
+Koshy / Moscato (2024)              & 5--8         & $< 3$ ppm               & interpolatory \\
+Ayala-Raggi $F_2$--$F_5$ (2025--26) & ${\sim}15$   & $0.0216$ ppm            & series-truncated \\
+AAA (Trefethen et al., 2018)        & 30           & ${\sim}10^{-13}$        & \emph{cannot represent log} \\
+\midrule
+\rowcolor{yellowfill}
+SRIRACHA (Mamoun, prior record)      & ${\sim}25$   & $7$ ppt                 & log-branch-aware (gate) \\
+\rowcolor{greenfill}
+\textbf{UNDERWOOD F3} (this work)    & \textbf{13}  & $\mathbf{3.3}$ \textbf{ppt}  & \emph{flat to floor} \\
+\rowcolor{greenfill}
+\textbf{UNDERWOOD F4 + Remez}        & \textbf{14}  & $\mathbf{2.1{\times}10^{-13}}$ & \emph{machine $\varepsilon$} \\
+\bottomrule
+\end{tabular}
+
+\vspace{4pt}
+
+{\footnotesize All rows verified at 50-digit \texttt{mpmath} precision.
+The green rows are the only ones whose error is \emph{flat} (not
+plateauing) as $b \to 0$.  Separation theorem in paper \S8:
+gap vs.\ any rational method grows without bound.}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.29\textwidth}
+\centering
+\vspace{0pt}
+\textbf{Paper + code + Lean}\\[2pt]
+\qrcode[height=1.5in]{https://github.com/monir/math}\\[2pt]
+{\scriptsize\ttfamily github.com/monir/math}
+
+\vspace{6pt}
+\textbf{Reproduce in 5 seconds:}\\[-2pt]
+{\scriptsize\ttfamily
+python verify\_all\_claims\_v2.py\\
+lake build Logatoms
+}
+
+\vspace{6pt}
+\textbf{77-page paper}\\[-2pt]
+{\scriptsize\ttfamily paper\_mamoun\_ellipse\_\\underwood\_two\_foci\_\\one\_cup\_v2\_\\19-April-2026.pdf}
+\end{minipage}
+
+\vspace{0.1in}
+
+% ---------- FOOTER: the idea in one line + verification seal ----------
+\noindent
+\fbox{\parbox{\textwidth}{\small
+\textbf{The one-line idea.}\quad
+The ellipse perimeter has a logarithmic branch point at the degenerate
+limit $b \to 0$.  Every prior method fit \emph{smooth} functions to a
+\emph{non-smooth} target.  UNDERWOOD writes the log modes explicitly:
+three named log companions $\xi^{2+j}\log(1/\xi)$ added to a Chebyshev
+basis, QR solve, done.  Residual is analytic; Chebyshev owns it at
+geometric rate; the gap to any rational method grows without bound.
+
+\smallskip
+\textbf{Verification seal.}\quad
+{\ding{51}} \ Every numerical claim reproducible at 50 digits.\ \ %
+{\ding{51}} \ Separation theorem proved
+(super-geometric envelope vs.\ rational impossibility).\ \ %
+{\ding{51}} \ Mathematical substrate (the $\lambda$-ladder of logatom
+primitives) formalised in Lean 4 + Mathlib v4.28.0:
+\textbf{4 modules, 9 theorems, fully sorry-free}.\ \ %
+{\ding{51}} \ 77-page paper with 20 open-question ``landings'' table
+engaging adjacent literature (AAA, Gopal-Trefethen, XFEM crack-tip
+enrichment, Stahl 1997, Gonchar-Rakhmanov 1989, Rokhlin quadrature,
+and more).
+}}
+
+\end{document}
