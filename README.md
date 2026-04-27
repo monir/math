@@ -13,6 +13,20 @@ view; this README is the contributor's-eye view.
 
 ## Recent updates
 
+> [!IMPORTANT]
+> **2026-04-27 — [FIX] Snow-crystal companion-series name corrected to 'Crystal Math and Theta Means'**
+>
+> The snow-crystal companion-paper series is named **Crystal Math
+> and Theta Means** — two named concepts joined by "and" — per
+> the paper's own `\title` block ("How to Make Snow and Ice:
+> Crystal Math and Theta Means").  Earlier prose in this README,
+> and in the Zenodo deposit's description, used a compound form
+> "Crystal-Math θ-means".  All readable references now use the
+> correct name; filenames (`crystal_math_theta_means_*`) and the
+> `theta_means_addenda/` directory keep their existing identifiers.
+>
+> Commits: [`859d71c`](https://github.com/monir/math/commit/859d71c) (series name fix) · [`a6de7303`](https://github.com/gitscratch/ellipse/commit/a6de7303) (source-of-truth wording fix)
+
 > [!TIP]
 > **2026-04-27 — [NEW] Top-level README is now data-driven; first dated changelog at the top**
 >
