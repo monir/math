@@ -13,6 +13,29 @@ view; this README is the contributor's-eye view.
 
 ## Recent updates
 
+> [!NOTE]
+> **2026-04-27 — [UPDATE] rev4 abstract reframes EML as a parallel translation; new one-page summary added**
+>
+> Two related changes published in one commit:
+> (1) The rev4 abstract now states explicitly that the logatom
+> analytical framework is developed in **standard real analysis**
+> (Chebyshev expansions, Bernstein's geometric-rate theorem,
+> Heisenberg-ladder identities on Laguerre frames, closed-form
+> Gamma moments).  Odrzywołek's EML grammar (arXiv:2603.21852,
+> 2026) is acknowledged as a recent **parallel encoding** that
+> the logatoms also inhabit, but is **not a substrate UNDERWOOD's
+> proofs depend on**.  Readers do not need to learn EML to use
+> UNDERWOOD or follow its proofs.  Insights from the EML
+> viewpoint are treated as an open research direction in a
+> separate "EML translation" research-note appendix.
+> (2) Adds `underwood_one_page_summary_v3.{pdf,tex}` — a
+> single-page landscape summary for smart non-experts containing
+> the 8-term Formula 2 fully expanded with a worked numerical
+> example (a=5, b=3) computable with high-school algebra and
+> calculus only.  Supersedes the prior press handout v2.
+>
+> Commits: [`859d71c`](https://github.com/monir/math/commit/859d71c) (rev4 EML reframe + one-page summary)
+
 > [!IMPORTANT]
 > **2026-04-27 — [FIX] Snow-crystal companion-series name corrected to 'Crystal Math and Theta Means'**
 >
