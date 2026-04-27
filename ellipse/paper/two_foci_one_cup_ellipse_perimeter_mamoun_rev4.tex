@@ -163,10 +163,21 @@ $[T, D] = -I$.  Together, (i)~closed-form moments and (ii)~ladder
 closure pin down the logatoms as the \emph{minimal} basis spanning
 the log-branch class: any honest competitor must contain them.
 
-\textbf{The substrate beneath: Odrzywo{\l}ek's EML grammar.}  The
-logatom set sits inside a strictly more general grammar that has
-just become available.  Odrzywo{\l}ek's recent \textbf{EML}
-(\emph{Effective Mathematical Language}) result
+\textbf{The logatom framework is developed in standard analysis;
+EML is a parallel translation, not a prerequisite.}  Everything
+above --- the logatom primitives, the Gamma-moment identity, the
+Heisenberg ladder, the augmented basis, the Bernstein convergence,
+and the Walsh--Bernstein separation theorem of \S~\ref{thm:separation}
+--- is developed in classical real analysis: Chebyshev expansions,
+Bernstein's geometric-rate theorem, Heisenberg-ladder identities on
+Laguerre frames, and the closed-form Gamma moments of
+$x^j e^{-\alpha x}$.  Nothing in UNDERWOOD's main results requires a
+new grammar to state, prove, or use.
+
+After the framework was in place, the author observed that the
+logatoms also inhabit a recently announced \emph{alternative
+encoding} of the elementary functions: Odrzywo{\l}ek's
+\textbf{EML} (\emph{Effective Mathematical Language}) result
 (\,Odrzywo{\l}ek 2026, arXiv:2603.21852\,) proves that the single
 binary operation
 \[
@@ -174,21 +185,23 @@ binary operation
 \]
 together with the constant~$1$, is a \emph{Sheffer stroke for the
 elementary functions}: every elementary function on the reals is
-built by a finite EML tree from $\{1, \mathrm{eml}\}$, and EML
-trees are isomorphic to full binary trees, hence counted by the
-Catalan numbers.  Inside that grammar the logatoms occupy a
-distinguished slot: they are precisely the depth-$\le 3$ EML
-expressions that are useful for log-branch work, and the
+built by a finite EML tree from $\{1, \mathrm{eml}\}$, with the
+Catalan numbers counting trees by size.  The logatoms
+$\xi^{\alpha}(\log 1/\xi)^{j}$ turn out to be the depth-$\le 3$
+EML expressions relevant to log-branch approximation, and the
 Gamma-moment map
 \[
   \Phi(\alpha, j) \;:=\; \frac{j!}{(\alpha+1)^{j+1}}
 \]
-realises a \emph{syntax-free} bijection between logatom indices
-and equivalence classes of EML trees: two log-branch expressions
-agree iff their moment signatures agree.  This bijection is the
-analytical machine that certifies UNDERWOOD's basis below as both
-minimal and complete --- the certificate becomes rational
-arithmetic on a pair of integers $(\alpha, j)$.
+suggests a syntax-free identification of logatom-equivalent EML
+trees.  This is a \emph{parallel description of objects already
+defined in standard analysis}, not a substrate that UNDERWOOD's
+proofs depend on.  Whether the EML viewpoint yields algorithmically
+or theoretically novel insights for log-branch work is treated in
+this paper as an \emph{open research direction}, with any
+exploratory observations gathered in a clearly-labelled
+``EML translation'' research-note appendix.  Readers using or
+proving things about UNDERWOOD do not need to learn EML.
 
 \textbf{What UNDERWOOD does, in one display.}  The augmented basis
 at the heart of this paper is then a one-line consequence of the
@@ -204,9 +217,10 @@ framework above:
 \]
 The exponents $\alpha = 2, 3, 4$ on the logatom side are not
 free parameters: they are forced by Villarino's 2005 closed-form
-expansion of the ellipse perimeter near $b = 0$, and the moment
-map $\Phi$ certifies that no shorter logatom list can absorb the
-same singular content.  No gate function, no fitted exponential
+expansion of the ellipse perimeter near $b = 0$, and minimality of
+the resulting basis follows from the standard
+linear-independence-and-closure arguments on the augmented basis
+(\S~\ref{sec:basis-opt}).  No gate function, no fitted exponential
 ladder, no nonlinear search, no Ramanujan denominator, no tower.
 The estimator is named \textbf{UNDERWOOD} (\textbf{U}ndivided
 \textbf{N}umerical $\cdot$ \textbf{D}irect \textbf{E}lliptic
