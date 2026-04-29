@@ -36,20 +36,6 @@ view; this README is the contributor's-eye view.
 >
 > Commits: [`859d71c`](https://github.com/monir/math/commit/859d71c) (rev4 EML reframe + one-page summary)
 
-> [!IMPORTANT]
-> **2026-04-27 — [FIX] Snow-crystal companion-series name corrected to 'Crystal Math and Theta Means'**
->
-> The snow-crystal companion-paper series is named **Crystal Math
-> and Theta Means** — two named concepts joined by "and" — per
-> the paper's own `\title` block ("How to Make Snow and Ice:
-> Crystal Math and Theta Means").  Earlier prose in this README,
-> and in the Zenodo deposit's description, used a compound form
-> "Crystal-Math θ-means".  All readable references now use the
-> correct name; filenames (`crystal_math_theta_means_*`) and the
-> `theta_means_addenda/` directory keep their existing identifiers.
->
-> Commits: [`859d71c`](https://github.com/monir/math/commit/859d71c) (series name fix) · [`a6de7303`](https://github.com/gitscratch/ellipse/commit/a6de7303) (source-of-truth wording fix)
-
 > [!TIP]
 > **2026-04-27 — [NEW] Top-level README is now data-driven; first dated changelog at the top**
 >
@@ -82,15 +68,15 @@ view; this README is the contributor's-eye view.
 > Commits: [`414389b`](https://github.com/monir/math/commit/414389b) (rev4 abstract update)
 
 > [!TIP]
-> **2026-04-27 — [NEW] First publication of UNDERWOOD rev4 + Snow-Crystal Paper V to monir/math**
+> **2026-04-27 — [NEW] First publication of UNDERWOOD rev4 to monir/math**
 >
-> Two-commit publication of (1) UNDERWOOD ellipse-perimeter rev4 (the
-> Definitive Second Breakthrough, 136 pp) to ellipse/, and (2) Snow-
-> Crystal Paper V Unified Theory v2 (14 April 2026, 25 pp) to
-> snowcrystal/.  Top-level README added.  Manifest-driven publishing
-> mechanism live at gitscratch/ellipse:infra/publishing/.
+> Publication of UNDERWOOD ellipse-perimeter rev4 (the Definitive
+> Second Breakthrough, 136 pp) to ellipse/.  Top-level README added.
+> Manifest-driven publishing mechanism live at
+> gitscratch/ellipse:infra/publishing/.
 >
-> Commits: [`4a9ca89`](https://github.com/monir/math/commit/4a9ca89) (UNDERWOOD rev4 (initial publication)) · [`da68918`](https://github.com/monir/math/commit/da68918) (Snow Crystal Series Paper V) · [`bf36e9f`](https://github.com/monir/math/commit/bf36e9f) (Top-level README first publication)
+> *(Snow-crystal work has been moved out of monir/math; it
+> continues in the upstream gitscratch repository.)*
 
 ---
 
@@ -99,7 +85,6 @@ view; this README is the contributor's-eye view.
 | Topic | Folder | Latest publication | Headline |
 |---|---|---|---|
 | **Ellipse perimeter** | [`ellipse/`](./ellipse/) | rev4, 27 April 2026 (136 pp) | **UNDERWOOD — the Definitive Second Breakthrough in Closed-Form Approximator Models.** **3.3 parts-per-trillion at 13 stored constants** (F3); 2.1 × 10⁻¹³ relative error at 14 (F4 + Remez). Beats SRIRACHA by **2×** and the Ramanujan / Cantrell / Ayala–Raggi / AAA lines by **10⁴–10⁸×** at every matched parameter budget. **147,000×** better than AAA on the L-shaped corner singularity. Walsh–Bernstein **separation theorem**: the gap vs any rational method grows without bound. |
-| **Snow-crystal physics** | [`snowcrystal/`](./snowcrystal/) | Paper V (Unified Theory v2), 14 April 2026 (25 pp) | **First-principles unified theory of snow-crystal formation**, MB-pol(2023) quantum chemistry through Kobayashi 1993 phase-field PDE. Predicts ice-face splitting Δ_split = 8.94 ± 0.46 cm⁻¹ vs THz-measured 8.80 (**0.30σ**). Recovers the Mason 1:2:3 cyclotomic ratio at −4 / −10 / −22 °C. Lean-verified hexagonal factor R_hex = 4/(4+√3) = (16−4√3)/13 exact. **7/8** historical predictions confirmed (Murata 2020, Sazaki 2012, Bailey-Hallett 2004, Kobayashi 1976). 6 new falsifiable predictions. Spans 10 orders of magnitude in length, 30 in time. |
 
 ---
 
@@ -136,26 +121,6 @@ target.
 
 Lean: the deposited Logatoms slice is **5 modules, sorry-free and
 axiom-free against Mathlib v4.28.0**; full library forthcoming.
-
-### Snow-crystal physics — snowcrystal/
-
-**First-principles unified theory of snow-crystal formation**, MB-pol(2023)
-quantum chemistry through Kobayashi 1993 phase-field PDE.
-Predicts ice-face splitting Δ_split = 8.94 ± 0.46 cm⁻¹ vs THz-measured 8.80 (**0.30σ**).
-Recovers the Mason 1:2:3 cyclotomic ratio at −4 / −10 / −22 °C.
-Lean-verified hexagonal factor R_hex = 4/(4+√3) = (16−4√3)/13 exact.
-**7/8** historical predictions confirmed (Murata 2020, Sazaki 2012, Bailey-Hallett 2004, Kobayashi 1976).
-6 new falsifiable predictions.  Spans 10 orders of magnitude in length, 30 in time.
-
-The series comprises five papers (I-V), with **Paper V** as the
-canonical headline that combines and supersedes the rest:
-  - Paper I: THz Spectroscopy of Ice Faces
-  - Paper II: Phonon Dispersion of Ice I_h
-  - Paper III: The Snowflake Equation (current iterate: snow_crystal_equation_v6)
-  - Paper IV: Snow-Crystal Splitting Equation
-  - **Paper V (★)** Unified Theory — twinning, Hamiltonian hierarchy,
-    phase-field morphology, 6 falsifiable predictions.
-Companion: Crystal Math and Theta Means series (parts 1, 2, 3 + UNDERWOOD addendum).
 
 ---
 
@@ -211,9 +176,6 @@ The top-level README itself is now data-driven: edit
 | 2026-04-27 | UNDERWOOD ellipse perimeter — rev4 abstract update (136 pp) — *current; abstract describes deposited Logatoms slice* | [`ellipse/paper/two_foci_one_cup_ellipse_perimeter_mamoun_rev4.pdf`](./ellipse/paper/two_foci_one_cup_ellipse_perimeter_mamoun_rev4.pdf) |
 | 2026-04-23 | UNDERWOOD ellipse perimeter — v6 (88 pp) — *legacy; superseded by rev4* | [`ellipse/paper/paper_mamoun_ellipse_underwood_two_foci_one_cup_v6_23-April-2026.pdf`](./ellipse/paper/paper_mamoun_ellipse_underwood_two_foci_one_cup_v6_23-April-2026.pdf) |
 | 2026-04-19 | UNDERWOOD ellipse perimeter — v1 original release — *legacy* | [`ellipse/paper/paper_mamoun_ellipse_underwood_two_foci_one_cup_v1_19-April-2026.pdf`](./ellipse/paper/paper_mamoun_ellipse_underwood_two_foci_one_cup_v1_19-April-2026.pdf) |
-| 2026-04-14 | Snow-Crystal Paper V Unified Theory v2 (canonical headline) (25 pp) | [`snowcrystal/papers/paper_mamoun_snow_crystal_theory_unified_v2_14-April-2026.pdf`](./snowcrystal/papers/paper_mamoun_snow_crystal_theory_unified_v2_14-April-2026.pdf) |
-| 2026-04-14 | Snow-Crystal Paper IV — Splitting Equation | [`snowcrystal/papers/snow_crystal_splitting_v2.pdf`](./snowcrystal/papers/snow_crystal_splitting_v2.pdf) |
-| 2026-04-14 | Snow-Crystal Paper III — Snowflake Equation (v6 current) | [`snowcrystal/papers/snow_crystal_equation_v6.pdf`](./snowcrystal/papers/snow_crystal_equation_v6.pdf) |
 | 2026-03-30 | SRIRACHA ellipse perimeter (R6+16exp+3log SCOR, 7 ppt) — *legacy standalone repo; superseded by UNDERWOOD* | [https://github.com/monir/ellipse](https://github.com/monir/ellipse) |
 
 ---

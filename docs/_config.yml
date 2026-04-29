@@ -2,15 +2,14 @@
 # Served at https://monir.github.io/math/
 # (Source: docs/ folder on main branch.)
 #
-# We do not use Jekyll layouts -- index.html, ellipse/index.html and
-# snowcrystal/index.html are self-contained static pages.  We disable
-# the default Cayman theme so Pages serves our HTML verbatim instead
-# of wrapping it in a Jekyll theme template.
+# We do not use Jekyll layouts -- index.html and ellipse/index.html
+# are self-contained static pages.  We disable the default Cayman
+# theme so Pages serves our HTML verbatim instead of wrapping it in
+# a Jekyll theme template.
 theme: null
 plugins: []
 include:
   - ellipse
-  - snowcrystal
 exclude:
   - "*.py"
   - "scratch/"

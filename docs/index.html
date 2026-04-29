@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>monir/math &mdash; an open math research repository</title>
-<meta name="description" content="Open mathematical research by Monir Mamoun: ellipse-perimeter world records, snow-crystal physics, and the UNDERWOOD log-companion framework.">
+<meta name="description" content="Open mathematical research by Monir Mamoun: ellipse-perimeter world records and the UNDERWOOD log-companion framework.">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
@@ -210,7 +210,6 @@
   <h1>monir<span class="slash">/</span>math</h1>
   <nav>
     <a href="#ellipse">Ellipse</a>
-    <a href="#snowcrystal">Snow crystals</a>
     <a href="https://github.com/monir/math">GitHub</a>
     <a href="https://github.com/monir/monirstudio" title="Local research workspace (private repo, link active when published)">monirstudio</a>
   </nav>
@@ -218,8 +217,8 @@
 
 <p class="lede">
   An open repository of mathematical research on hard,
-  classical problems &mdash; <em>ellipse perimeters, snow-crystal physics,
-  the &lambda;-ladder of log primitives, and the
+  classical problems &mdash; <em>ellipse perimeters, the
+  &lambda;-ladder of log primitives, and the
   <strong>UNDERWOOD</strong> framework that ties them together</em>.
   Every result is reproducible, every coefficient is written out, every
   proof is checked by Lean&nbsp;4 where possible.
@@ -231,7 +230,6 @@
     <a href="https://github.com/monir/math"><code>monir/math</code></a>
     repository. The repo is laid out as one folder per mega-topic
     (<a href="https://github.com/monir/math/tree/main/ellipse"><code>ellipse/</code></a>,
-    <a href="https://github.com/monir/math/tree/main/snowcrystal"><code>snowcrystal/</code></a>,
     &hellip;), each with its own paper, code, scripts, and Lean modules.
     New topics are added as their own subdirectories rather than
     sprawling sideways through the same tree.
@@ -376,32 +374,6 @@ across all eccentricities (verified at 50-digit <code>mpmath</code>).</p>
 
 <div class="topic-grid">
 
-  <div class="topic" id="snowcrystal">
-    <span class="pill">Snow-crystal physics</span>
-    <h3><a href="snowcrystal/">snowcrystal/</a></h3>
-    <p>
-      A <strong>first-principles unified theory of snow-crystal
-      formation</strong>, MB-pol(2023) quantum chemistry through
-      Kobayashi 1993 phase-field PDE simulation.  <strong>Paper&nbsp;V
-      (Unified Theory v2, 14 April 2026, 25&nbsp;pp)</strong> predicts
-      ice-face splitting $\Delta_{\rm split} = 8.94 \pm 0.46\
-      \mathrm{cm}^{-1}$ matching THz-measured 8.80 at <strong>0.30&sigma;</strong>;
-      recovers the Mason 1:2:3 cyclotomic ratio at &minus;4&nbsp;/
-      &nbsp;&minus;10&nbsp;/ &nbsp;&minus;22&nbsp;&deg;C; Lean-proven
-      hexagonal factor $R_{\rm hex} = 4/(4+\sqrt{3}) = (16-4\sqrt{3})/13$.
-      <strong>7&nbsp;of&nbsp;8</strong> historical predictions confirmed
-      by independent experiments (Murata 2020, Sazaki 2012,
-      Bailey&ndash;Hallett 2004, Kobayashi 1976).  Six new falsifiable
-      predictions stated.
-    </p>
-    <div class="links">
-      <a href="snowcrystal/">Snow-crystal page (this site)</a>
-      <a href="https://github.com/monir/math/tree/main/snowcrystal/papers">Papers</a>
-      <a href="https://github.com/monir/math/tree/main/snowcrystal/lean">Lean&nbsp;4</a>
-      <a href="https://github.com/monir/math/tree/main/snowcrystal/scripts">Scripts</a>
-    </div>
-  </div>
-
   <div class="topic">
     <span class="pill">$\zeta(5)$ irrationality</span>
     <h3>convergent reduction</h3>
@@ -456,14 +428,9 @@ monir/math/
 │   ├── scripts/                # verify_all_claims_v2.py + figure regen
 │   ├── src/                    # augmented_basis, formulas, verify
 │   └── lean/                   # Lean 4 Logatoms substrate slice
-├── snowcrystal/                # Unified Theory v2 + Papers III/IV + theta-means
-│   ├── papers/                 # Paper V Unified Theory + companion papers
-│   ├── lean/                   # hexagonal-factor proofs, MultiDepth
-│   └── scripts/                # bizipular operator + 26 unit tests
 └── docs/                       # this site (monir.github.io/math/)
     ├── index.html              # umbrella landing
-    ├── ellipse/index.html      # ellipse subpage
-    └── snowcrystal/index.html  # snow-crystal subpage
+    └── ellipse/index.html      # ellipse subpage
 </pre>
 
 <p style="font-size:0.91rem; color:var(--muted);">
